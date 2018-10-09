@@ -141,91 +141,78 @@
             </b-col>
           </b-row>
           <div id="product-details-container">
-            <div class="product-info-container" v-for="(productInfo, key) in form.product_details">
-              <b-row v-if="key != 0">
-                <b-col class="product-delete-container">
-                  <a @click="deleteDetail(key)">Delete</a>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col md="4">
-                  <b-form-group class="serialNumberGroup"
-                                label="Serial Number:"
-                                label-for="serialNumber">
-                    <b-form-input class="serialNumber"
-                                  v-model="form.product_details[key].serial_number"
-                                  type="text"
-                                  required
-                                  placeholder="Enter Serial Number">
-                    </b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col md="4">
-                  <b-form-group class="productTypeGroup"
-                                  label="Product Type:"
-                                  label-for="productType">
-                      <b-form-input class="productType"
-                                  v-model="form.product_details[key].product_type"
-                                  type="text"
-                                  required>
-                      </b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col md="4">
-                  <b-form-group class="purchaseDateGroup"
-                                label="Purchase Date:"
-                                label-for="purchaseDateNumber">
-                          <datepicker
+            <b-row>
+              <b-col md="4">
+                <b-form-group id="productType"
+                              label="Product Type:"
+                              label-for="productType">
+                  <b-form-input id="productType"
+                                type="text"
+                                required
+                                v-model="form.product_type"
+                                placeholder="Enter Product Type">
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col md="4">
+                <b-form-group id="serialNumber"
+                              label="Serial Number:"
+                              label-for="serialNumber">
+                  <b-form-input id="serialNumber"
+                                type="text"
+                                required
+                                v-model="form.serial_number"
+                                placeholder="Enter Serial Number">
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col md="4">
+                <b-form-group id="purchaseDate"
+                              label="Purchase Date:"
+                              label-for="purchaseDate">
+                    <datepicker
                             :config="dateConfig"
-                            v-model="form.product_details[key].purchase_date"
+                            v-model="form.purchase_date"
                             placeholder="Enter Purchase Date" 
                             class="form-control">
                         </datepicker>
-                    </b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col md="4">
-                  <b-form-group class="paintProtectionGroup">
-                      <b-form-checkbox class="duraSealPaint"
-                                       v-model="form.product_details[key].dura_paint"
-                                       value="DURA-SEAL Paint Protection"
-                                       unchecked-value="">
-                        DURA-SEAL Paint Protection
-                      </b-form-checkbox>
-                    </b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col md="4">
-                  <b-form-group class="leatherProtectionGroup">
-                      <b-form-checkbox class="duraSealLeather"
-                                       v-model="form.product_details[key].dura_leather"
-                                       value="DURA-SEAL Leather Protection"
-                                       unchecked-value="">
-                        DURA-SEAL Leather Protection
-                      </b-form-checkbox>
-                    </b-form-input>
-                  </b-form-group>
-                </b-col>
-                <b-col md="4">
-                  <b-form-group class="fabricProtectionGroup">
-                      <b-form-checkbox class="duraSealFabric"
-                                       v-model="form.product_details[key].dura_fabric"
-                                       value="DURA-SEAL Fabric Protection"
-                                       unchecked-value="">
-                        DURA-SEAL Fabric Protection
-                      </b-form-checkbox>
-                    </b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-            </div>
-          </div>
-          <div id="product-add-container">
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+            </b-row>
             <b-row>
-              <b-col>
-                <b-button type="button" variant="primary" @click="addProduct">Add Another Product</b-button>
+              <b-col md="4">
+                <b-form-group class="paintProtectionGroup">
+                    <b-form-checkbox class="duraSealPaint"
+                                     v-model="form.dura_paint"
+                                     value="DURA-SEAL Paint Protection"
+                                     unchecked-value="">
+                      DURA-SEAL Paint Protection
+                    </b-form-checkbox>
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col md="4">
+                <b-form-group class="leatherProtectionGroup">
+                    <b-form-checkbox class="duraSealLeather"
+                                     v-model="form.dura_leather"
+                                     value="DURA-SEAL Leather Protection"
+                                     unchecked-value="">
+                      DURA-SEAL Leather Protection
+                    </b-form-checkbox>
+                  </b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col md="4">
+                <b-form-group class="fabricProtectionGroup">
+                    <b-form-checkbox class="duraSealFabric"
+                                     v-model="form.dura_fabric"
+                                     value="DURA-SEAL Fabric Protection"
+                                     unchecked-value="">
+                      DURA-SEAL Fabric Protection
+                    </b-form-checkbox>
+                  </b-form-input>
+                </b-form-group>
               </b-col>
             </b-row>
           </div>
@@ -289,18 +276,6 @@
 import { mapState } from "vuex";
 import Datepicker from "vue-bulma-datepicker";
 
-const productTypeList = [
-    {
-        value: "dura_seal_package1",
-        text: "Dura Seal Package 1"
-    },
-    {
-        value: "dura_seal_package2",
-        text: "Dura Seal Package 2"
-    },
-];
-
-
 export default{
   name: "WarrantyRegistration",
   components: {
@@ -320,22 +295,17 @@ export default{
         dealer_name: '',
         dealer_location: '',
         subscribe: '',
-        product_details: [
-          {
-            product_type: '',
-            serial_number: '',
-            purchase_date: '',
-            dura_paint: '',
-            dura_leather: '',
-            dura_fabric: ''
-          }
-        ]
+        product_type: '',
+        serial_number: '',
+        purchase_date: '',
+        dura_paint: '',
+        dura_leather: '',
+        dura_fabric: ''
       },
       dateConfig: { 
         dateFormat: 'm-d-Y', 
         static: true 
       },
-      productTypeList: productTypeList,
       personal: true,
       product: false
     }
@@ -362,19 +332,6 @@ export default{
     goPersonal() {
       this.personal = true;
       this.product = false;
-    },
-    addProduct() {
-      this.form.productDetails.push({
-        productType: '',
-        serialNumber: '',
-        purchaseDate: '',
-        duraPaint: '',
-        duraLeather: '',
-        duraFabric: ''
-      });
-    },
-    deleteDetail(key) {
-      this.form.productDetails.splice(key, 1);
     }
   }
 }
