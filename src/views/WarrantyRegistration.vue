@@ -108,6 +108,18 @@
               </b-form-group>
             </b-col>
             <b-col md="6">
+              <b-form-group id="Country"
+                            label="Country:"
+                            label-for="Country">
+                <b-form-select id="Country"
+                                v-model="form.country" 
+                                :options="countryOptions" 
+                                required/>
+              </b-form-group>
+            </b-col>
+          </b-row>
+          <b-row>
+            <b-col md="6">
               <b-form-group id="postCodeGroup"
                             label="Post Code:"
                             label-for="postcode">
@@ -143,18 +155,6 @@
           <div id="product-details-container">
             <b-row>
               <b-col md="4">
-                <b-form-group id="productType"
-                              label="Product Type:"
-                              label-for="productType">
-                  <b-form-input id="productType"
-                                type="text"
-                                required
-                                v-model="form.product_type"
-                                placeholder="Enter Product Type">
-                  </b-form-input>
-                </b-form-group>
-              </b-col>
-              <b-col md="4">
                 <b-form-group id="serialNumber"
                               label="Serial Number:"
                               label-for="serialNumber">
@@ -164,6 +164,16 @@
                                 v-model="form.serial_number"
                                 placeholder="Enter Serial Number">
                   </b-form-input>
+                </b-form-group>
+              </b-col>
+              <b-col md="4">
+                <b-form-group id="productType"
+                              label="Product Type:"
+                              label-for="productType">
+                  <b-form-select id="productType"
+                                  v-model="form.product_type" 
+                                  :options="productTypeOptions" 
+                                  required/>
                 </b-form-group>
               </b-col>
               <b-col md="4">
@@ -184,7 +194,7 @@
               <b-col md="4">
                 <b-form-group class="paintProtectionGroup">
                     <b-form-checkbox class="duraSealPaint"
-                                     v-model="form.dura_paint"
+                                     v-model="form.product_applied"
                                      value="DURA-SEAL Paint Protection"
                                      unchecked-value="">
                       DURA-SEAL Paint Protection
@@ -195,7 +205,7 @@
               <b-col md="4">
                 <b-form-group class="leatherProtectionGroup">
                     <b-form-checkbox class="duraSealLeather"
-                                     v-model="form.dura_leather"
+                                     v-model="form.product_applied"
                                      value="DURA-SEAL Leather Protection"
                                      unchecked-value="">
                       DURA-SEAL Leather Protection
@@ -206,7 +216,7 @@
               <b-col md="4">
                 <b-form-group class="fabricProtectionGroup">
                     <b-form-checkbox class="duraSealFabric"
-                                     v-model="form.dura_fabric"
+                                     v-model="form.product_applied"
                                      value="DURA-SEAL Fabric Protection"
                                      unchecked-value="">
                       DURA-SEAL Fabric Protection
@@ -298,6 +308,7 @@ export default{
         product_type: '',
         serial_number: '',
         purchase_date: '',
+        product_applied: [],
         dura_paint: '',
         dura_leather: '',
         dura_fabric: ''
@@ -306,6 +317,17 @@ export default{
         dateFormat: 'm-d-Y', 
         static: true 
       },
+      productTypeOptions : [
+        { value: 'DURA SEAL Protection', text: 'DURA SEAL Protection' },
+        { value: 'Premium Care Leather', text: 'Premium Care Leather' },
+        { value: 'Premium Care Fabric', text: 'Premium Care Fabric' },
+        { value: 'Leather Guard', text: 'Leather Guard' },
+        { value: 'Solid Guard', text: 'Solid Guard' }
+      ],
+      countryOptions : [
+        { value: 'New Zealand', text: 'New Zealand' },
+        { value: 'Australia', text: 'Australia' }
+      ],
       personal: true,
       product: false
     }

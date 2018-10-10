@@ -19,7 +19,11 @@ export default {
             dealer_name: null,
             dealer_location: null,
             subscribe: null,
-            product_details: []
+            serial_number: null,
+            product_type: null,
+            purchase_date: null,
+            product_applied: [],
+            subscribe: null,
         }
     },
     mutations: {
@@ -44,7 +48,10 @@ export default {
             state.warranty.dealer_name = response.dealer_name;
             state.warranty.dealer_location = response.dealer_location;
             state.warranty.subscribe = response.subscribe;
-            state.warranty.product_details = response.product_details;
+            state.warranty.serial_number = response.serial_number;
+            state.warranty.product_type = response.product_type;
+            state.warranty.purchase_date = response.purchase_date;
+            state.warranty.product_applied = response.product_applied;
         }
     },
     actions: {
