@@ -1,6 +1,11 @@
 <template>
   <div id="app">
     <router-view/>
+    <notifications
+    group="notification"
+    position="bottom right"
+    width="325"
+    animation-type="velocity"/>
   </div>
 </template>
 
@@ -48,5 +53,10 @@ body {
 #warranty-success {
   width: 900px;
   margin: 100px auto;
+}
+
+.appliedOption{
+  margin-right: 100px !important;
+  margin-left: 20px;
 }
 </style>

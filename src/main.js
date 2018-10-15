@@ -6,9 +6,15 @@ import BootstrapVue from 'bootstrap-vue'
 import auth from "./services/api/auth";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Vuelidate from 'vuelidate'
+import velocity from "velocity-animate";
+import Notifications from "vue-notification"
+
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue);
+Vue.use(Vuelidate);
+Vue.use(Notifications, { velocity });
 
 // router.beforeEach((to, from, next) => {
 //     if (to.matched.some(record => record.meta.requireAuth)) {
