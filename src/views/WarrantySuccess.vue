@@ -14,6 +14,11 @@
 <script lang="ts">
 
 export default{
-  name: "WarrantySuccess"
+  name: "WarrantySuccess",
+  created: function() {
+    setTimeout(function(){ 
+      window.location = 'http://tfrgoup.myshopify.com'; 
+    }, 5000);
+  }
 }
 </script>

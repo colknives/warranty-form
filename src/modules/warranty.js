@@ -1,9 +1,11 @@
 import warranty from '../services/api/warranty';
+import notification from "../services/notification";
 import router from "../router";
 
 export default {
     namespaced: true,
     state: {
+        hasErrors: false,
         errors: null,
         loading: false,
         notification: null,
@@ -15,6 +17,7 @@ export default {
             address: null,
             suburb: null,
             city: null,
+            country: null,
             postcode: null,
             dealer_name: null,
             dealer_location: null,
@@ -28,7 +31,11 @@ export default {
             state.loading = false;
         },
         loading(state) {
+            state.hasErrors = false;
             state.loading = true;
+        },
+        unloading(state) {
+            state.loading = false;
         },
         setPersonal(state, response) {
             state.warranty.firstname = response.firstname;
@@ -38,6 +45,7 @@ export default {
             state.warranty.address = response.address;
             state.warranty.suburb = response.suburb;
             state.warranty.city = response.city;
+            state.warranty.country = response.country;
             state.warranty.postcode = response.postcode;
         },
         setProduct(state, response) {
@@ -50,16 +58,24 @@ export default {
     actions: {
         saveWarranty: async ({ commit, state }) => {
             commit("loading");
+            
             try {
                 let response = await warranty.saveWarranty(
                     state.warranty
                 );
 
+                commit("unloading");
+
                 if( response ){
                     router.push('/warranty/success');
                 }
             } catch (errors) {
+
+                commit("unloading");
                 commit("errors", errors);
+
+                notification.error(errors.errors.message);
+
             }
         }
     }
