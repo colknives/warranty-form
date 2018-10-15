@@ -293,7 +293,7 @@
                       <b-form-file v-model="file[key]" 
                                   placeholder="Choose a file..."
                                   @change="setImport(key)"
-                                   accept="image/jpeg, image/png, image/gif"></b-form-file>
+                                  accept=".jpg, .png, .pdf"></b-form-file>
                   </b-form-group>
                 </b-col>
               </b-row>

@@ -57,22 +57,26 @@ export default {
     },
     actions: {
         saveWarranty: async ({ commit, state }) => {
-
-            notification.error('ahhahahaha');
-
-            // commit("loading");
+            commit("loading");
             
-            // try {
-            //     let response = await warranty.saveWarranty(
-            //         state.warranty
-            //     );
+            try {
+                let response = await warranty.saveWarranty(
+                    state.warranty
+                );
 
-            //     // if( response ){
-            //     //     router.push('/warranty/success');
-            //     // }
-            // } catch (errors) {
-            //     commit("errors", errors);
-            // }
+                commit("unloading");
+
+                if( response ){
+                    router.push('/warranty/success');
+                }
+            } catch (errors) {
+
+                commit("unloading");
+                commit("errors", errors);
+
+                notification.error(errors.errors.message);
+
+            }
         }
     }
 };
