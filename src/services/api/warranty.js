@@ -28,5 +28,32 @@ export default {
                     reject(status, error);
                 });
         });
+    },
+    getMake () {
+        return new Promise((resolve, reject) => {
+            api.get(
+                "vehicle-info/make"
+            )
+                .then(response => {
+                    return resolve(response);
+                })
+                .catch((status, error) => {
+                    reject(status, error);
+                });
+        });
+    },
+    getModel (make) {
+        return new Promise((resolve, reject) => {
+            api.post(
+                "vehicle-info/model",
+                {"make":make}
+            )
+                .then(response => {
+                    return resolve(response);
+                })
+                .catch((status, error) => {
+                    reject(status, error);
+                });
+        });
     }
 }

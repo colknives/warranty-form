@@ -118,12 +118,19 @@
                     <b-form-group id="Make"
                                   label="Make:"
                                   label-for="Make">
-                      <TypeAhead
+                      <!-- <TypeAhead
                         v-model="form.product_details[key].vehicle_make"
                         src="http://localhost:8001/vehicle-info/make/list/:keyword"
                         :getResponse="getResponse"
                         :delayTime="parseInt(500)"
-                      ></TypeAhead>
+                      ></TypeAhead> -->
+                      <b-form-select id="Make"
+                            v-model="form.product_details[key].vehicle_make"
+                            :state="(productInfo.vehicle_make.$dirty && productInfo.vehicle_make.$invalid)? false : null"
+                            @blur.native="productInfo.vehicle_make.$touch()"
+                            @change="getModel(key)"
+                            :options="vehicleMakeOptions" 
+                            required/>
                       <b-form-invalid-feedback v-if="!productInfo.vehicle_make.required">
                         Make is a required field
                       </b-form-invalid-feedback>
@@ -133,12 +140,18 @@
                     <b-form-group id="Model"
                                   label="Model:"
                                   label-for="Model">
-                     <TypeAhead
+                     <!-- <TypeAhead
                         v-model="form.product_details[key].vehicle_model"
                         src="http://localhost:8001/vehicle-info/model/list/:keyword"
                         :getResponse="getResponse"
                         :delayTime="parseInt(500)"
-                      ></TypeAhead>
+                      ></TypeAhead> -->
+                      <b-form-select id="Model"
+                            v-model="form.product_details[key].vehicle_model"
+                            :state="(productInfo.vehicle_model.$dirty && productInfo.vehicle_model.$invalid)? false : null"
+                            @blur.native="productInfo.vehicle_model.$touch()"
+                            :options="vehicleModelOptions" 
+                            required/>
                       <b-form-invalid-feedback v-if="!productInfo.vehicle_model.required">
                         Model is a required field
                       </b-form-invalid-feedback>
@@ -376,7 +389,9 @@ export default{
           "notification",
           "warranty",
           "productType",
-          "serialKey"
+          "serialKey",
+          "vehicleMakeOptions",
+          "vehicleModelOptions"
       ])
   },
   created: function() {
@@ -385,10 +400,37 @@ export default{
       this.form.dealer_location = this.warranty.dealer_location;
       this.form.subscribe = this.warranty.subscribe;
       this.form.product_details = this.warranty.product_details;
+
+      this.$store.dispatch("warranty/getMake");
   },
   methods: {
     getResponse: function (response) {
         return response.data.items;
+    },
+    getMake: function(key){
+
+      let self = this;
+
+      this.$nextTick(function() {
+        self.$store.dispatch("warranty/getMake");
+      });
+
+    },
+    getModel: function(key){
+
+      let self = this;
+
+      this.$nextTick(function() {
+        let make = self.form.product_details[key].vehicle_make;
+        self.form.product_details[key].vehicle_model = "";
+
+        self.$store.commit("warranty/setMake", make);
+        self.$store.commit("warranty/clearVehicleModel");
+        self.$store.dispatch("warranty/getModel").then(function() {
+          self.form.product_details[self.serialKey].product_type = self.productType;
+        });
+      });
+
     },
     checkSerial: function (key) {
 
