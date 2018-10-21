@@ -46,17 +46,47 @@ body {
   text-align: right;
 }
 
-#warranty-success{
-  text-align: center;
-}
-
 #warranty-success {
   width: 900px;
-  margin: 100px auto;
+  margin: 0px auto;
 }
 
 .appliedOption{
   margin-right: 100px !important;
   margin-left: 20px;
+}
+
+.datefield{
+  background-color: #fff !important;
+}
+
+#product-details-add-btn{
+  color: #2364d7;
+  font-weight: bold;
+}
+
+.product-detail-info-container{
+  margin-bottom: 30px;
+}
+
+.required .col-form-label:before {
+    content: "* ";
+    color:red;
+}
+
+.info-tip{
+  padding: 0px 7px;
+  border: 1px solid #000;
+  border-radius: 100px;
+  float: right;
+  width: 20px;
+  height: 20px;
+  margin: 7px 0px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.warranty-image-header{
+  padding-bottom: 30px;
 }
 </style>

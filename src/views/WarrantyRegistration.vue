@@ -1,9 +1,13 @@
 <template>
   <div class="warranty-registration">
-    <loading :show="loading" label="Loading..."></loading>
+    <loading :active.sync="loading" 
+        :is-full-page="true"></loading>
     <section class="warranty-personal-details" v-if="personal">
+      <div class="warranty-image-header">
+        <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
+      </div>
     	<div class="warranty-personal-header">
-    		<h2>Register your product here</h2>
+    		<h3><strong>Why register your product?</strong></h3>
     	</div>
     	<div class="warranty-personal-description">
     		<p>Please complete our form to register your product for warranty</p>
@@ -20,6 +24,7 @@
           <b-row>
             <b-col md="6">
               <b-form-group id="firstNameGroup"
+                            class="required"
                             label="First Name:"
                             label-for="firstname">
                 <b-form-input id="firstname"
@@ -32,12 +37,13 @@
                               placeholder="Enter First Name">
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.firstname.required">
-                  Firstn Name is required
+                  First Name is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
             <b-col md="6">
               <b-form-group id="lastNameGroup"
+                            class="required"
                             label="Last Name:"
                             label-for="lastname">
                 <b-form-input id="lastname"
@@ -49,7 +55,7 @@
                               placeholder="Enter Last Name">
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.lastname.required">
-                  Last Name is required
+                  Last Name is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
@@ -57,6 +63,7 @@
           <b-row>
             <b-col md="6">
               <b-form-group id="mobileGroup"
+                            class="required"
                             label="Contact Number:"
                             label-for="mobile">
                 <b-form-input id="mobile"
@@ -68,13 +75,14 @@
                               placeholder="Enter Contact Number">
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.contact_number.required">
-                  Contact Number is required
+                  Contact Number is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
             <b-col md="6">
               <b-form-group id="emailGroup"
-                            label="Email:"
+                            class="required"
+                            label="Email Address:"
                             label-for="email">
                 <b-form-input id="email"
                               type="text"
@@ -85,15 +93,16 @@
                               placeholder="Enter Email">
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.email.required">
-                  Email is required
+                  Email is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
           </b-row>
           <b-row>
-            <b-col md="6">
+            <b-col md="4">
               <b-form-group id="addressGroup"
-                            label="Address:"
+                            class="required"
+                            label="Street Number and Name:"
                             label-for="address">
                 <b-form-input id="address"
                               type="text"
@@ -104,31 +113,32 @@
                               placeholder="Enter Address">
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.address.required">
-                  Address is required
+                  Address is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
-            <b-col md="6">
-              <b-form-group id="suburbGroup"
-                            label="Suburb:"
-                            label-for="suburb">
-                <b-form-input id="suburb"
+            <b-col md="4">
+              <b-form-group id="Region"
+                            class="required"
+                            label="Region:"
+                            label-for="Region">
+                <b-form-input id="region"
                               type="text"
                               required
-                              v-model="form.suburb"
-                              :state="($v.form.suburb.$dirty && $v.form.suburb.$invalid)? false : null"
-                              @blur.native="$v.form.suburb.$touch()"
-                              placeholder="Enter Suburb">
+                              v-model="form.region"
+                              :state="($v.form.region.$dirty && $v.form.region.$invalid)? false : null"
+                              @blur.native="$v.form.region.$touch()"
+                              aria-describedby="input1LiveFeedback"
+                              placeholder="Enter Region">
                 </b-form-input>
-                <b-form-invalid-feedback v-if="!$v.form.suburb.required">
-                  Suburb is required
+                <b-form-invalid-feedback v-if="!$v.form.region.required">
+                  Region is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
-          </b-row>
-          <b-row>
-            <b-col md="6">
+            <b-col md="4">
               <b-form-group id="cityGroup"
+                            class="required"
                             label="City:"
                             label-for="city">
                 <b-form-input id="city"
@@ -140,29 +150,33 @@
                               placeholder="Enter City">
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.city.required">
-                  City is required
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col md="6">
-              <b-form-group id="Country"
-                            label="Country:"
-                            label-for="Country">
-                <b-form-select id="Country"
-                                v-model="form.country"
-                                :state="($v.form.country.$dirty && $v.form.country.$invalid)? false : null"
-                                @blur.native="$v.form.country.$touch()"
-                                :options="countryOptions" 
-                                required/>
-                <b-form-invalid-feedback v-if="!$v.form.country.required">
-                  Country is required
+                  City is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
           </b-row>
           <b-row>
-            <b-col md="6">
+            <b-col md="4">
+              <b-form-group id="suburbGroup"
+                            class="required"
+                            label="Suburb:"
+                            label-for="suburb">
+                <b-form-input id="suburb"
+                              type="text"
+                              required
+                              v-model="form.suburb"
+                              :state="($v.form.suburb.$dirty && $v.form.suburb.$invalid)? false : null"
+                              @blur.native="$v.form.suburb.$touch()"
+                              placeholder="Enter Suburb">
+                </b-form-input>
+                <b-form-invalid-feedback v-if="!$v.form.suburb.required">
+                  Suburb is a required field
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+            <b-col md="4">
               <b-form-group id="postCodeGroup"
+                            class="required"
                             label="Post Code:"
                             label-for="postcode">
                 <b-form-input id="postcode"
@@ -174,18 +188,37 @@
                               placeholder="Enter Post Code">
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.postcode.required">
-                  Post Code is required
+                  Post Code is a required field
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
+            <b-col md="4">
+              <b-form-group id="Country"
+                            class="required"
+                            label="Country:"
+                            label-for="Country">
+                <b-form-select id="Country"
+                                v-model="form.country"
+                                :state="($v.form.country.$dirty && $v.form.country.$invalid)? false : null"
+                                @blur.native="$v.form.country.$touch()"
+                                :options="countryOptions" 
+                                required/>
+                <b-form-invalid-feedback v-if="!$v.form.country.required">
+                  Country is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
           </b-row>
-          <b-button type="button" variant="primary" @click="setPersonal">Proceed to Product Details</b-button>
+          <b-button type="button" variant="primary" @click="setPersonal"><strong>Proceed to Product Details</strong></b-button>
         </b-form>
       </div>
     </section>
     <section class="warranty-product-details" v-if="product">
+      <div class="warranty-image-header">
+        <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
+      </div>
       <div class="warranty-product-header">
-        <h2>Enter your product &amp; dealer details</h2>
+        <h3><strong>Why register your product?</strong></h3>
       </div>
       <div class="warranty-product-description">
         <p>To ensure the successful completion of this form, please ensure you are using a modern browser and enable cookies beofre proceeding.</p>
@@ -211,98 +244,180 @@
             </b-col>
           </b-row>
           <div id="product-details-container">
-            <div class="product-info-container" v-for="(productInfo, key) in $v.form.product_details.$each.$iter">
-              <b-row v-if="key != 0">
-                <b-col class="product-delete-container">
-                  <a @click="deleteDetail(key)">Delete</a>
-                </b-col>
-              </b-row>
-              <b-row>
-                <b-col md="4">
-                  <b-form-group class="serialNumberGroup"
-                                label="Serial Number:"
-                                label-for="serialNumber">
-                    <b-form-input class="serialNumber"
-                                  v-model="form.product_details[key].serial_number"
-                                  :state="(productInfo.serial_number.$dirty && productInfo.serial_number.$invalid)? false : null"
-                                  @blur.native="productInfo.serial_number.$touch()"
-                                  type="text"
-                                  required
-                                  placeholder="Enter Serial Number">
-                    </b-form-input>
-                    <b-form-invalid-feedback v-if="!productInfo.serial_number.required">
-                      Serial Number is required
-                    </b-form-invalid-feedback>
-                  </b-form-group>
-                </b-col>
-                <b-col md="4">
-                  <b-form-group class="productTypeGroup"
-                                  label="Product Type:"
-                                  label-for="productType">
-                      <b-form-select id="productType"
-                                  v-model="form.product_details[key].product_type"
-                                  :state="(productInfo.product_type.$dirty && productInfo.product_type.$invalid)? false : null"
-                                  @blur.native="productInfo.product_type.$touch()"
-                                  :options="productTypeOptions" 
-                                  required
-                                  @change="setOptions(key)"/>
-                      <b-form-invalid-feedback v-if="!productInfo.product_type.required">
-                        Product Type is required
-                      </b-form-invalid-feedback>
-                  </b-form-group>
-                </b-col>
-                <b-col md="4">
-                  <b-form-group class="purchaseDateGroup"
-                                label="Purchase Date:"
-                                label-for="purchaseDateNumber">
-                          <datepicker
-                            :config="dateConfig"
-                            v-model="form.product_details[key].purchase_date"
-                            :state="(productInfo.purchase_date.$dirty && productInfo.purchase_date.$invalid)? false : null"
-                            @blur.native="productInfo.purchase_date.$touch()"
-                            placeholder="Enter Purchase Date" 
-                            class="form-control">
-                        </datepicker>
-                        <b-form-invalid-feedback v-if="!productInfo.purchase_date.required">
-                        Purchase Date is required
-                      </b-form-invalid-feedback>
-                    </b-form-input>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-              <b-row>
-                 <template v-for="(optionValue, optionKey) in form.product_details[key].options">
-                  <b-col md="4">
-                    <b-form-group class="productAppliedGroup">
-                        <b-form-checkbox v-model="form.product_details[key].product_applied"
-                                         :value="optionValue.value"
-                                          v-bind:key="optionKey"
-                                          @change="checkAppliedOption(key, optionValue.value)"
-                                         unchecked-value="">
-                          {{ optionValue.text }}
-                        </b-form-checkbox>
+            <template v-for="(productInfo, key) in $v.form.product_details.$each.$iter">
+              <div class="product-detail-info-container">
+                <div class="product-delete-container">
+                  <b-row v-if="key != 0">
+                    <b-col class="product-delete-container">
+                      <a @click="deleteDetail(key)">DELETE</a>
+                    </b-col>
+                  </b-row>
+                </div>
+                <div class="product-info-container">
+                  <b-row>
+                    <b-col md="4">
+                      <b-form-group class="serialNumberGroup required info">
+                        <label for="serialNumber" class="col-form-label">Product Serial Number:</label><span class="info-tip" v-b-tooltip.hover title="Serial number is located at the rear box ex. DS123456">i</span>
+                        <b-form-input class="serialNumber"
+                                      v-model="form.product_details[key].serial_number"
+                                      :state="(productInfo.serial_number.$dirty && productInfo.serial_number.$invalid)? false : null"
+                                      @blur.native="productInfo.serial_number.$touch()"
+                                      type="text"
+                                      required
+                                      placeholder="Enter Serial Number">
+                        </b-form-input>
+                        <b-form-invalid-feedback v-if="!productInfo.serial_number.required">
+                          Serial Number is a required field
+                        </b-form-invalid-feedback>
+                      </b-form-group>
+                    </b-col>
+                    <b-col md="4">
+                      <b-form-group class="productTypeGroup required"
+                                      label="Product Type:"
+                                      label-for="productType">
+                          <b-form-select id="productType"
+                                      v-model="form.product_details[key].product_type"
+                                      :state="(productInfo.product_type.$dirty && productInfo.product_type.$invalid)? false : null"
+                                      @blur.native="productInfo.product_type.$touch()"
+                                      :options="productTypeOptions" 
+                                      required
+                                      @change="setOptions(key)"/>
+                          <b-form-invalid-feedback v-if="!productInfo.product_type.required">
+                            Product Type is a required field
+                          </b-form-invalid-feedback>
+                      </b-form-group>
+                    </b-col>
+                    <b-col md="4">
+                      <b-form-group class="purchaseDateGroup required"
+                                    label="Purchase Date:"
+                                    label-for="purchaseDateNumber">
+                              <datepicker
+                                :config="dateConfig"
+                                v-model="form.product_details[key].purchase_date"
+                                :state="(productInfo.purchase_date.$dirty && productInfo.purchase_date.$invalid)? false : null"
+                                @blur.native="productInfo.purchase_date.$touch()"
+                                placeholder="DD-MM-YYYY" 
+                                class="form-control datefield">
+                            </datepicker>
+                            <b-form-invalid-feedback v-if="!productInfo.purchase_date.required">
+                            Purchase Date is a required field
+                          </b-form-invalid-feedback>
+                        </b-form-input>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                  <template v-if="form.product_details[key].product_type == 'DURA SEAL Vehicle Protection'">
+                    <b-row>
+                    <b-col md="12">
+                    <b-form-group class="productAppliedGroup required"
+                                    label="Product Applied:"
+                                    label-for="productApplied">
+                    <b-row>
+                      <template v-for="(optionValue, optionKey) in duraSealOptions">
+                        <b-col md="4">
+                          
+                              <b-form-checkbox v-model="form.product_details[key].product_applied"
+                                               :value="optionValue.value"
+                                               v-bind:key="optionKey"
+                                               unchecked-value="">
+                                <strong>{{ optionValue.text }}</strong>
+                              </b-form-checkbox>
+                          
+                        </b-col>
+                      </template>
+                    </b-row>
                     </b-form-group>
-                  </b-col>
-                </template>
-              </b-row>
-              <b-row>
-                <b-col md="12">
-                  <b-form-group class="proofPurchaseGroup"
-                                label="Proof of Purchase:"
-                                label-for="proofPurchase">
-                      <b-form-file v-model="file[key]" 
-                                  placeholder="Choose a file..."
-                                  @change="setImport(key)"
-                                  accept=".jpg, .png, .pdf"></b-form-file>
-                  </b-form-group>
-                </b-col>
-              </b-row>
-            </div>
+                    </b-col>
+                    </b-row>
+                    <b-row>
+                      <b-col md="4">
+                        <b-form-group class="vehicleRegistrationNumberGroup required"
+                                    label="Vehicle Registration Number:"
+                                    label-for="vehicleRegistrationNumber">
+                        <b-form-input class="vehicleRegistrationNumber"
+                                      v-model="form.product_details[key].vehicle_registration"
+                                      :state="(productInfo.vehicle_registration.$dirty && productInfo.vehicle_registration.$invalid)? false : null"
+                                      @blur.native="productInfo.vehicle_registration.$touch()"
+                                      type="text"
+                                      required
+                                      placeholder="Enter Vehicle Registration Number">
+                        </b-form-input>
+                        <b-form-invalid-feedback v-if="!productInfo.vehicle_registration.required">
+                          Vehicle Registration Number is a required field
+                        </b-form-invalid-feedback>
+                      </b-form-group>
+                      </b-col>
+                      <b-col md="4">
+                        <b-form-group id="Make"
+                                      label="Make:"
+                                      label-for="Make">
+                          <TypeAhead
+                            v-model="form.product_details[key].vehicle_make"
+                            src="http://localhost:8001/vehicle-info/make/list/:keyword"
+                            :getResponse="getResponse"
+                            :delayTime="parseInt(500)"
+                          ></TypeAhead>
+                          <b-form-invalid-feedback v-if="!productInfo.vehicle_make.required">
+                            Make is a required field
+                          </b-form-invalid-feedback>
+                        </b-form-group>
+                      </b-col>
+                      <b-col md="4">
+                        <b-form-group id="Model"
+                                      label="Model:"
+                                      label-for="Model">
+                         <TypeAhead
+                            v-model="form.product_details[key].vehicle_model"
+                            src="http://localhost:8001/vehicle-info/model/list/:keyword"
+                            :getResponse="getResponse"
+                            :delayTime="parseInt(500)"
+                          ></TypeAhead>
+                          <b-form-invalid-feedback v-if="!productInfo.vehicle_model.required">
+                            Model is a required field
+                          </b-form-invalid-feedback>
+                        </b-form-group>
+                      </b-col>
+                    </b-row>
+                  </template>
+                  <b-row>
+                    <b-col md="4">
+                      <b-form-group class="invoiceNumberGroup"
+                                    label="Invoice Number:"
+                                    label-for="invoiceNumber">
+                        <b-form-input class="invoiceNumber"
+                                      v-model="form.product_details[key].invoice_number"
+                                      :state="(productInfo.invoice_number.$dirty && productInfo.invoice_number.$invalid)? false : null"
+                                      @blur.native="productInfo.invoice_number.$touch()"
+                                      type="text"
+                                      required
+                                      placeholder="Enter Serial Number">
+                        </b-form-input>
+                        <b-form-invalid-feedback v-if="!productInfo.invoice_number.required">
+                          Invoice Number is a required field
+                        </b-form-invalid-feedback>
+                      </b-form-group>
+                    </b-col>
+                    <b-col md="4">
+                      <b-form-group class="proofPurchaseGroup"
+                                    label="Proof of Purchase:"
+                                    label-for="proofPurchase">
+                          <b-form-file v-model="file[key]" 
+                                      placeholder="Choose a file..."
+                                      @change="setImport(key)"
+                                      class="upload-file-input"
+                                      accept=".jpg, .docx, .pdf"></b-form-file>
+                          <small>Upload Max of 3mb. JPG, DOCX and PDF only</small>
+                      </b-form-group>
+                    </b-col>
+                  </b-row>
+                </div>
+              </div>
+            </template>
           </div>
           <div id="product-add-container">
             <b-row>
               <b-col>
-                <b-button type="button" variant="primary" @click="addProduct">Add Another Product</b-button>
+                <a id="product-details-add-btn" @click="addProduct">ADD ANOTHER</a>
               </b-col>
             </b-row>
           </div>
@@ -310,6 +425,7 @@
             <b-row>
               <b-col md="6">
                 <b-form-group id="dealerGroup"
+                              class="required"
                               label="Dealer Name:"
                               label-for="dealerName">
                   <b-form-input id="dealerName"
@@ -321,12 +437,13 @@
                                 placeholder="Enter Dealer Name">
                   </b-form-input>
                   <b-form-invalid-feedback v-if="!$v.form.dealer_name.required">
-                    Dealer Name is required
+                    Dealer Name is a required field
                   </b-form-invalid-feedback>
                 </b-form-group>
               </b-col>
               <b-col md="6">
                 <b-form-group id="dealerLocationGroup"
+                              class="required"
                               label="Location:"
                               label-for="dealerLocation">
                   <b-form-input id="dealerLocation"
@@ -338,7 +455,7 @@
                                 placeholder="Enter Location">
                   </b-form-input>
                   <b-form-invalid-feedback v-if="!$v.form.dealer_location.required">
-                    Dealer Location is required
+                    Dealer Location is a required field
                   </b-form-invalid-feedback>
                 </b-form-group>
               </b-col>
@@ -351,10 +468,10 @@
           </div>
           <b-row>
             <b-col md="2">
-              <b-button type="button" variant="default" @click="goPersonal">Return Back</b-button>
+              <b-button type="button" variant="default" @click="goPersonal"><strong>Return Back</strong></b-button>
             </b-col>
             <b-col md="2">
-              <b-button type="button" variant="primary" @click="saveWarrantyRegistration" :disabled="$v.form.$invalid">Submit Details</b-button>
+              <b-button type="button" variant="primary" @click="saveWarrantyRegistration" :disabled="$v.form.$invalid"><strong>Submit Details</strong></b-button>
             </b-col>
           </b-row>
         </b-form>
@@ -369,89 +486,18 @@ import { mapState } from "vuex";
 import Datepicker from "vue-bulma-datepicker";
 import { validationMixin } from "vuelidate";
 import { required, minLength, between } from 'vuelidate/lib/validators';
-import loading from 'vue-full-loading';
+// import loading from 'vue-full-loading';
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
+import TypeAhead from "vue2-typeahead";
 
 const appliedOptionsList = {
-  'Soil Guard' : [
-    {
-      text: 'Single',
-      value: 'Single'
-    },
-    {
-      text: 'Double',
-      value: 'Double'
-    },
-    {
-      text: 'Multi',
-      value: 'Multi'
-    }
-  ],
-  'Leather Guard' : [
-    {
-      text: 'Single',
-      value: 'Single'
-    },
-    {
-      text: 'Double',
-      value: 'Double'
-    },
-    {
-      text: 'Multi',
-      value: 'Multi'
-    }
-  ],
-  'Premium Care Leather': [
-    {
-      text: 'Mini',
-      value: 'Mini'
-    },
-    {
-      text: 'Midi',
-      value: 'Midi'
-    },
-    {
-      text: 'Maxi',
-      value: 'Maxi'
-    }
-  ],
-  'Premium Care Fabric': [
-    {
-      text: 'Mini',
-      value: 'Mini'
-    },
-    {
-      text: 'Midi',
-      value: 'Midi'
-    },
-    {
-      text: 'Maxi',
-      value: 'Maxi'
-    }
-  ],
-  'Premium Care Synthetic': [
-    {
-      text: 'Mini',
-      value: 'Mini'
-    },
-    {
-      text: 'Midi',
-      value: 'Midi'
-    },
-    {
-      text: 'Maxi',
-      value: 'Maxi'
-    }
-  ],
-  'Premium Care Outdoor': [
-    {
-      text: 'Small',
-      value: 'Small'
-    },
-    {
-      text: 'Medium',
-      value: 'Medium'
-    }
-  ],
+  'Soil Guard' : [],
+  'Leather Guard' : [],
+  'Premium Care Leather': [],
+  'Premium Care Fabric': [],
+  'Premium Care Synthetic': [],
+  'Premium Care Outdoor': [],
   'DURA SEAL Vehicle Protection': [
     {
       text: 'Paint Protection',
@@ -473,7 +519,8 @@ export default{
   name: "WarrantyRegistration",
   components: {
       Datepicker,
-      loading
+      TypeAhead,
+      Loading
   },
   data () {
     return {
@@ -487,16 +534,20 @@ export default{
         email: '',
         address: '',
         suburb: '',
+        region: '',
         city: '',
         country: '',
         postcode: '',
         dealer_name: '',
         dealer_location: '',
-        subscribe: '',
         product_details: [
           {
             product_type: '',
             serial_number: '',
+            invoice_number: '',
+            vehicle_registration: '',
+            vehicle_make: '',
+            vehicle_model: '',
             purchase_date: '',
             product_applied: [],
             proof_purchase: null,
@@ -526,6 +577,23 @@ export default{
         { value: 'New Zealand', text: 'New Zealand' },
         { value: 'Australia', text: 'Australia' }
       ],
+      regionOptions : [
+        { value: 'Test Region 1', text: 'Test Region 1' },
+        { value: 'Test Region 2', text: 'Test Region 2' }
+      ],
+      duraSealOptions : [
+        { text: 'Paint Protection', value: 'Paint Protection' },
+        { text: 'Leather Protection', value: 'Leather Protection' },
+        { text: 'Fabric Protection', value: 'Fabric Protection' }
+      ],
+      vehicleMakeOptions : [
+        { value: 'Test Make 1', text: 'Test Make 1' },
+        { value: 'Test Make 2', text: 'Test Make 2' }
+      ],
+      vehicleModelOptions : [
+        { value: 'Test Model 1', text: 'Test Model 1' },
+        { value: 'Test Model 2', text: 'Test Model 2' }
+      ],
       personal: true,
       product: false
     }
@@ -551,6 +619,9 @@ export default{
         required
       },
       suburb: {
+        required
+      },
+      region: {
         required
       },
       city: {
@@ -580,12 +651,12 @@ export default{
           purchase_date: {
             required
           },
-          product_applied: {
-            required
-          },
-          proof_purchase: {
-            required
-          }
+          product_applied: {},
+          invoice_number: {},
+          vehicle_registration: {},
+          vehicle_make: {},
+          vehicle_model: {},
+          proof_purchase: {}
         }
       }
     }
@@ -600,6 +671,9 @@ export default{
       ])
   },
   methods: {
+    getResponse: function (response) {
+        return response.data.items;
+    },
     checkAppliedOption(key, value){
 
       let self = this;
@@ -671,11 +745,15 @@ export default{
       this.form.product_details.push({
         product_type: '',
         serial_number: '',
+        invoice_number: '',
+        vehicle_registration: '',
+        vehicle_make: '',
+        vehicle_model: '',
         purchase_date: '',
+        product_applied: [],
         proof_purchase: null,
         proof_purchase_type: null,
         proof_purchase_file: null,
-        product_applied: [],
         multiple: false,
         options: []
       });
