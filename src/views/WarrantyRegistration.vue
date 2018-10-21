@@ -118,25 +118,6 @@
               </b-form-group>
             </b-col>
             <b-col md="4">
-              <b-form-group id="Region"
-                            class="required"
-                            label="Region:"
-                            label-for="Region">
-                <b-form-input id="region"
-                              type="text"
-                              required
-                              v-model="form.region"
-                              :state="($v.form.region.$dirty && $v.form.region.$invalid)? false : null"
-                              @blur.native="$v.form.region.$touch()"
-                              aria-describedby="input1LiveFeedback"
-                              placeholder="Enter Region">
-                </b-form-input>
-                <b-form-invalid-feedback v-if="!$v.form.region.required">
-                  Region is a required field
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col md="4">
               <b-form-group id="cityGroup"
                             class="required"
                             label="City:"
@@ -154,8 +135,6 @@
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
-          </b-row>
-          <b-row>
             <b-col md="4">
               <b-form-group id="suburbGroup"
                             class="required"
@@ -174,6 +153,43 @@
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
+          </b-row>
+          <b-row>
+            <b-col md="4">
+              <b-form-group id="Region"
+                            class="required"
+                            label="Region:"
+                            label-for="Region">
+                <b-form-input id="region"
+                              type="text"
+                              required
+                              v-model="form.region"
+                              :state="($v.form.region.$dirty && $v.form.region.$invalid)? false : null"
+                              @blur.native="$v.form.region.$touch()"
+                              aria-describedby="input1LiveFeedback"
+                              placeholder="Enter Region">
+                </b-form-input>
+                <b-form-invalid-feedback v-if="!$v.form.region.required">
+                  Region is a required field
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col> 
+            <b-col md="4">
+              <b-form-group id="Country"
+                            class="required"
+                            label="Country:"
+                            label-for="Country">
+                <b-form-select id="Country"
+                                v-model="form.country"
+                                :state="($v.form.country.$dirty && $v.form.country.$invalid)? false : null"
+                                @blur.native="$v.form.country.$touch()"
+                                :options="countryOptions" 
+                                required/>
+                <b-form-invalid-feedback v-if="!$v.form.country.required">
+                  Country is a required field
+                </b-form-invalid-feedback>
+              </b-form-group>
+            </b-col>
             <b-col md="4">
               <b-form-group id="postCodeGroup"
                             class="required"
@@ -189,22 +205,6 @@
                 </b-form-input>
                 <b-form-invalid-feedback v-if="!$v.form.postcode.required">
                   Post Code is a required field
-                </b-form-invalid-feedback>
-              </b-form-group>
-            </b-col>
-            <b-col md="4">
-              <b-form-group id="Country"
-                            class="required"
-                            label="Country:"
-                            label-for="Country">
-                <b-form-select id="Country"
-                                v-model="form.country"
-                                :state="($v.form.country.$dirty && $v.form.country.$invalid)? false : null"
-                                @blur.native="$v.form.country.$touch()"
-                                :options="countryOptions" 
-                                required/>
-                <b-form-invalid-feedback v-if="!$v.form.country.required">
-                  Country is a required field
                 </b-form-invalid-feedback>
               </b-form-group>
             </b-col>
