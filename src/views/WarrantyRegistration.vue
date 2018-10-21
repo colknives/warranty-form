@@ -309,7 +309,7 @@
                   <template v-if="form.product_details[key].product_type == 'DURA SEAL Vehicle Protection'">
                     <b-row>
                     <b-col md="12">
-                    <b-form-group class="productAppliedGroup required"
+                    <b-form-group class="productAppliedGroup"
                                     label="Product Applied:"
                                     label-for="productApplied">
                     <b-row>
@@ -331,7 +331,7 @@
                     </b-row>
                     <b-row>
                       <b-col md="4">
-                        <b-form-group class="vehicleRegistrationNumberGroup required"
+                        <b-form-group class="vehicleRegistrationNumberGroup"
                                     label="Vehicle Registration Number:"
                                     label-for="vehicleRegistrationNumber">
                         <b-form-input class="vehicleRegistrationNumber"

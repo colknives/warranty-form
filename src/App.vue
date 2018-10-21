@@ -74,6 +74,10 @@ body {
     color:red;
 }
 
+.info .col-form-label{
+  padding-top: 0px !important;
+}
+
 .info-tip{
   padding: 0px 7px;
   border: 1px solid #000;
@@ -81,7 +85,7 @@ body {
   float: right;
   width: 20px;
   height: 20px;
-  margin: 7px 0px;
+  margin-bottom: 7px;
   font-size: 14px;
   font-weight: bold;
 }
