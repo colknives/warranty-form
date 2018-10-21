@@ -5,10 +5,15 @@ import router from "../router";
 export default {
     namespaced: true,
     state: {
+        personal: true,
+        product: false,
         hasErrors: false,
         errors: null,
         loading: false,
         notification: null,
+        serial: '',
+        serialKey: '',
+        productType: '',
         warranty: {
             firstname: null,
             lastname: null,
@@ -18,13 +23,29 @@ export default {
             suburb: null,
             region: null,
             city: null,
-            country: null,
+            country: 'New Zealand',
             postcode: null,
             invoice_number: null,
             dealer_name: null,
             dealer_location: null,
             subscribe: null,
-            product_details: []
+            product_details: [
+              {
+                product_type: '',
+                serial_number: '',
+                invoice_number: '',
+                vehicle_registration: '',
+                vehicle_make: '',
+                vehicle_model: '',
+                purchase_date: '',
+                product_applied: [],
+                proof_purchase: null,
+                proof_purchase_type: null,
+                proof_purchase_file: null,
+                multiple: false,
+                options: []
+              }
+            ]
         }
     },
     mutations: {
@@ -38,6 +59,14 @@ export default {
         },
         unloading(state) {
             state.loading = false;
+        },
+        enablePersonal(state){
+            state.personal = true;
+            state.product = false;
+        },
+        enableProduct(state){
+            state.personal = false;
+            state.product = true;
         },
         setPersonal(state, response) {
             state.warranty.firstname = response.firstname;
@@ -57,9 +86,38 @@ export default {
             state.warranty.dealer_location = response.dealer_location;
             state.warranty.subscribe = response.subscribe;
             state.warranty.product_details = response.product_details;
+        },
+        setSerial(state, serial) {
+            state.serial = serial;
+        },
+        setSerialKey(state, serialKey) {
+            state.serialKey = serialKey;
+        },
+        getProductType(state, response) {
+            state.productType = response.type;
+        },
+        clearProductType(state){
+            state.productType = '';
         }
     },
     actions: {
+        identifySerial: async ({ commit, state }) => {
+            try {
+                let response = await warranty.identifySerial(
+                    state.serial
+                );
+
+                if( response ){
+                    commit("getProductType", response);
+                }
+            } catch (errors) {
+
+                commit("unloading");
+                commit("errors", errors);
+
+                notification.error(errors.errors.message);
+            }
+        },
         saveWarranty: async ({ commit, state }) => {
             commit("loading");
             
@@ -77,9 +135,6 @@ export default {
 
                 commit("unloading");
                 commit("errors", errors);
-
-                console.log(errors);
-                console.log(errors.errors.message);
 
                 notification.error(errors.errors.message);
 
