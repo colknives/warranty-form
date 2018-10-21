@@ -14,5 +14,19 @@ export default {
                     reject(status, error);
                 });
         });
+    },
+    identifySerial (serialNumber) {
+        return new Promise((resolve, reject) => {
+            api.post(
+                "warranty/type",
+                {"serial_number":serialNumber}
+            )
+                .then(response => {
+                    return resolve(response);
+                })
+                .catch((status, error) => {
+                    reject(status, error);
+                });
+        });
     }
 }
