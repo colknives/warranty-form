@@ -3,7 +3,7 @@
     <router-view/>
     <notifications
     group="notification"
-    position="bottom right"
+    position="top center"
     width="325"
     animation-type="velocity"/>
   </div>
