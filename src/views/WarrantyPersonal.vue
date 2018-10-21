@@ -103,6 +103,23 @@
           </b-form-group>
         </b-col>
         <b-col md="4">
+          <b-form-group id="suburbGroup"
+                        label="Suburb:"
+                        label-for="suburb">
+            <b-form-input id="suburb"
+                          type="text"
+                          required
+                          v-model="form.suburb"
+                          :state="($v.form.suburb.$dirty && $v.form.suburb.$invalid)? false : null"
+                          @blur.native="$v.form.suburb.$touch()"
+                          placeholder="Enter Suburb">
+            </b-form-input>
+            <b-form-invalid-feedback v-if="!$v.form.suburb.required">
+              Suburb is a required field
+            </b-form-invalid-feedback>
+          </b-form-group>
+        </b-col>
+        <b-col md="4">
           <b-form-group id="cityGroup"
                         class="required"
                         label="City:"
@@ -117,23 +134,6 @@
             </b-form-input>
             <b-form-invalid-feedback v-if="!$v.form.city.required">
               City is a required field
-            </b-form-invalid-feedback>
-          </b-form-group>
-        </b-col>
-        <b-col md="4">
-          <b-form-group id="suburbGroup"
-                        label="Suburb:"
-                        label-for="suburb">
-            <b-form-input id="suburb"
-                          type="text"
-                          required
-                          v-model="form.suburb"
-                          :state="($v.form.suburb.$dirty && $v.form.suburb.$invalid)? false : null"
-                          @blur.native="$v.form.suburb.$touch()"
-                          placeholder="Enter Suburb">
-            </b-form-input>
-            <b-form-invalid-feedback v-if="!$v.form.suburb.required">
-              Suburb is a required field
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>

@@ -14,6 +14,10 @@ export default {
         serial: '',
         serialKey: '',
         productType: '',
+        make: '',
+        model: '',
+        vehicleMakeOptions: [],
+        vehicleModelOptions: [],
         warranty: {
             firstname: null,
             lastname: null,
@@ -98,20 +102,86 @@ export default {
         },
         clearProductType(state){
             state.productType = '';
-        }
+        },
+        setMake(state, make) {
+            state.make = make;
+        },
+        getMakeOptions(state, response) {
+            state.vehicleMakeOptions = response.makes;
+
+            console.log('get make options');
+            console.log(state.vehicleMakeOptions);
+        },
+        setModel(state, make) {
+            state.model = models;
+        },
+        getModelOptions(state, response) {
+            state.vehicleModelOptions = response.models;
+
+            console.log('get model options');
+            console.log(state.vehicleModelOptions);
+        },
+        clearVehicleModel(state){
+            state.model = '';
+        },
     },
     actions: {
+        getMake: async ({ commit, state }) => {
+            commit("loading");
+
+            try {
+                let response = await warranty.getMake();
+
+                commit("unloading");
+
+                if( response ){
+
+                    console.log('get make success');
+                    console.log(response);
+
+                    commit("getMakeOptions", response);
+                }
+            } catch (errors) {
+                commit("unloading");
+                commit("errors", errors);
+
+                notification.error(errors.errors.message);
+            }
+        },
+        getModel: async ({ commit, state }) => {
+            commit("loading");
+
+            try {
+                let response = await warranty.getModel(
+                    state.make
+                );
+
+                commit("unloading");
+
+                if( response ){
+                    commit("getModelOptions", response);
+                }
+            } catch (errors) {
+                commit("unloading");
+                commit("errors", errors);
+
+                notification.error(errors.errors.message);
+            }
+        },
         identifySerial: async ({ commit, state }) => {
+            commit("loading");
+
             try {
                 let response = await warranty.identifySerial(
                     state.serial
                 );
 
+                commit("unloading");
+
                 if( response ){
                     commit("getProductType", response);
                 }
             } catch (errors) {
-
                 commit("unloading");
                 commit("errors", errors);
 
