@@ -16,9 +16,11 @@ export default {
             contact_number: null,
             address: null,
             suburb: null,
+            region: null,
             city: null,
             country: null,
             postcode: null,
+            invoice_number: null,
             dealer_name: null,
             dealer_location: null,
             subscribe: null,
@@ -45,10 +47,12 @@ export default {
             state.warranty.address = response.address;
             state.warranty.suburb = response.suburb;
             state.warranty.city = response.city;
+            state.warranty.region = response.region;
             state.warranty.country = response.country;
             state.warranty.postcode = response.postcode;
         },
         setProduct(state, response) {
+            state.warranty.invoice_number = response.invoice_number;
             state.warranty.dealer_name = response.dealer_name;
             state.warranty.dealer_location = response.dealer_location;
             state.warranty.subscribe = response.subscribe;
@@ -73,6 +77,9 @@ export default {
 
                 commit("unloading");
                 commit("errors", errors);
+
+                console.log(errors);
+                console.log(errors.errors.message);
 
                 notification.error(errors.errors.message);
 
