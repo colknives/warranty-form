@@ -18,7 +18,7 @@ export default {
     identifySerial (serialNumber) {
         return new Promise((resolve, reject) => {
             api.post(
-                "warranty/type/",
+                "warranty/type",
                 {"serial_number":serialNumber}
             )
                 .then(response => {
