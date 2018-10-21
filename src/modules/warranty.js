@@ -108,18 +108,12 @@ export default {
         },
         getMakeOptions(state, response) {
             state.vehicleMakeOptions = response.makes;
-
-            console.log('get make options');
-            console.log(state.vehicleMakeOptions);
         },
         setModel(state, make) {
             state.model = models;
         },
         getModelOptions(state, response) {
             state.vehicleModelOptions = response.models;
-
-            console.log('get model options');
-            console.log(state.vehicleModelOptions);
         },
         clearVehicleModel(state){
             state.model = '';
@@ -135,10 +129,6 @@ export default {
                 commit("unloading");
 
                 if( response ){
-
-                    console.log('get make success');
-                    console.log(response);
-
                     commit("getMakeOptions", response);
                 }
             } catch (errors) {
