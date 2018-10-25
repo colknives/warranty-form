@@ -118,6 +118,40 @@ export default {
         clearVehicleModel(state){
             state.model = '';
         },
+        clearForm(state){
+            state.warranty.firstname = null;
+            state.warranty.lastname = null;
+            state.warranty.contact_number = null;
+            state.warranty.email = null;
+            state.warranty.address = null;
+            state.warranty.suburb = null;
+            state.warranty.city = null;
+            state.warranty.region = null;
+            state.warranty.country = 'New Zealand';
+            state.warranty.postcode = null;
+            state.warranty.invoice_number = null;
+            state.warranty.dealer_name = null;
+            state.warranty.dealer_location = null;
+            state.warranty.subscribe = null;
+            state.warranty.product_details = {};
+
+            state.warranty.product_details.push({
+                product_type: '',
+                serial_number: '',
+                invoice_number: '',
+                vehicle_registration: '',
+                vehicle_make: '',
+                vehicle_model: '',
+                purchase_date: '',
+                product_applied: [],
+                proof_purchase: null,
+                proof_purchase_type: null,
+                proof_purchase_file: null,
+                multiple: false,
+                options: []
+              });
+
+        }
     },
     actions: {
         getMake: async ({ commit, state }) => {

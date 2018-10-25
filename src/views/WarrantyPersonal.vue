@@ -139,7 +139,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="4">
+        <!-- <b-col md="4">
           <b-form-group id="Region"
                         label="Region:"
                         label-for="Region">
@@ -156,7 +156,7 @@
               Region is a required field
             </b-form-invalid-feedback>
           </b-form-group>
-        </b-col> 
+        </b-col>  -->
         <b-col md="4">
           <b-form-group id="Country"
                         class="required"
