@@ -98,7 +98,7 @@
               <template v-if="form.product_details[key].product_type == 'DURA SEAL Vehicle Protection' || form.product_details[key].product_type == 'DURA SEAL Leather Protection'">
                 <b-row>
                   <b-col md="4">
-                    <b-form-group class="vehicleRegistrationNumberGroup"
+                    <b-form-group class="vehicleRegistrationNumberGroup required"
                                 label="Vehicle Registration Number:"
                                 label-for="vehicleRegistrationNumber">
                     <b-form-input class="vehicleRegistrationNumber"
@@ -156,6 +156,30 @@
                         Model is a required field
                       </b-form-invalid-feedback>
                     </b-form-group>
+                  </b-col>
+                </b-row>
+                <b-row>
+                  <b-col offset-md="4" md="4">
+                    <template v-if="form.product_details[key].vehicle_make == 'Others'">
+                      <b-form-group class="makeOthersGroup required">
+                        <b-form-input class="makeOthers"
+                                      v-model="form.product_details[key].vehicle_make_others"
+                                      type="text"
+                                      placeholder="Enter Make">
+                        </b-form-input>
+                      </b-form-group>
+                    </template>
+                  </b-col>
+                  <b-col md="4">
+                    <template v-if="form.product_details[key].vehicle_model == 'Others'">
+                      <b-form-group class="modelOthersGroup required">
+                        <b-form-input class="modelOthers"
+                                      v-model="form.product_details[key].vehicle_model_others"
+                                      type="text"
+                                      placeholder="Enter Model">
+                        </b-form-input>
+                      </b-form-group>
+                    </template>
                   </b-col>
                 </b-row>
               </template>
@@ -315,7 +339,9 @@ export default{
             invoice_number: '',
             vehicle_registration: '',
             vehicle_make: '',
+            vehicle_make_others: '',
             vehicle_model: '',
+            vehicle_model_others: '',
             purchase_date: '',
             product_applied: [],
             proof_purchase: null,
@@ -373,7 +399,19 @@ export default{
           },
           product_applied: {},
           invoice_number: {},
-          vehicle_registration: {},
+          vehicle_registration: {
+            isNeeded(value, params) {
+
+              if( params['product_type'] == 'DURA SEAL Leather Protection' || params['product_type'] == 'DURA SEAL Vehicle Protection' ){
+
+                if( value === '' ){
+                  return false;
+                }
+              }
+
+              return true;
+            }
+          },
           vehicle_make: {},
           vehicle_model: {},
           proof_purchase: {}
@@ -422,12 +460,18 @@ export default{
 
       this.$nextTick(function() {
         let make = self.form.product_details[key].vehicle_make;
+
         self.form.product_details[key].vehicle_model = "";
 
         self.$store.commit("warranty/setMake", make);
         self.$store.commit("warranty/clearVehicleModel");
         self.$store.dispatch("warranty/getModel").then(function() {
           self.form.product_details[self.serialKey].product_type = self.productType;
+
+          if( make == "Others" ){
+            self.form.product_details[key].vehicle_model = 'Others';
+          }
+
         });
       });
 
@@ -459,6 +503,15 @@ export default{
       });
     },
     saveWarrantyRegistration() {
+
+      if( this.form.product_details[key].vehicle_make_others != '' ){
+        self.form.product_details[key].vehicle_make = self.form.product_details[key].vehicle_make_others
+      }
+
+      if( this.form.product_details[key].vehicle_model_others != '' ){
+        self.form.product_details[key].vehicle_model = self.form.product_details[key].vehicle_model_others
+      }
+
       this.$store.commit("warranty/setProduct", this.form);
       this.$store.dispatch("warranty/saveWarranty");
     },

@@ -25,6 +25,8 @@
 
 <script lang="ts">
 
+import { mapState } from "vuex";
+
 export default{
   name: "WarrantySuccess",
   created: function() {
@@ -34,11 +36,24 @@ export default{
   },
   methods: {
     registerProduct() {
+      this.$store.commit("warranty/enablePersonal");
+      this.$store.commit("warranty/clearForm");
       this.$router.push('/');
     },
     goShop() {
       window.location = 'http://tfrgoup.myshopify.com';
     }
+  },
+  computed: {
+      ...mapState("warranty", [
+          "loading",
+          "hasErrors",
+          "errors",
+          "notification",
+          "warranty",
+          "personal",
+          "product"
+      ])
   }
 }
 </script>
