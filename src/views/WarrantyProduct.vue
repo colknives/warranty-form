@@ -508,11 +508,12 @@ export default{
       let arrayLength = productDetails.length;
 
       for (var key = 0; key < arrayLength; key++) {
-        if( this.form.product_details[key].vehicle_make_others != '' ){
+
+        if( this.form.product_details[key].vehicle_make_others != null ){
           this.form.product_details[key].vehicle_make = this.form.product_details[key].vehicle_make_others;
         }
 
-        if( this.form.product_details[key].vehicle_model_others != '' ){
+        if( this.form.product_details[key].vehicle_model_others != null ){
           this.form.product_details[key].vehicle_model = this.form.product_details[key].vehicle_model_others;
         }
       }
