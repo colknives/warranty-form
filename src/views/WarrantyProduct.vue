@@ -232,15 +232,20 @@
                           class="required"
                           label="Dealer Name:"
                           label-for="dealerName">
-              <b-form-input id="dealerName"
+              <vue-bootstrap-typeahead v-model="form.dealer_name"
+                                        :data="dealerNameOptions"
+                                        placeholder="Enter Dealer Name"
+                                        :inputClass="($v.form.dealer_name.$dirty && $v.form.dealer_name.$invalid)? 'is-invalid' : ''"
+                                        @blur.native="$v.form.dealer_name.$touch()"/>
+              <!-- <b-form-input id="dealerName"
                             type="text"
                             required
                             v-model="form.dealer_name"
                             :state="($v.form.dealer_name.$dirty && $v.form.dealer_name.$invalid)? false : null"
                             @blur.native="$v.form.dealer_name.$touch()"
                             placeholder="Enter Dealer Name">
-              </b-form-input>
-              <b-form-invalid-feedback v-if="!$v.form.dealer_name.required">
+              </b-form-input> -->
+              <b-form-invalid-feedback v-if="($v.form.dealer_name.$dirty && !$v.form.dealer_name.required)" style="display:block;">
                 Dealer Name is a required field
               </b-form-invalid-feedback>
             </b-form-group>
@@ -255,7 +260,6 @@
                             required
                             v-model="form.dealer_location"
                             :state="($v.form.dealer_location.$dirty && $v.form.dealer_location.$invalid)? false : null"
-                            @blur.native="$v.form.dealer_location.$touch()"
                             placeholder="Enter Location">
               </b-form-input>
               <b-form-invalid-feedback v-if="!$v.form.dealer_location.required">
@@ -328,6 +332,7 @@ export default{
     return {
       appliedOptionsList: appliedOptionsList,
       appliedOptions: [],
+      dealerNames: ['Canada', 'USA', 'Mexico'],
       validated: true,
       form: {
         dealer_name: '',
@@ -429,7 +434,8 @@ export default{
           "productType",
           "serialKey",
           "vehicleMakeOptions",
-          "vehicleModelOptions"
+          "vehicleModelOptions",
+          "dealerNameOptions"
       ])
   },
   created: function() {
@@ -440,6 +446,18 @@ export default{
       this.form.product_details = this.warranty.product_details;
 
       this.$store.dispatch("warranty/getMake");
+  },
+  watch: {
+      'form.dealer_name' : function() {
+        if( this.form.dealer_name != null ){
+          this.$v.form.dealer_name.$touch();
+        }  
+      },
+      'form.dealer_location' : function() {
+        if( this.form.dealer_location != null ){
+          this.$v.form.dealer_location.$touch();
+        }  
+      }
   },
   methods: {
     getResponse: function (response) {
@@ -489,6 +507,15 @@ export default{
         self.$store.commit("warranty/setSerialKey", key);
         self.$store.dispatch("warranty/identifySerial").then(function() {
           self.form.product_details[self.serialKey].product_type = self.productType;
+
+          let type = 'Furniture';
+
+          if( self.productType == 'DURA SEAL Leather Protection' || self.productType == 'DURA SEAL Vehicle Protection' ){
+            type = 'Vehicle';
+          }
+
+          self.$store.commit("warranty/setDealerType", type);
+          self.$store.dispatch("warranty/getDealer");
         });
       });
     }, 
