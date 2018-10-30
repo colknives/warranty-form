@@ -9,12 +9,15 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuelidate from 'vuelidate'
 import velocity from "velocity-animate";
 import Notifications from "vue-notification"
+import Autocomplete from 'v-autocomplete'
+import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 
 
 Vue.config.productionTip = false
 Vue.use(BootstrapVue);
 Vue.use(Vuelidate);
 Vue.use(Notifications, { velocity });
+Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead);
 
 // router.beforeEach((to, from, next) => {
 //     if (to.matched.some(record => record.meta.requireAuth)) {

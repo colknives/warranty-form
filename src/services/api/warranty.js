@@ -55,5 +55,19 @@ export default {
                     reject(status, error);
                 });
         });
+    },
+    getDealer (type) {
+        return new Promise((resolve, reject) => {
+            api.post(
+                "dealer-info/name",
+                {"type":type}
+            )
+                .then(response => {
+                    return resolve(response);
+                })
+                .catch((status, error) => {
+                    reject(status, error);
+                });
+        });
     }
 }

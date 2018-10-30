@@ -18,6 +18,8 @@ export default {
         model: '',
         vehicleMakeOptions: [],
         vehicleModelOptions: [],
+        dealerNameOptions: [],
+        dealerType: null,
         warranty: {
             firstname: null,
             lastname: null,
@@ -115,6 +117,12 @@ export default {
         getModelOptions(state, response) {
             state.vehicleModelOptions = response.models;
         },
+        setDealerType(state, type) {
+            state.dealerType = type;
+        },
+        getDealerOptions(state, response) {
+            state.dealerNameOptions = response.dealers;
+        },
         clearVehicleModel(state){
             state.model = '';
         },
@@ -184,6 +192,25 @@ export default {
 
                 if( response ){
                     commit("getModelOptions", response);
+                }
+            } catch (errors) {
+                commit("unloading");
+                commit("errors", errors);
+
+                notification.error(errors.errors.message);
+            }
+        },
+        getDealer: async ({ commit, state }) => {
+            commit("loading");
+            try {
+                let response = await warranty.getDealer(
+                    state.dealerType
+                );
+
+                commit("unloading");
+
+                if( response ){
+                    commit("getDealerOptions", response);
                 }
             } catch (errors) {
                 commit("unloading");
