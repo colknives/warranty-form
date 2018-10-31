@@ -531,12 +531,18 @@ export default{
     },
     saveWarrantyRegistration() {
 
-      if( this.form.product_details[key].vehicle_make_others != '' ){
-        self.form.product_details[key].vehicle_make = self.form.product_details[key].vehicle_make_others
-      }
+      let productDetails = this.form.product_details;
+      let arrayLength = productDetails.length;
 
-      if( this.form.product_details[key].vehicle_model_others != '' ){
-        self.form.product_details[key].vehicle_model = self.form.product_details[key].vehicle_model_others
+      for (var key = 0; key < arrayLength; key++) {
+
+        if( this.form.product_details[key].vehicle_make_others != null ){
+          this.form.product_details[key].vehicle_make = this.form.product_details[key].vehicle_make_others;
+        }
+
+        if( this.form.product_details[key].vehicle_model_others != null ){
+          this.form.product_details[key].vehicle_model = this.form.product_details[key].vehicle_model_others;
+        }
       }
 
       this.$store.commit("warranty/setProduct", this.form);

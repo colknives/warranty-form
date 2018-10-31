@@ -141,23 +141,23 @@ export default {
             state.warranty.dealer_name = null;
             state.warranty.dealer_location = null;
             state.warranty.subscribe = null;
-            state.warranty.product_details = {};
-
-            state.warranty.product_details.push({
-                product_type: '',
-                serial_number: '',
-                invoice_number: '',
-                vehicle_registration: '',
-                vehicle_make: '',
-                vehicle_model: '',
-                purchase_date: '',
-                product_applied: [],
-                proof_purchase: null,
-                proof_purchase_type: null,
-                proof_purchase_file: null,
-                multiple: false,
-                options: []
-              });
+            state.warranty.product_details = [
+                {
+                    product_type: '',
+                    serial_number: '',
+                    invoice_number: '',
+                    vehicle_registration: '',
+                    vehicle_make: '',
+                    vehicle_model: '',
+                    purchase_date: '',
+                    product_applied: [],
+                    proof_purchase: null,
+                    proof_purchase_type: null,
+                    proof_purchase_file: null,
+                    multiple: false,
+                    options: []
+                }
+            ];
 
         }
     },
