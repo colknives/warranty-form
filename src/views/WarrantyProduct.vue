@@ -237,14 +237,6 @@
                                         placeholder="Enter Dealer Name"
                                         :inputClass="($v.form.dealer_name.$dirty && $v.form.dealer_name.$invalid)? 'is-invalid' : ''"
                                         @blur.native="$v.form.dealer_name.$touch()"/>
-              <!-- <b-form-input id="dealerName"
-                            type="text"
-                            required
-                            v-model="form.dealer_name"
-                            :state="($v.form.dealer_name.$dirty && $v.form.dealer_name.$invalid)? false : null"
-                            @blur.native="$v.form.dealer_name.$touch()"
-                            placeholder="Enter Dealer Name">
-              </b-form-input> -->
               <b-form-invalid-feedback v-if="($v.form.dealer_name.$dirty && !$v.form.dealer_name.required)" style="display:block;">
                 Dealer Name is a required field
               </b-form-invalid-feedback>
