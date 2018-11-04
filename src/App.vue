@@ -93,4 +93,16 @@ body {
 .warranty-image-header{
   padding-bottom: 30px;
 }
+
+.warranty-footer{
+  border-top: 1px solid #eee;
+  padding: 10px 0px;
+  margin: 20px 0px;
+}
+
+@media only screen and (max-width: 980px) {
+    .warranty-registration {
+        padding: 0px 100px;
+    }
+}
 </style>

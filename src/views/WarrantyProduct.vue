@@ -267,11 +267,11 @@
         </b-row>
       </div>
       <b-row>
-        <b-col md="2">
-          <b-button type="button" variant="default" @click="goPersonal"><strong>Return Back</strong></b-button>
+        <b-col md="4" sm="6" lg="2">
+          <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="default" @click="goPersonal"><strong>Return Back</strong></b-button>
         </b-col>
-        <b-col md="2">
-          <b-button type="button" variant="primary" @click="saveWarrantyRegistration" :disabled="$v.form.$invalid"><strong>Submit Details</strong></b-button>
+        <b-col md="4" sm="6" lg="2">
+          <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" @click="saveWarrantyRegistration" :disabled="$v.form.$invalid"><strong>Submit Details</strong></b-button>
         </b-col>
       </b-row>
     </b-form>
