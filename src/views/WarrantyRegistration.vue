@@ -1,5 +1,5 @@
 <template>
-  <div class="warranty-registration">
+  <div class="warranty-registration col-sm-12  col-md-10">
     <loading :active.sync="loading" 
         :is-full-page="true"></loading>
     <div class="warranty-image-header">
@@ -19,6 +19,9 @@
     <section class="warranty-product-details" v-if="product">
       <warranty-product-tab></warranty-product-tab>
     </section>
+    <div class="warranty-footer">
+      <small>&copy; 2018 TFGROUP. All prices displayed in NZD. Checkout in NZD. Designed by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
+    </div>
   </div>
 </template>
 

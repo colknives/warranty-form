@@ -7,7 +7,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="6">
+        <b-col sm="12" md="6">
           <b-form-group id="firstNameGroup"
                         class="required"
                         label="First Name:"
@@ -192,7 +192,7 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button type="button" variant="primary" @click="setPersonal" :disabled="$v.form.$invalid"><strong>Proceed to Product Details</strong></b-button>
+      <b-button class="col-sm-12 col-md-4 col-lg-3" type="button" variant="primary" @click="setPersonal" :disabled="$v.form.$invalid"><strong>Proceed to Product Details</strong></b-button>
     </b-form>
   </div>
 </template>
