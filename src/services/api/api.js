@@ -5,9 +5,9 @@ import store from "../../store";
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 const API = axios.create({
-    baseURL: "http://apitfgroup.weroar.co.nz/public/",
-    // baseURL: "http://localhost:8001/",
-    timeout: 29000
+    // baseURL: "http://apitfgroup.weroar.co.nz/public/",
+    baseURL: "http://localhost:8001/",
+    timeout: 500000
 });
 
 const POST = (uri, params, headers = {}) => {

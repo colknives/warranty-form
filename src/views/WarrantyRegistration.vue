@@ -1,28 +1,46 @@
 <template>
-  <div class="warranty-registration col-sm-12  col-md-10">
-    <loading :active.sync="loading" 
+  <b-row class="warranty-main">
+    <b-col md="2"></b-col>
+    <b-col md="8" sm="12" xs="12">
+      <loading :active.sync="loading" 
         :is-full-page="true"></loading>
-    <div class="warranty-image-header">
-      <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
-    </div>
-  	<div class="warranty-personal-header">
-  		<h3><strong>Why register your product?</strong></h3>
-  	</div>
-  	<div class="warranty-personal-description">
-  		<p>Please complete our form to register your product for warranty</p>
-  		<p>To ensure the successful completion of this form, please ensure you are using a modern browser and enable cookies before proceeding.</p>
-  		<p>TF GROUP is committed to protecting your personal information and respecting your privacy. To understand more about the personal data we collect from our website, you can read our <a href="#">privacy information statement</a>.</p>
-  	</div>
-    <section class="warranty-personal-details" v-if="personal">
-      <warranty-personal-tab></warranty-personal-tab>
-    </section>
-    <section class="warranty-product-details" v-if="product">
-      <warranty-product-tab></warranty-product-tab>
-    </section>
-    <div class="warranty-footer">
-      <small>&copy; 2018 TFGROUP. All prices displayed in NZD. Checkout in NZD. Designed by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
-    </div>
-  </div>
+      <div class="warranty-registration">
+
+        <b-row>
+          <b-col>
+            <!--logo-->
+            <img class="img-responsive" src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
+            <!--description-->
+            <h3>Why register your product?</h3>
+            <p>
+              In order to properly register your product, you will need to provide your personal information and product details. The serial number is printed on the registration card and can also be found in the top section of your warranty certificate. Required fields are tag with <span class="red">*</span> on its label.</p>
+            <p>Benefits of registering your product:</p>
+
+              <ul>
+                <li>Confirmation of ownership</li>
+              <li>Receive important updates for products</li>
+              <li>Be the first to know about new products and new offers</li>
+              <li>Covers your warranty</li>
+              </ul>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col>
+            <section class="warranty-personal-details" v-if="personal">
+              <warranty-personal-tab></warranty-personal-tab>
+            </section>
+            <section class="warranty-product-details" v-if="product">
+              <warranty-product-tab></warranty-product-tab>
+            </section>
+          </b-col>
+        </b-row>
+        <div class="warranty-footer">
+          <small>&copy; 2018 TFGROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
+        </div>
+      </div>
+    </b-col>
+    <b-col md="2"></b-col>
+  </b-row>
 </template>
 
 <script lang="ts">

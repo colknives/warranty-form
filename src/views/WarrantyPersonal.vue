@@ -192,7 +192,7 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-button class="col-sm-12 col-md-4 col-lg-3" type="button" variant="primary" @click="setPersonal" :disabled="$v.form.$invalid"><strong>Proceed to Product Details</strong></b-button>
+      <b-button class="col-sm-12 col-md-6 col-lg-4" type="button" variant="primary" @click="setPersonal" :disabled="$v.form.$invalid"><strong>Proceed to Product Details</strong></b-button>
     </b-form>
   </div>
 </template>

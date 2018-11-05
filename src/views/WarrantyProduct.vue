@@ -20,7 +20,7 @@
               <b-row>
                 <b-col md="4">
                   <b-form-group class="serialNumberGroup required info">
-                    <label for="serialNumber" class="col-form-label">Product Serial Number:</label><span class="info-tip" v-b-tooltip.hover title="Serial number is located at the rear box ex. DS123456">i</span>
+                    <label for="serialNumber" class="col-form-label">Product Serial No.:</label><span class="info-tip" v-b-tooltip.hover title="Serial No. is located at the rear box ex. DS123456">i</span>
                     <b-form-input class="serialNumber"
                                   v-model="form.product_details[key].serial_number"
                                   :state="(productInfo.serial_number.$dirty && productInfo.serial_number.$invalid)? false : null"
@@ -99,7 +99,7 @@
                 <b-row>
                   <b-col md="4">
                     <b-form-group class="vehicleRegistrationNumberGroup required"
-                                label="Vehicle Registration Number:"
+                                label="Vehicle Registration No.:"
                                 label-for="vehicleRegistrationNumber">
                     <b-form-input class="vehicleRegistrationNumber"
                                   v-model="form.product_details[key].vehicle_registration"
@@ -107,7 +107,7 @@
                                   @blur.native="productInfo.vehicle_registration.$touch()"
                                   type="text"
                                   required
-                                  placeholder="Enter Vehicle Registration Number">
+                                  placeholder="Enter Vehicle Registration No.">
                     </b-form-input>
                     <b-form-invalid-feedback v-if="!productInfo.vehicle_registration.required">
                       Vehicle Registration Number is a required field
@@ -186,7 +186,7 @@
               <b-row>
                 <b-col md="4">
                   <b-form-group class="invoiceNumberGroup"
-                                label="Invoice Number:"
+                                label="Invoice No.:"
                                 label-for="invoiceNumber">
                     <b-form-input class="invoiceNumber"
                                   v-model="form.product_details[key].invoice_number"
@@ -194,14 +194,14 @@
                                   @blur.native="productInfo.invoice_number.$touch()"
                                   type="text"
                                   required
-                                  placeholder="Enter Serial Number">
+                                  placeholder="Enter Invoice No.">
                     </b-form-input>
                     <b-form-invalid-feedback v-if="!productInfo.invoice_number.required">
                       Invoice Number is a required field
                     </b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
-                <b-col md="4">
+                <b-col md="8" sm="12" xs="12">
                   <b-form-group class="proofPurchaseGroup"
                                 label="Proof of Purchase:"
                                 label-for="proofPurchase">
@@ -244,7 +244,7 @@
           </b-col>
           <b-col md="6">
             <b-form-group id="dealerLocationGroup"
-                          class="required"
+                          class=""
                           label="Location:"
                           label-for="dealerLocation">
               <b-form-input id="dealerLocation"
@@ -267,10 +267,10 @@
         </b-row>
       </div>
       <b-row>
-        <b-col md="4" sm="6" lg="2">
+        <b-col md="5" sm="6" lg="3" class="padding-bot">
           <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="default" @click="goPersonal"><strong>Return Back</strong></b-button>
         </b-col>
-        <b-col md="4" sm="6" lg="2">
+        <b-col md="5" sm="6" lg="3" class="padding-bot">
           <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" @click="saveWarrantyRegistration" :disabled="$v.form.$invalid"><strong>Submit Details</strong></b-button>
         </b-col>
       </b-row>
@@ -379,9 +379,7 @@ export default{
       dealer_name: {
         required
       },
-      dealer_location: {
-        required
-      },
+      dealer_location: {},
       product_details: {
         required,
         $each: {
