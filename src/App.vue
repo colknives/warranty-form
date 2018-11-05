@@ -15,17 +15,25 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
-  margin: 50px 0;
-}
-.warranty-registration {
-  width: 900px;
-  margin: 0 auto;
+  margin-top: 50px;
 }
 body {
   background-color:#f7f7f7 !important;
 }
 #product-details-container{
   margin: 20px 0px;
+}
+
+.warranty-main{
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.img-responsive{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    padding-bottom: 20px;
 }
 
 .product-info-container{
@@ -44,6 +52,10 @@ body {
 
 .product-delete-container{
   text-align: right;
+}
+
+.warranty-personal-form, .warranty-product-form{
+  margin-bottom: 50px;
 }
 
 #warranty-success {
@@ -100,9 +112,15 @@ body {
   margin: 20px 0px;
 }
 
-@media only screen and (max-width: 980px) {
-    .warranty-registration {
-        padding: 0px 100px;
-    }
+.custom-file-label{
+  overflow:hidden;
+}
+
+.padding-bot{
+  padding-bottom: 10px;
+}
+
+.red{
+  color:#ff0000;
 }
 </style>
