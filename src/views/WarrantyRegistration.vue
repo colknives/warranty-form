@@ -9,7 +9,7 @@
         <b-row>
           <b-col>
             <!--logo-->
-            <img class="img-responsive" src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
+            <a href="http://tfgroup.co.nz"><img class="img-responsive" src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></a>
             <!--description-->
             <h3>Why register your product?</h3>
             <p>
