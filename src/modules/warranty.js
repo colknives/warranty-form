@@ -111,7 +111,7 @@ export default {
         getMakeOptions(state, response) {
             state.vehicleMakeOptions = response.makes;
         },
-        setModel(state, make) {
+        setModel(state, models) {
             state.model = models;
         },
         getModelOptions(state, response) {
@@ -162,7 +162,7 @@ export default {
         }
     },
     actions: {
-        getMake: async ({ commit, state }) => {
+        getMake: async ({ commit }) => {
             commit("loading");
 
             try {

@@ -123,4 +123,12 @@ body {
 .red{
   color:#ff0000;
 }
+
+.invalid-file-feedback{
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 80%;
+    color: #dc3545;
+}
 </style>

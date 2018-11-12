@@ -8,7 +8,7 @@
       </b-row>
       <div id="product-details-container">
         <template v-for="(productInfo, key) in $v.form.product_details.$each.$iter">
-          <div class="product-detail-info-container">
+          <div class="product-detail-info-container" v-bind:key="key">
             <div class="product-delete-container">
               <b-row v-if="key != 0">
                 <b-col class="product-delete-container">
@@ -33,6 +33,9 @@
                     <b-form-invalid-feedback v-if="!productInfo.serial_number.required">
                       Serial Number is a required field
                     </b-form-invalid-feedback>
+                    <b-form-invalid-feedback v-if="!productInfo.serial_number.alphaNum">
+                      Serial Number can only consist of alphanumeric characters
+                    </b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
                 <b-col md="4">
@@ -56,18 +59,15 @@
                   <b-form-group class="purchaseDateGroup required"
                                 label="Purchase Date:"
                                 label-for="purchaseDateNumber">
-                          <datepicker
-                            :config="dateConfig"
-                            v-model="form.product_details[key].purchase_date"
-                            :state="(productInfo.purchase_date.$dirty && productInfo.purchase_date.$invalid)? false : null"
-                            @blur.native="productInfo.purchase_date.$touch()"
-                            placeholder="DD-MM-YYYY" 
-                            class="form-control datefield">
-                        </datepicker>
-                        <b-form-invalid-feedback v-if="!productInfo.purchase_date.required">
-                        Purchase Date is a required field
-                      </b-form-invalid-feedback>
-                    </b-form-input>
+                    <datepicker
+                      :config="dateConfig"
+                      v-model="form.product_details[key].purchase_date"
+                      :state="(productInfo.purchase_date.$dirty && productInfo.purchase_date.$invalid)? false : null"
+                      @blur.native="productInfo.purchase_date.$touch()"
+                      placeholder="DD-MM-YYYY" 
+                      class="form-control datefield">
+                    </datepicker>
+                    <b-form-invalid-feedback v-if="!productInfo.purchase_date.required">Purchase Date is a required field</b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -79,7 +79,7 @@
                                 label-for="productApplied">
                 <b-row>
                   <template v-for="(optionValue, optionKey) in duraSealOptions">
-                    <b-col md="4">
+                    <b-col md="4" v-bind:key="optionKey">
                       
                           <b-form-checkbox v-model="form.product_details[key].product_applied"
                                            :value="optionValue.value"
@@ -111,6 +111,9 @@
                     </b-form-input>
                     <b-form-invalid-feedback v-if="!productInfo.vehicle_registration.required">
                       Vehicle Registration Number is a required field
+                    </b-form-invalid-feedback>
+                    <b-form-invalid-feedback v-if="!productInfo.vehicle_registration.alphaNum">
+                      Vehicle Registration Number can only consist of alphanumeric characters
                     </b-form-invalid-feedback>
                   </b-form-group>
                   </b-col>
@@ -196,8 +199,8 @@
                                   required
                                   placeholder="Enter Invoice No.">
                     </b-form-input>
-                    <b-form-invalid-feedback v-if="!productInfo.invoice_number.required">
-                      Invoice Number is a required field
+                    <b-form-invalid-feedback v-if="!productInfo.invoice_number.alphaNum">
+                      Invoice Number can only consist of alphanumeric characters
                     </b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
@@ -209,8 +212,12 @@
                                   placeholder="Choose a file..."
                                   @change="setImport(key)"
                                   class="upload-file-input"
+                                  :state="(productInfo.proof_purchase.$invalid)? false : null"
+                                  @blur.native="productInfo.proof_purchase.$touch()"
                                   accept=".jpg, .docx, .pdf"></b-form-file>
-                      <small>Upload Max of 3mb. JPG, DOCX and PDF only</small>
+                      <small>* A great way to save a copy of your invoice in case of a claim. Upload max of 3mb. JPG, DOC, DOCX and PDF only {{ productInfo.proof_purchase.maxFile }} {{ productInfo.proof_purchase.$dirty }} {{ productInfo.proof_purchase.$invalid }}</small>
+                      <div class="invalid-file-feedback" v-if="productInfo.proof_purchase.maxFile == false">Proof of Purchase file size must be less than or equal to 3mb</div>
+                      <div class="invalid-file-feedback" v-if="productInfo.proof_purchase.mimeType == false">Proof of Purchase file type can only be JPG, DOC, DOCX or PDF</div>
                   </b-form-group>
                 </b-col>
               </b-row>
@@ -262,7 +269,7 @@
         </b-row>
         <b-row>
           <b-col md="12">
-            <p>By clicking submit you are agreeing to the <a href="#">Terms and Conditions.</a></p>
+            <p>By clicking submit you are agreeing to the <a href="https://tfgroup.myshopify.com/pages/terms-and-conditions/" target="_blank">Terms and Conditions.</a></p>
           </b-col>
         </b-row>
       </div>
@@ -283,7 +290,7 @@
 import { mapState } from "vuex";
 import Datepicker from "vue-bulma-datepicker";
 import { validationMixin } from "vuelidate";
-import { required, minLength, between } from 'vuelidate/lib/validators';
+import { required, alphaNum } from 'vuelidate/lib/validators';
 // import loading from 'vue-full-loading';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -312,6 +319,14 @@ const appliedOptionsList = {
   ],
   'DURA SEAL Leather Protection': []
 };
+
+const mimeType = [
+  'image/jpeg',
+  'image/png',
+  'application/pdf',
+  'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+  'application/msword'
+];
 
 export default{
   name: "WarrantyProduct",
@@ -342,6 +357,7 @@ export default{
             purchase_date: '',
             product_applied: [],
             proof_purchase: null,
+            proof_purchase_size: null,
             proof_purchase_type: null,
             proof_purchase_file: null,
             multiple: false,
@@ -387,14 +403,18 @@ export default{
             required
           },
           serial_number: {
-            required
+            required,
+            alphaNum
           },
           purchase_date: {
             required
           },
           product_applied: {},
-          invoice_number: {},
+          invoice_number: {
+            alphaNum
+          },
           vehicle_registration: {
+            alphaNum,
             isNeeded(value, params) {
 
               if( params['product_type'] == 'DURA SEAL Leather Protection' || params['product_type'] == 'DURA SEAL Vehicle Protection' ){
@@ -409,7 +429,24 @@ export default{
           },
           vehicle_make: {},
           vehicle_model: {},
-          proof_purchase: {}
+          proof_purchase: {
+            maxFile(value, params) {
+
+              if( params['proof_purchase_size'] == null ){
+                return true;
+              }
+
+              return (params['proof_purchase_size'] > 300000)? false : true;
+            },
+            mimeType(value, params) {
+
+              if( params['proof_purchase_type'] == null ){
+                return true;
+              }
+
+              return (!mimeType.includes(params['proof_purchase_type']))? false : true;
+            }
+          }
         }
       }
     }
@@ -453,7 +490,7 @@ export default{
     getResponse: function (response) {
         return response.data.items;
     },
-    getMake: function(key){
+    getMake: function(){
 
       let self = this;
 
@@ -575,12 +612,23 @@ export default{
       this.$nextTick(function() {
         setTimeout(function(){ 
 
-          self.form.product_details[key].proof_purchase_type = self.file[key].type;
+          if( self.file[key] != null ){
 
-          reader.readAsDataURL(self.file[key]);
-          reader.onload = e => {
-            self.form.product_details[key].proof_purchase = e.target.result;
-          };
+            self.form.product_details[key].proof_purchase_type = self.file[key].type;
+            self.form.product_details[key].proof_purchase_size = self.file[key].size;
+
+            reader.readAsDataURL(self.file[key]);
+            reader.onload = e => {
+              self.form.product_details[key].proof_purchase = e.target.result;
+            };
+
+          }
+          else{
+            self.form.product_details[key].proof_purchase_type = null;
+            self.form.product_details[key].proof_purchase_size = null;
+            self.form.product_details[key].proof_purchase = null;
+          }
+          
         }, 500);
       });
     },

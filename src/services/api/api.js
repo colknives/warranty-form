@@ -5,8 +5,9 @@ import store from "../../store";
 axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
 
 const API = axios.create({
+    baseURL: "https://apiwarranty.tfgroup.co.nz/public/",
     // baseURL: "http://apitfgroup.weroar.co.nz/public/",
-    baseURL: "http://localhost:8001/",
+    // baseURL: "http://localhost:8001/",
     timeout: 500000
 });
 
@@ -20,7 +21,7 @@ const POST = (uri, params, headers = {}) => {
                 error = error.response;
 
                 switch (error.status) {
-                    case 422:
+                    case 422: {
                         let errors = {};
                         _.each(
                             error.data,
@@ -33,8 +34,9 @@ const POST = (uri, params, headers = {}) => {
                         });
 
                         break;
+                    }
                     case 404:
-                    case 401:
+                    case 401: {
                         reject({
                             status: error.status,
                             errors: {
@@ -42,10 +44,12 @@ const POST = (uri, params, headers = {}) => {
                             }
                         });
                         break;
-                    case 419:
+                    }
+                    case 419: {
                         store.commit("auth/logout");
                         break;
-                    default:
+                    }
+                    default: {
                         reject({
                             status: 500,
                             errors: {
@@ -53,6 +57,7 @@ const POST = (uri, params, headers = {}) => {
                                     "Something went wrong, please try again"
                             }
                         });
+                    }
                 }
             });
     });
