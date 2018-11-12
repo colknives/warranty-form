@@ -3,13 +3,11 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import BootstrapVue from 'bootstrap-vue'
-import auth from "./services/api/auth";
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vuelidate from 'vuelidate'
 import velocity from "velocity-animate";
 import Notifications from "vue-notification"
-import Autocomplete from 'v-autocomplete'
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
 
 

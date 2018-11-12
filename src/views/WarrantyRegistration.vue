@@ -1,7 +1,7 @@
 <template>
   <b-row class="warranty-main">
-    <b-col md="2"></b-col>
-    <b-col md="8" sm="12" xs="12">
+    <b-col lg="2"></b-col>
+    <b-col lg="8" md="12" sm="12" xs="12">
       <loading :active.sync="loading" 
         :is-full-page="true"></loading>
       <div class="warranty-registration">
@@ -17,10 +17,10 @@
             <p>Benefits of registering your product:</p>
 
               <ul>
-                <li>Confirmation of ownership</li>
-              <li>Receive important updates for products</li>
-              <li>Be the first to know about new products and new offers</li>
-              <li>Covers your warranty</li>
+                <li>Confirmation of Warranty</li>
+                <li>Receive important updates for products</li>
+                <li>Faster Service in the event of a claim</li>
+                <li>Copy of your warranty and care instructions</li>
               </ul>
           </b-col>
         </b-row>
@@ -39,45 +39,17 @@
         </div>
       </div>
     </b-col>
-    <b-col md="2"></b-col>
+    <b-col lg="2"></b-col>
   </b-row>
 </template>
 
 <script lang="ts">
 
 import { mapState } from "vuex";
-import Datepicker from "vue-bulma-datepicker";
-import { validationMixin } from "vuelidate";
-import { required, minLength, between } from 'vuelidate/lib/validators';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import TypeAhead from "vue2-typeahead";
 import WarrantyPersonal from "./WarrantyPersonal";
 import WarrantyProduct from "./WarrantyProduct";
-
-const appliedOptionsList = {
-  'Soil Guard' : [],
-  'Leather Guard' : [],
-  'Premium Care Leather': [],
-  'Premium Care Fabric': [],
-  'Premium Care Synthetic': [],
-  'Premium Care Outdoor': [],
-  'DURA SEAL Vehicle Protection': [
-    {
-      text: 'Paint Protection',
-      value: 'Paint Protection'
-    },
-    {
-      text: 'Leather Protection',
-      value: 'Leather Protection'
-    },
-    {
-      text: 'Fabric Protection',
-      value: 'Fabric Protection'
-    }
-  ],
-  'DURA SEAL Leather Protection': []
-};
 
 export default{
   name: "WarrantyRegistration",

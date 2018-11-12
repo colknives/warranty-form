@@ -80,6 +80,9 @@
             <b-form-invalid-feedback v-if="!$v.form.email.required">
               Email is a required field
             </b-form-invalid-feedback>
+            <b-form-invalid-feedback v-if="!$v.form.email.email">
+              Please provide a valid email address
+            </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
       </b-row>
@@ -189,6 +192,12 @@
             <b-form-invalid-feedback v-if="!$v.form.postcode.required">
               Post Code is a required field
             </b-form-invalid-feedback>
+            <b-form-invalid-feedback v-if="!$v.form.postcode.integer">
+              Post Code can only consist of numeric characters
+            </b-form-invalid-feedback>
+            <b-form-invalid-feedback v-if="!$v.form.postcode.maxLength">
+              Post Code can only have a maximum of 6 digits
+            </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
       </b-row>
@@ -202,7 +211,7 @@
 import { mapState } from "vuex";
 import Datepicker from "vue-bulma-datepicker";
 import { validationMixin } from "vuelidate";
-import { required, minLength, between } from 'vuelidate/lib/validators';
+import { required, email, integer, maxLength } from 'vuelidate/lib/validators';
 // import loading from 'vue-full-loading';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
@@ -250,7 +259,8 @@ export default{
         required
       },
       email: {
-        required
+        required,
+        email
       },
       address: {
         required
@@ -264,7 +274,9 @@ export default{
         required
       },
       postcode: {
-        required
+        required,
+        integer,
+        maxLength: maxLength(6)
       }
     }
   },
