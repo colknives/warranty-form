@@ -21,15 +21,14 @@
                 <b-col md="4">
                   <b-form-group class="serialNumberGroup required info">
                     <label for="serialNumber" class="col-form-label">Product Serial No.:</label><span class="info-tip" v-b-tooltip.hover title="Serial No. is located at the rear box ex. DS123456">i</span>
-                    <b-form-input class="serialNumber"
-                                  v-model="form.product_details[key].serial_number"
-                                  :state="(productInfo.serial_number.$dirty && productInfo.serial_number.$invalid)? false : null"
-                                  @blur.native="productInfo.serial_number.$touch()"
-                                  @change="checkSerial(key)"
-                                  type="text"
-                                  required
-                                  placeholder="Enter Serial Number">
-                    </b-form-input>
+                    <input class="serialNumber form-control" 
+                           v-model="form.product_details[key].serial_number" 
+                           v-on:change="checkSerial(key)" 
+                           :state="(productInfo.serial_number.$dirty && productInfo.serial_number.$invalid)? false : null"
+                            @blur.native="productInfo.serial_number.$touch()"
+                            type="text"
+                            required
+                            placeholder="Enter Serial Number"/>
                     <b-form-invalid-feedback v-if="!productInfo.serial_number.required">
                       Serial Number is a required field
                     </b-form-invalid-feedback>
@@ -59,14 +58,15 @@
                   <b-form-group class="purchaseDateGroup required"
                                 label="Purchase Date:"
                                 label-for="purchaseDateNumber">
-                    <datepicker
-                      :config="dateConfig"
-                      v-model="form.product_details[key].purchase_date"
-                      :state="(productInfo.purchase_date.$dirty && productInfo.purchase_date.$invalid)? false : null"
-                      @blur.native="productInfo.purchase_date.$touch()"
-                      placeholder="DD-MM-YYYY" 
-                      class="form-control datefield">
-                    </datepicker>
+                    <flat-pickr
+                            v-model="form.product_details[key].purchase_date"
+                            :config="dateConfig"                                                          
+                            class="form-control datefield" 
+                            placeholder="DD-MM-YYYY"               
+                            name="date"
+                            :state="(productInfo.purchase_date.$dirty && productInfo.purchase_date.$invalid)? false : null"
+                            @blur.native="productInfo.purchase_date.$touch()">
+                    </flat-pickr>
                     <b-form-invalid-feedback v-if="!productInfo.purchase_date.required">Purchase Date is a required field</b-form-invalid-feedback>
                   </b-form-group>
                 </b-col>
@@ -121,12 +121,6 @@
                     <b-form-group id="Make"
                                   label="Make:"
                                   label-for="Make">
-                      <!-- <TypeAhead
-                        v-model="form.product_details[key].vehicle_make"
-                        src="http://localhost:8001/vehicle-info/make/list/:keyword"
-                        :getResponse="getResponse"
-                        :delayTime="parseInt(500)"
-                      ></TypeAhead> -->
                       <b-form-select id="Make"
                             v-model="form.product_details[key].vehicle_make"
                             :state="(productInfo.vehicle_make.$dirty && productInfo.vehicle_make.$invalid)? false : null"
@@ -143,12 +137,6 @@
                     <b-form-group id="Model"
                                   label="Model:"
                                   label-for="Model">
-                     <!-- <TypeAhead
-                        v-model="form.product_details[key].vehicle_model"
-                        src="http://localhost:8001/vehicle-info/model/list/:keyword"
-                        :getResponse="getResponse"
-                        :delayTime="parseInt(500)"
-                      ></TypeAhead> -->
                       <b-form-select id="Model"
                             v-model="form.product_details[key].vehicle_model"
                             :state="(productInfo.vehicle_model.$dirty && productInfo.vehicle_model.$invalid)? false : null"
@@ -225,13 +213,6 @@
           </div>
         </template>
       </div>
-<!--       <div id="product-add-container">
-        <b-row>
-          <b-col>
-            <a id="product-details-add-btn" @click="addProduct">ADD ANOTHER</a>
-          </b-col>
-        </b-row>
-      </div> -->
       <div>
         <b-row>
           <b-col md="6">
@@ -288,13 +269,13 @@
 <script lang="ts">
 
 import { mapState } from "vuex";
-import Datepicker from "vue-bulma-datepicker";
+// import Datepicker from "vue-bulma-datepicker";
+import flatPickr from 'vue-flatpickr-component';
+import 'flatpickr/dist/flatpickr.css';
 import { validationMixin } from "vuelidate";
 import { required, alphaNum } from 'vuelidate/lib/validators';
-// import loading from 'vue-full-loading';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import TypeAhead from "vue2-typeahead";
 
 const appliedOptionsList = {
   'Soil Guard' : [],
@@ -331,11 +312,12 @@ const mimeType = [
 export default{
   name: "WarrantyProduct",
   components: {
-      Datepicker,
-      TypeAhead,
+      // Datepicker,
+      flatPickr,
       Loading
   },
-  data () {
+  data: function(){
+
     return {
       appliedOptionsList: appliedOptionsList,
       appliedOptions: [],
@@ -367,8 +349,10 @@ export default{
       },
       file: [],
       dateConfig: { 
-        dateFormat: 'd-m-Y', 
-        static: true 
+        wrap: true, // set wrap to true only when using 'input-group'
+        altFormat: 'd-m-Y',
+        altInput: true,
+        dateFormat: 'd-m-Y'
       },
       productTypeOptions : [
         { value: 'DURA SEAL Vehicle Protection', text: 'DURA SEAL Vehicle Protection' },
@@ -385,7 +369,9 @@ export default{
         { text: 'Leather Protection', value: 'Leather Protection' },
         { text: 'Fabric Protection', value: 'Fabric Protection' }
       ]
-    }
+    } 
+
+
   },
   mixins: [
     validationMixin
@@ -415,7 +401,7 @@ export default{
           },
           vehicle_registration: {
             alphaNum,
-            isNeeded(value, params) {
+            isNeeded: function(value, params) {
 
               if( params['product_type'] == 'DURA SEAL Leather Protection' || params['product_type'] == 'DURA SEAL Vehicle Protection' ){
 
@@ -430,41 +416,39 @@ export default{
           vehicle_make: {},
           vehicle_model: {},
           proof_purchase: {
-            maxFile(value, params) {
+            maxFile: function(value, params) {
 
               if( params['proof_purchase_size'] == null ){
                 return true;
               }
 
-              return (params['proof_purchase_size'] > 300000)? false : true;
+              return (params['proof_purchase_size'] > 3000000)? false : true;
             },
-            mimeType(value, params) {
+            mimeType: function(value, params) {
 
               if( params['proof_purchase_type'] == null ){
                 return true;
               }
 
-              return (!mimeType.includes(params['proof_purchase_type']))? false : true;
+              return ( mimeType.indexOf(params['proof_purchase_type']) >= 0 )? true : false;
             }
           }
         }
       }
     }
   },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "warranty",
-          "productType",
-          "serialKey",
-          "vehicleMakeOptions",
-          "vehicleModelOptions",
-          "dealerNameOptions"
-      ])
-  },
+  computed: mapState("warranty", [
+      "loading",
+      "hasErrors",
+      "errors",
+      "notification",
+      "warranty",
+      "productType",
+      "serialKey",
+      "vehicleMakeOptions",
+      "vehicleModelOptions",
+      "dealerNameOptions"
+  ]),
   created: function() {
       this.form.invoice_number = this.warranty.invoice_number;
       this.form.dealer_name = this.warranty.dealer_name;
@@ -522,7 +506,7 @@ export default{
 
     },
     checkSerial: function (key) {
-
+      
       let self = this;
 
       this.$nextTick(function() {
@@ -546,7 +530,7 @@ export default{
         });
       });
     }, 
-    checkAppliedOption(key, value){
+    checkAppliedOption: function (key, value) {
 
       let self = this;
 
@@ -556,7 +540,7 @@ export default{
         }
       });
     },
-    saveWarrantyRegistration() {
+    saveWarrantyRegistration: function() {
 
       let productDetails = this.form.product_details;
       let arrayLength = productDetails.length;
@@ -575,10 +559,10 @@ export default{
       this.$store.commit("warranty/setProduct", this.form);
       this.$store.dispatch("warranty/saveWarranty");
     },
-    goPersonal() {
+    goPersonal: function() {
       this.$store.commit("warranty/enablePersonal");
     },
-    setOptions(key) {
+    setOptions: function(key) {
 
       let self = this;
 
@@ -605,7 +589,7 @@ export default{
 
       });
     },
-    setImport(key) {
+    setImport: function(key) {
       let self = this;
       let reader = new FileReader();
 
@@ -613,15 +597,13 @@ export default{
         setTimeout(function(){ 
 
           if( self.file[key] != null ){
-
             self.form.product_details[key].proof_purchase_type = self.file[key].type;
             self.form.product_details[key].proof_purchase_size = self.file[key].size;
 
             reader.readAsDataURL(self.file[key]);
-            reader.onload = e => {
+            reader.onload = function(e){
               self.form.product_details[key].proof_purchase = e.target.result;
             };
-
           }
           else{
             self.form.product_details[key].proof_purchase_type = null;
@@ -632,7 +614,7 @@ export default{
         }, 500);
       });
     },
-    addProduct() {
+    addProduct: function() {
       this.form.product_details.push({
         product_type: '',
         serial_number: '',
@@ -649,7 +631,7 @@ export default{
         options: []
       });
     },
-    deleteDetail(key) {
+    deleteDetail: function(key) {
       this.form.product_details.splice(key, 1);
     }
   }

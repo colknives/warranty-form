@@ -58,20 +58,14 @@ export default{
     "warranty-product-tab": WarrantyProduct,
     Loading
   },
-  data () {
-    return {
-    }
-  },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "warranty",
-          "personal",
-          "product"
-      ])
-  }
+  computed: mapState("warranty", [
+    "loading",
+    // "hasErrors",
+    // "errors",
+    // "notification",
+    // "warranty",
+    "personal",
+    "product"
+  ])
 }
 </script>

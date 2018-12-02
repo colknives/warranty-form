@@ -53,7 +53,8 @@ export default {
               }
             ]
         }
-    },
+    }
+    ,
     mutations: {
         errors(state, errors) {
             state.errors = errors;

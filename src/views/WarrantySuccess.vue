@@ -5,10 +5,10 @@
     </div>
     <div class="warranty-success-header">
         <h3><strong>Thank you for registering your product!</strong></h3>
-      </div>
-      <div class="warranty-success-description">
-        <p>To ensure the successful completion of this form, please ensure you are using a modern browser and enable cookies beofre proceeding.</p>
-        <p>TF GROUP is committed to protecting your personal information and respecting your privacy. To understand more about the personal data we collect from our website, you can read our <a href="#">privacy information statement</a>.</p><br />
+    </div>
+    <div class="warranty-success-description">
+      <p>To ensure the successful completion of this form, please ensure you are using a modern browser and enable cookies beofre proceeding.</p>
+      <p>TF GROUP is committed to protecting your personal information and respecting your privacy. To understand more about the personal data we collect from our website, you can read our <a href="#">privacy information statement</a>.</p><br />
     </div>
     <div>
       <b-row>
@@ -35,25 +35,23 @@ export default{
     // }, 5000);
   },
   methods: {
-    registerProduct() {
+    registerProduct: function() {
       this.$store.commit("warranty/enablePersonal");
       this.$store.commit("warranty/clearForm");
       this.$router.push('/');
     },
-    goShop() {
-      window.location = 'http://tfrgoup.myshopify.com';
+    goShop: function() {
+      window.location = 'http://tfgroup.myshopify.com';
     }
   },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "warranty",
-          "personal",
-          "product"
-      ])
-  }
+  computed: mapState("warranty", [
+      "loading",
+      "hasErrors",
+      "errors",
+      "notification",
+      "warranty",
+      "personal",
+      "product"
+  ])
 }
 </script>

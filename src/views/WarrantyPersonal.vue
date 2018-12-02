@@ -142,24 +142,6 @@
         </b-col>
       </b-row>
       <b-row>
-        <!-- <b-col md="4">
-          <b-form-group id="Region"
-                        label="Region:"
-                        label-for="Region">
-            <b-form-input id="region"
-                          type="text"
-                          required
-                          v-model="form.region"
-                          :state="($v.form.region.$dirty && $v.form.region.$invalid)? false : null"
-                          @blur.native="$v.form.region.$touch()"
-                          aria-describedby="input1LiveFeedback"
-                          placeholder="Enter Region">
-            </b-form-input>
-            <b-form-invalid-feedback v-if="!$v.form.region.required">
-              Region is a required field
-            </b-form-invalid-feedback>
-          </b-form-group>
-        </b-col>  -->
         <b-col md="4">
           <b-form-group id="Country"
                         class="required"
@@ -209,40 +191,35 @@
 <script lang="ts">
 
 import { mapState } from "vuex";
-import Datepicker from "vue-bulma-datepicker";
 import { validationMixin } from "vuelidate";
 import { required, email, integer, maxLength } from 'vuelidate/lib/validators';
-// import loading from 'vue-full-loading';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import TypeAhead from "vue2-typeahead";
 
 export default{
   name: "WarrantyPersonal",
   components: {
-      Datepicker,
-      TypeAhead,
       Loading
   },
-  data () {
-    return {
-      validated: true,
-      form: {
-        firstname: '',
-        lastname: '',
-        contact_number: '',
-        email: '',
-        address: '',
-        suburb: '',
-        region: '',
-        city: '',
-        country: 'New Zealand',
-        postcode: ''
-      },
-      countryOptions : [
-        { value: 'New Zealand', text: 'New Zealand' }
-      ]
-    }
+  data: function() {
+       return  {
+        validated: true,
+        form: {
+          firstname: '',
+          lastname: '',
+          contact_number: '',
+          email: '',
+          address: '',
+          suburb: '',
+          region: '',
+          city: '',
+          country: 'New Zealand',
+          postcode: ''
+        },
+        countryOptions : [
+          { value: 'New Zealand', text: 'New Zealand' }
+        ]
+       }
   },
   mixins: [
     validationMixin
@@ -280,15 +257,13 @@ export default{
       }
     }
   },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "warranty"
-      ])
-  },
+  computed: mapState("warranty", [
+    "loading",
+    "hasErrors",
+    "errors",
+    "notification",
+    "warranty"
+  ]),
   created: function() {
       this.form.firstname = this.warranty.firstname;
       this.form.lastname = this.warranty.lastname;
@@ -305,7 +280,7 @@ export default{
     getResponse: function (response) {
         return response.data.items;
     },
-    setPersonal() {
+    setPersonal: function () {
       this.$store.commit("warranty/setPersonal", this.form);
       this.$store.commit("warranty/enableProduct");
     }
