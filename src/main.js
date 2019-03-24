@@ -9,6 +9,11 @@ import Vuelidate from 'vuelidate'
 import velocity from "velocity-animate";
 import Notifications from "vue-notification"
 import VueBootstrapTypeahead from 'vue-bootstrap-typeahead'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
 Vue.config.productionTip = false
@@ -16,6 +21,13 @@ Vue.use(BootstrapVue);
 Vue.use(Vuelidate);
 Vue.use(Notifications, { velocity });
 Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead);
+
+library.add(faCoffee)
+library.add(faCheckCircle)
+library.add(faInfoCircle)
+
+
+Vue.component('font-awesome-icon', FontAwesomeIcon)
 
 // router.beforeEach((to, from, next) => {
 //     if (to.matched.some(record => record.meta.requireAuth)) {

@@ -4,17 +4,24 @@
       <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
     </div>
     <div class="warranty-success-header">
-        <h3><strong>Thank you for registering your product!</strong></h3>
-      </div>
-      <div class="warranty-success-description">
-        <p>To ensure the successful completion of this form, please ensure you are using a modern browser and enable cookies beofre proceeding.</p>
-        <p>TF GROUP is committed to protecting your personal information and respecting your privacy. To understand more about the personal data we collect from our website, you can read our <a href="#">privacy information statement</a>.</p><br />
+      <b-row>
+        <b-col sm="1" md="1" class="font-icon"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+        <b-col sm="11" md="11"><h3><strong>Your Product has been registered!</strong></h3></b-col>
+      </b-row>
+    </div>
+    <div class="warranty-success-description">
+        <br />
+        <p>Once approved, we will send you a general warranty terms & conditions at <a href="#">{your-email-address}</a>.</p>
     </div>
     <div>
       <b-row>
-        <b-col md="3">
-          <b-button type="button" variant="default" @click="registerProduct"><strong>Register another Product</strong></b-button>
+        <b-col sm="12" md="12">
+          <p><a href="#">Check another Serial Number</a></p>
         </b-col>
+      </b-row>
+    </div>
+    <div>
+      <b-row>
         <b-col md="3">
           <b-button type="button" variant="primary" @click="goShop"><strong>Go to Shop</strong></b-button>
         </b-col>

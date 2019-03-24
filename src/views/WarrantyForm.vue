@@ -3,6 +3,30 @@
     <b-form>
       <b-row>
         <b-col md="12">
+          <div class="warranty-notification">
+            <b-row>
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+              <b-col>
+                <p><h5>Leather Guard Product Validated.</h5>
+                <small>Your Warranty Number {warranty-number} is valid for a lifetime warranty. <a href="#">Check another Serial Number</a>
+                </small></p>
+              </b-col>
+            </b-row>
+          </div>
+          <div class="warranty-notification">
+            <b-row>
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="info" icon="info-circle" /></b-col>
+              <b-col>
+                <p><h5>Warranty not yet Registered.</h5>
+                <small>Our records indicates that the serial number you have entered is not yet registered. In order to claim your lifetime warranty coverage, you need to register your warranty number.
+                </small></p>
+              </b-col>
+            </b-row>
+          </div>
+        </b-col>
+      </b-row>
+      <b-row>
+        <b-col md="12">
           <h4><strong>Personal Details</strong></h4>
         </b-col>
       </b-row>

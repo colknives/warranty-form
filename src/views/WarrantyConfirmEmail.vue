@@ -13,36 +13,38 @@
       <div>
         <b-row>
           <b-col sm="12" md="12">
-            <div>
+            <div class="warranty-notification">
               <b-row>
-                <b-col sm="2" md="2">check-icon</b-col>
+                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
                 <b-col>
-                  <p>Dura-Seal Paint and Fabric Protection
-                  <br />
+                  <p><h5>Dura-Seal Paint and Fabric Protection</h5>
                   <small>Covered with Dura-Seal lifetime warranty. Registered last {date e.g. 12 March 2018}.</small></p>
                 </b-col>
               </b-row>
+            </div>
+            <div class="warranty-notification">
               <b-row>
-                <b-col sm="2" md="2">check-icon</b-col>
+                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
                 <b-col>
-                  <p>Dura-Seal Leather Protection
-                  <br />
+                  <p><h5>Dura-Seal Leather Protection</h5>
                   <small>Covered with Dura-Seal lifetime warranty. Registered last {date e.g. 12 March 2018}.</small></p>
                 </b-col>
               </b-row>
+            </div>
+            <div class="warranty-notification">
               <b-row>
-                <b-col sm="2" md="2">information-icon</b-col>
+                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="info" icon="info-circle" /></b-col>
                 <b-col>
-                  <p>Dura-Seal Leather Protection Needs to top up twice a year
-                  <br />
+                  <p><h5>Dura-Seal Leather Protection Needs to top up twice a year</h5>
                   <small>We will notify you via email when you might need to top up your leather protection.</small></p>
                 </b-col>
               </b-row>
+            </div>
+            <div class="warranty-notification">
               <b-row>
-                <b-col sm="2" md="2">check-icon</b-col>
+                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
                 <b-col>
-                  <p>Leather Guard Protection
-                  <br />
+                  <p><h5>Leather Guard Protection</h5>
                   <small>Covered with Leather Guard lifetime warranty. Registered last {date e.g. 12 March 2018}.</small></p>
                 </b-col>
               </b-row>

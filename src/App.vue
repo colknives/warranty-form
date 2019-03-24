@@ -131,4 +131,29 @@ body {
     font-size: 80%;
     color: #dc3545;
 }
+
+.warranty-notification, warranty-success-header{
+  padding-bottom: 20px;
+}
+
+.font-icon{
+  text-align: center;
+}
+
+.font-icon-with-header{
+  padding-top: 15px;
+}
+
+.font-icon svg{
+  width: 40px !important;
+  height: 40px;
+}
+
+.font-icon .success{
+  color: #7fd41b;
+}
+
+.font-icon .info{
+  color: #4991e3;
+}
 </style>

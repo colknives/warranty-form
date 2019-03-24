@@ -13,9 +13,9 @@
       <div>
         <b-row>
           <b-col sm="12" md="12">
-            <div>
+            <div class="warranty-notification">
               <b-row>
-                <b-col sm="2" md="2">information-icon</b-col>
+                <b-col sm="2" md="2" class="font-icon"><font-awesome-icon class="info" icon="info-circle" /></b-col>
                 <b-col>
                   <p>Our record does not show any warranty under your email {email-address}
                   <br />

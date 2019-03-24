@@ -13,9 +13,9 @@
       <div>
         <b-row>
           <b-col sm="12" md="12">
-            <div>
+            <div class="warranty-notification">
               <b-row>
-                <b-col sm="2" md="2">check-icon</b-col>
+                <b-col sm="1" md="1" class="font-icon"><font-awesome-icon class="success" icon="check-circle" /></b-col>
                 <b-col>
                   <p>Your Warranty number {warranty-number} is already registered to {email-address}
                   <br />

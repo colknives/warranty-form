@@ -14,14 +14,14 @@ export default new Router({
           requireAuth: true
       }
     },
-    // {
-    //   path: '/warranty/success',
-    //   name: 'warranty-success',
-    //   component: () => import("./views/WarrantySuccess.vue"),
-    //   meta: {
-    //       requireAuth: true
-    //   }
-    // },
+    {
+      path: '/warranty/success',
+      name: 'warranty-success',
+      component: () => import("./views/WarrantySuccess.vue"),
+      meta: {
+          requireAuth: true
+      }
+    },
     {
       path: '/',
       name: 'warranty-check',
