@@ -20,6 +20,7 @@ export default {
         vehicleModelOptions: [],
         dealerNameOptions: [],
         dealerType: null,
+        serial_email: '',
         warranty: {
             firstname: null,
             lastname: null,
@@ -73,6 +74,9 @@ export default {
         enableProduct(state){
             state.personal = false;
             state.product = true;
+        },
+        setSerialEmail(state, response){
+            state.serial_email = response;
         },
         setPersonal(state, response) {
             state.warranty.firstname = response.firstname;
@@ -260,6 +264,31 @@ export default {
                 notification.error(errors.errors.message);
 
             }
+        },
+        checkSerialEmailInfo: async ({ commit, state }) => {
+            commit("loading");
+            
+            console.log(state.serial_email);
+
+            // try {
+                // let response = await warranty.checkSerialEmailInfo(
+                    // state.serial_email
+                // );
+
+                // commit("unloading");
+
+                // if( response ){
+                //     router.push('/warranty/success');
+                // }
+            // } catch (errors) {
+
+                // commit("unloading");
+                // commit("errors", errors);
+
+                // notification.error(errors.errors.message);
+
+            // }
+
         }
     }
 };

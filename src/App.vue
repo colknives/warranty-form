@@ -18,7 +18,7 @@
   margin-top: 50px;
 }
 body {
-  background-color:#f7f7f7 !important;
+  background-color:#FFF !important;
 }
 #product-details-container{
   margin: 20px 0px;

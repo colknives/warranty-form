@@ -121,12 +121,6 @@
                     <b-form-group id="Make"
                                   label="Make:"
                                   label-for="Make">
-                      <!-- <TypeAhead
-                        v-model="form.product_details[key].vehicle_make"
-                        src="http://localhost:8001/vehicle-info/make/list/:keyword"
-                        :getResponse="getResponse"
-                        :delayTime="parseInt(500)"
-                      ></TypeAhead> -->
                       <b-form-select id="Make"
                             v-model="form.product_details[key].vehicle_make"
                             :state="(productInfo.vehicle_make.$dirty && productInfo.vehicle_make.$invalid)? false : null"
@@ -143,12 +137,6 @@
                     <b-form-group id="Model"
                                   label="Model:"
                                   label-for="Model">
-                     <!-- <TypeAhead
-                        v-model="form.product_details[key].vehicle_model"
-                        src="http://localhost:8001/vehicle-info/model/list/:keyword"
-                        :getResponse="getResponse"
-                        :delayTime="parseInt(500)"
-                      ></TypeAhead> -->
                       <b-form-select id="Model"
                             v-model="form.product_details[key].vehicle_model"
                             :state="(productInfo.vehicle_model.$dirty && productInfo.vehicle_model.$invalid)? false : null"

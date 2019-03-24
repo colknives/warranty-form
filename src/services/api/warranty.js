@@ -1,6 +1,20 @@
 import api from "./api";
 
 export default {
+    checkSerialEmailInfo (serialEmail) {
+        return new Promise((resolve, reject) => {
+            api.post(
+                "warranty/check_serial_email",
+                {"serial_number":serialEmail}
+            )
+                .then(response => {
+                    return resolve(response);
+                })
+                .catch((status, error) => {
+                    reject(status, error);
+                });
+        });
+    },
     saveWarranty (warranty) {
         return new Promise((resolve, reject) => {
             api.post(
