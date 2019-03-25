@@ -370,11 +370,9 @@ export default{
         email: '',
         address: '',
         suburb: '',
-        region: '',
         city: '',
         country: 'New Zealand',
         postcode: '',
-        product_type: '',
         serial_number: '',
         invoice_number: '',
         vehicle_registration: '',
@@ -382,16 +380,11 @@ export default{
         vehicle_make_others: '',
         vehicle_model: '',
         vehicle_model_others: '',
-        purchase_date: '',
-        product_applied: [],
-        proof_purchase: null,
-        proof_purchase_size: null,
-        proof_purchase_type: null,
-        proof_purchase_file: null,
         multiple: false,
         options: [],
         dealer_name: '',
         dealer_location: '',
+        have_fabric: ''
       },
       countryOptions : [
         { value: 'New Zealand', text: 'New Zealand' }
@@ -419,8 +412,6 @@ export default{
       address: {
         required
       },
-      suburb: {},
-      region: {},
       city: {
         required
       },
@@ -432,10 +423,6 @@ export default{
         integer,
         maxLength: maxLength(6)
       },
-      product_type: {},
-      serial_number: {},
-      purchase_date: {},
-      product_applied: {},
       invoice_number: {
         alphaNum
       },
@@ -453,13 +440,9 @@ export default{
           return true;
         }
       },
-      vehicle_make: {},
-      vehicle_model: {},
-      proof_purchase: {},
       dealer_name: {
         required
-      },
-      dealer_location: {},
+      }
     }
   },
   computed: {
@@ -486,25 +469,22 @@ export default{
       this.form.address = this.warranty.address;
       this.form.suburb = this.warranty.suburb;
       this.form.city = this.warranty.city;
-      this.form.region = this.warranty.region;
       this.form.country = this.warranty.country;
       this.form.postcode = this.warranty.postcode;
 
       this.form.invoice_number = this.warranty.invoice_number;
       this.form.dealer_name = this.warranty.dealer_name;
-      this.form.dealer_location = this.warranty.dealer_location;
-      this.form.subscribe = this.warranty.subscribe;
-      this.form.product_details = this.warranty.product_details;
+      this.form.vehicle_registration = this.warranty.vehicle_registration;
+      this.form.vehicle_make = this.warranty.vehicle_make;
+      this.form.vehicle_model = this.warranty.vehicle_model;
+      this.form.serial_number = this.warranty.serial_number;
+      this.form.have_fabric = this.warranty.have_fabric;
 
       this.$store.dispatch("warranty/getMake");
   },
   methods: {
     getResponse: function (response) {
         return response.data.items;
-    },
-    setPersonal() {
-      this.$store.commit("warranty/setPersonal", this.form);
-      this.$store.commit("warranty/enableProduct");
     },
     getMake: function(){
 

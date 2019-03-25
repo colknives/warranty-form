@@ -31,31 +31,18 @@ export default {
             contact_number: null,
             address: null,
             suburb: null,
-            region: null,
             city: null,
             country: 'New Zealand',
             postcode: null,
             invoice_number: null,
             dealer_name: null,
-            dealer_location: null,
             subscribe: null,
-            product_details: [
-              {
-                product_type: '',
-                serial_number: '',
-                invoice_number: '',
-                vehicle_registration: '',
-                vehicle_make: '',
-                vehicle_model: '',
-                purchase_date: '',
-                product_applied: [],
-                proof_purchase: null,
-                proof_purchase_type: null,
-                proof_purchase_file: null,
-                multiple: false,
-                options: []
-              }
-            ]
+            invoice_number: '',
+            vehicle_registration: '',
+            vehicle_make: '',
+            vehicle_model: '',
+            serial_number: '',
+            have_fabric: null
         }
     },
     mutations: {
@@ -70,18 +57,7 @@ export default {
         unloading(state) {
             state.loading = false;
         },
-        enablePersonal(state){
-            state.personal = true;
-            state.product = false;
-        },
-        enableProduct(state){
-            state.personal = false;
-            state.product = true;
-        },
         setCheck(state, response){
-
-            console.log(response);
-
             state.checkType = response.type;
             state.checkData = response.data;
             state.checkSerialType = response.serial_type;
@@ -89,7 +65,7 @@ export default {
         setSerialEmail(state, response){
             state.serial_email = response;
         },
-        setPersonal(state, response) {
+        setForm(state, response) {
             state.warranty.firstname = response.firstname;
             state.warranty.lastname = response.lastname;
             state.warranty.contact_number = response.contact_number;
@@ -97,16 +73,16 @@ export default {
             state.warranty.address = response.address;
             state.warranty.suburb = response.suburb;
             state.warranty.city = response.city;
-            state.warranty.region = response.region;
             state.warranty.country = response.country;
             state.warranty.postcode = response.postcode;
-        },
-        setProduct(state, response) {
+
             state.warranty.invoice_number = response.invoice_number;
             state.warranty.dealer_name = response.dealer_name;
-            state.warranty.dealer_location = response.dealer_location;
-            state.warranty.subscribe = response.subscribe;
-            state.warranty.product_details = response.product_details;
+            state.warranty.vehicle_registration = response.vehicle_registration;
+            state.warranty.vehicle_make = response.vehicle_make;
+            state.warranty.vehicle_model = response.vehicle_model;
+            state.warranty.serial_number = response.serial_number;
+            state.warranty.have_fabric = response.have_fabric;
         },
         setSerial(state, serial) {
             state.serial = serial;
