@@ -61,6 +61,14 @@ export default new Router({
       meta: {
           requireAuth: true
       }
+    },
+    {
+      path: '/warranty/confirm/not-found',
+      name: 'warranty-confirm-404',
+      component: () => import("./views/WarrantyConfirmNon.vue"),
+      meta: {
+          requireAuth: true
+      }
     }
   ]
 })

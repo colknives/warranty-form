@@ -21,6 +21,9 @@ export default {
         dealerNameOptions: [],
         dealerType: null,
         serial_email: '',
+        checkType: '',
+        checkSerialType: '',
+        checkData: [],
         warranty: {
             firstname: null,
             lastname: null,
@@ -74,6 +77,14 @@ export default {
         enableProduct(state){
             state.personal = false;
             state.product = true;
+        },
+        setCheck(state, response){
+
+            console.log(response);
+
+            state.checkType = response.type;
+            state.checkData = response.data;
+            state.checkSerialType = response.serial_type;
         },
         setSerialEmail(state, response){
             state.serial_email = response;
@@ -267,27 +278,43 @@ export default {
         },
         checkSerialEmailInfo: async ({ commit, state }) => {
             commit("loading");
-            
-            console.log(state.serial_email);
 
-            // try {
-                // let response = await warranty.checkSerialEmailInfo(
-                    // state.serial_email
-                // );
+            try {
+                let response = await warranty.checkSerialEmailInfo(
+                    state.serial_email
+                );
 
-                // commit("unloading");
+                commit("unloading");
 
-                // if( response ){
-                //     router.push('/warranty/success');
-                // }
-            // } catch (errors) {
+                if( response ){
 
-                // commit("unloading");
-                // commit("errors", errors);
+                    commit("setCheck", response);
 
-                // notification.error(errors.errors.message);
+                    if( response.type == 'serial_number' ){
 
-            // }
+                        if( response.count > 0 ){
+                            router.push('/warranty/confirm/serial');
+                        }
+                        else{
+                            router.push('/warranty/registration');
+                        }
+                    }
+                    else{
+                        if( response.count > 0 ){
+                            router.push('/warranty/confirm/email');
+                        }
+                        else{
+                            router.push('/warranty/confirm/email/not-found');
+                        }
+                    }
+                }
+            } catch (errors) {
+
+                commit("unloading");
+                commit("errors", errors);
+
+                notification.error(errors.errors.message);
+            }
 
         }
     }

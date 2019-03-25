@@ -8,7 +8,7 @@
           <h3><strong>Check Your Service and Support Coverage</strong></h3>
         </div>
         <div class="warranty-success-description">
-          <p>{email-address} product registrations</p><br />
+          <p><a href="#">{{ checkData[0].email }}</a> product registrations</p><br />
       </div>
       <div>
         <b-row>
@@ -78,6 +78,17 @@
 import { mapState } from "vuex";
 
 export default{
-  name: "WarrantyConfirmEmail"
+  name: "WarrantyConfirmEmail",
+  computed: {
+      ...mapState("warranty", [
+          "loading",
+          "hasErrors",
+          "errors",
+          "notification",
+          "checkType",
+          "checkSerialType",
+          "checkData"
+      ])
+  }
 }
 </script>

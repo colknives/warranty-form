@@ -1,5 +1,5 @@
 <template>
-  <div id="warranty-success">
+  <div id="warranty-confirm-non">
     <b-form>
       <div class="warranty-image-header">
         <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
@@ -15,11 +15,14 @@
           <b-col sm="12" md="12">
             <div class="warranty-notification">
               <b-row>
-                <b-col sm="1" md="1" class="font-icon"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+                <b-col sm="1" md="1" class="font-icon"><font-awesome-icon class="info" icon="info-circle" /></b-col>
                 <b-col>
-                  <p>Your Warranty number {{ checkData[0].serial_number }} is already registered to <a href="#">{{ checkData[0].email }}</a>
+                  <p>Our record does not show any warranty under your email / serial number <strong>{{ serial_email }}</strong>
                   <br />
-                  <small>Your Product is covered with a lifetime warranty. <a href="#">Check another Serial Number</a></small></p>
+                  <small>If you think you have purchased our product, you can check it's serial number and apply for claim. Alternatively, please try calling our customer support centre to validate your purchase.</a>
+                  <br />
+                  <a href="#">Check another Serial Number</a>
+                  </small></p>
                 </b-col>
               </b-row>
             </div>
@@ -46,16 +49,15 @@
 import { mapState } from "vuex";
 
 export default{
-  name: "WarrantyConfirmSerial",
+  name: "WarrantyConfirmNonEmail",
   computed: {
       ...mapState("warranty", [
           "loading",
           "hasErrors",
           "errors",
           "notification",
-          "checkType",
-          "checkSerialType",
-          "checkData"
+          "warranty",
+          "serial_email"
       ])
   }
 }

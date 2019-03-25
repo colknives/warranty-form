@@ -1,5 +1,5 @@
 <template>
-  <div id="warranty-success">
+  <div id="warranty-check">
     <b-form>
       <div class="warranty-image-header">
         <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />

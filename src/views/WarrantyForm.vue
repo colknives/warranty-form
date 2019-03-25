@@ -7,8 +7,8 @@
             <b-row>
               <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
               <b-col>
-                <p><h5>Leather Guard Product Validated.</h5>
-                <small>Your Warranty Number {warranty-number} is valid for a lifetime warranty. <a href="#">Check another Serial Number</a>
+                <p><h5>{{ checkSerialType }} Product Validated.</h5>
+                <small>Your Warranty Number {{ serial_email }} is valid for a lifetime warranty. <a href="#">Check another Serial Number</a>
                 </small></p>
               </b-col>
             </b-row>
@@ -19,6 +19,16 @@
               <b-col>
                 <p><h5>Warranty not yet Registered.</h5>
                 <small>Our records indicates that the serial number you have entered is not yet registered. In order to claim your lifetime warranty coverage, you need to register your warranty number.
+                </small></p>
+              </b-col>
+            </b-row>
+          </div>
+          <div class="warranty-notification" v-if="checkSerialType == 'DURA SEAL Leather Protection'">
+            <b-row>
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="info" icon="info-circle" /></b-col>
+              <b-col>
+                <p><h5>DURA-SEAL Leather Protection</h5>
+                <small>If you have purchased DURA SEAL Leather together with your DURA-SEAL product, you need to register it separately so you can claim it separately
                 </small></p>
               </b-col>
             </b-row>
@@ -213,7 +223,7 @@
           <h4><strong>Product Application Details</strong></h4>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection' || checkSerialType == 'DURA SEAL Fabric Protection'">
         <b-col md="4">
           <b-form-group class="vehicleRegistrationNumberGroup required"
                       label="Vehicle Registration No.:"
@@ -266,7 +276,7 @@
           </b-form-group>
         </b-col>
       </b-row>
-      <b-row>
+      <b-row v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection' || checkSerialType == 'DURA SEAL Fabric Protection'">
         <b-col offset-md="4" md="4">
           <template v-if="form.vehicle_make == 'Others'">
             <b-form-group class="makeOthersGroup required">
@@ -291,7 +301,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="6">
+        <b-col md="6" v-if="checkSerialType == 'Leather Guard' || checkSerialType == 'Soil Guard'">
           <b-form-group class="invoiceNumberGroup"
                         label="Invoice No.:"
                         label-for="invoiceNumber">
@@ -311,7 +321,7 @@
         <b-col md="6">
           <b-form-group id="dealerGroup"
                         class="required"
-                        label="Dealer Name:"
+                        label="Where did you bought the product:"
                         label-for="dealerName">
             <vue-bootstrap-typeahead v-model="form.dealer_name"
                                       :data="dealerNameOptions"
@@ -326,7 +336,7 @@
       </b-row>
       <b-row>
         <b-col md="4" sm="4" lg="4" class="padding-bot">
-          <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" @click="saveWarrantyRegistration" :disabled="$v.form.$invalid"><strong>REGISTER PRODUCT</strong></b-button>
+          <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" @click="saveWarrantyRegistration"><strong>REGISTER PRODUCT</strong></b-button>
         </b-col>
       </b-row>
     </b-form>
@@ -422,16 +432,9 @@ export default{
         integer,
         maxLength: maxLength(6)
       },
-      product_type: {
-        required
-      },
-      serial_number: {
-        required,
-        alphaNum
-      },
-      purchase_date: {
-        required
-      },
+      product_type: {},
+      serial_number: {},
+      purchase_date: {},
       product_applied: {},
       invoice_number: {
         alphaNum
@@ -440,7 +443,7 @@ export default{
         alphaNum,
         isNeeded(value, params) {
 
-          if( params['product_type'] == 'DURA SEAL Leather Protection' || params['product_type'] == 'DURA SEAL Vehicle Protection' ){
+          if( this.checkSerialType == 'DURA SEAL Leather Protection' || this.checkSerialType == 'DURA SEAL Paint Protection' || this.checkSerialType == 'DURA SEAL Fabric Protection' ){
 
             if( value === '' ){
               return false;
@@ -452,24 +455,7 @@ export default{
       },
       vehicle_make: {},
       vehicle_model: {},
-      proof_purchase: {
-        maxFile(value, params) {
-
-          if( params['proof_purchase_size'] == null ){
-            return true;
-          }
-
-          return (params['proof_purchase_size'] > 300000)? false : true;
-        },
-        mimeType(value, params) {
-
-          if( params['proof_purchase_type'] == null ){
-            return true;
-          }
-
-          return (!mimeType.includes(params['proof_purchase_type']))? false : true;
-        }
-      },
+      proof_purchase: {},
       dealer_name: {
         required
       },
@@ -485,7 +471,11 @@ export default{
           "warranty",
           "vehicleMakeOptions",
           "vehicleModelOptions",
-          "dealerNameOptions"
+          "dealerNameOptions",
+          "checkType",
+          "checkSerialType",
+          "checkData",
+          "serial_email"
       ])
   },
   created: function() {
@@ -559,9 +549,11 @@ export default{
       if( this.form.vehicle_model_others != null ){
         this.form.vehicle_model = this.form.vehicle_model_others;
       }
+
+      console.log(this.form);
       
-      this.$store.commit("warranty/setProduct", this.form);
-      this.$store.dispatch("warranty/saveWarranty");
+      // this.$store.commit("warranty/setProduct", this.form);
+      // this.$store.dispatch("warranty/saveWarranty");
     }
   }
 }

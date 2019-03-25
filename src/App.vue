@@ -58,7 +58,7 @@ body {
   margin-bottom: 50px;
 }
 
-#warranty-success {
+#warranty-success, #warranty-check, #warranty-confirm-non {
   width: 900px;
   margin: 0px auto;
 }

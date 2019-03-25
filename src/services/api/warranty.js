@@ -5,7 +5,7 @@ export default {
         return new Promise((resolve, reject) => {
             api.post(
                 "warranty/check_serial_email",
-                {"serial_number":serialEmail}
+                {"serial_email":serialEmail}
             )
                 .then(response => {
                     return resolve(response);

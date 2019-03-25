@@ -17,7 +17,7 @@
               <b-row>
                 <b-col sm="2" md="2" class="font-icon"><font-awesome-icon class="info" icon="info-circle" /></b-col>
                 <b-col>
-                  <p>Our record does not show any warranty under your email {email-address}
+                  <p>Our record does not show any warranty under your email <a href="#">{{ serial_email }}</a>
                   <br />
                   <small>If you think you have purchased our product, you can check it's serial number and apply for claim. Alternatively, please try calling our customer support centre to validate your purchase.</a>
                   <br />
@@ -49,6 +49,18 @@
 import { mapState } from "vuex";
 
 export default{
-  name: "WarrantyConfirmNonEmail"
+  name: "WarrantyConfirmNonEmail",
+  computed: {
+      ...mapState("warranty", [
+          "loading",
+          "hasErrors",
+          "errors",
+          "notification",
+          "checkType",
+          "checkSerialType",
+          "checkData",
+          "serial_email"
+      ])
+  }
 }
 </script>
