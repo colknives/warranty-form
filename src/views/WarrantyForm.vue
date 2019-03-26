@@ -318,6 +318,18 @@
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
+        <b-col md="4" v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection'">
+          <b-form-group id="haveFabric"
+                        label="Do you bought it with fabric:"
+                        label-for="haveFabric">
+            <b-form-select id="haveFabric"
+                  v-model="form.have_fabric"
+                  :state="($v.form.have_fabric.$dirty && $v.form.have_fabric.$invalid)? false : null"
+                  @blur.native="$v.form.have_fabric.$touch()"
+                  :options="haveFabricOptions" 
+                  required/>
+          </b-form-group>
+        </b-col>
         <b-col md="6">
           <b-form-group id="dealerGroup"
                         class="required"
@@ -363,6 +375,7 @@ export default{
   data () {
     return {
       validated: true,
+      haveFabricOptions: ['Yes', 'No'],
       form: {
         firstname: '',
         lastname: '',
@@ -383,7 +396,6 @@ export default{
         multiple: false,
         options: [],
         dealer_name: '',
-        dealer_location: '',
         have_fabric: ''
       },
       countryOptions : [
@@ -415,6 +427,7 @@ export default{
       city: {
         required
       },
+      suburb: {},
       country: {
         required
       },
@@ -440,6 +453,9 @@ export default{
           return true;
         }
       },
+      vehicle_make: {},
+      vehicle_model: {},
+      have_fabric: {},
       dealer_name: {
         required
       }
@@ -462,6 +478,7 @@ export default{
       ])
   },
   created: function() {
+      this.form.serial_number = this.serial_email;
       this.form.firstname = this.warranty.firstname;
       this.form.lastname = this.warranty.lastname;
       this.form.contact_number = this.warranty.contact_number;
@@ -518,9 +535,6 @@ export default{
 
     },
     saveWarrantyRegistration() {
-
-      let productDetails = this.form.product_details;
-      let arrayLength = productDetails.length;
 
       if( this.form.vehicle_make_others != null ){
         this.form.vehicle_make = this.form.vehicle_make_others;
