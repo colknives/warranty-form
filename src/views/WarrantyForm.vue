@@ -519,6 +519,8 @@ export default{
       this.$nextTick(function() {
         let make = self.form.vehicle_make;
 
+        console.log(make);
+
         self.form.vehicle_model = "";
 
         self.$store.commit("warranty/setMake", make);
@@ -536,18 +538,16 @@ export default{
     },
     saveWarrantyRegistration() {
 
-      if( this.form.vehicle_make_others != null ){
+      if( this.form.vehicle_make_others != null && this.form.vehicle_make_others != '' ){
         this.form.vehicle_make = this.form.vehicle_make_others;
       }
 
-      if( this.form.vehicle_model_others != null ){
+      if( this.form.vehicle_model_others != null && this.form.vehicle_make_others != '' ){
         this.form.vehicle_model = this.form.vehicle_model_others;
       }
 
-      console.log(this.form);
-      
-      // this.$store.commit("warranty/setProduct", this.form);
-      // this.$store.dispatch("warranty/saveWarranty");
+      this.$store.commit("warranty/setProduct", this.form);
+      this.$store.dispatch("warranty/saveWarranty");
     }
   }
 }
