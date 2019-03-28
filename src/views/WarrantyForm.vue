@@ -323,9 +323,9 @@
                         label="Do you bought it with fabric:"
                         label-for="haveFabric">
             <b-form-select id="haveFabric"
-                  v-model="form.have_fabric"
-                  :state="($v.form.have_fabric.$dirty && $v.form.have_fabric.$invalid)? false : null"
-                  @blur.native="$v.form.have_fabric.$touch()"
+                  v-model="form.product_applied"
+                  :state="($v.form.product_applied.$dirty && $v.form.product_applied.$invalid)? false : null"
+                  @blur.native="$v.form.product_applied.$touch()"
                   :options="haveFabricOptions" 
                   required/>
           </b-form-group>
@@ -396,7 +396,7 @@ export default{
         multiple: false,
         options: [],
         dealer_name: '',
-        have_fabric: ''
+        product_applied: 'No'
       },
       countryOptions : [
         { value: 'New Zealand', text: 'New Zealand' }
@@ -455,7 +455,7 @@ export default{
       },
       vehicle_make: {},
       vehicle_model: {},
-      have_fabric: {},
+      product_applied: {},
       dealer_name: {
         required
       }
@@ -495,7 +495,7 @@ export default{
       this.form.vehicle_make = this.warranty.vehicle_make;
       this.form.vehicle_model = this.warranty.vehicle_model;
       this.form.serial_number = this.warranty.serial_number;
-      this.form.have_fabric = this.warranty.have_fabric;
+      this.form.product_applied = this.warranty.product_applied;
 
       this.$store.dispatch("warranty/getMake");
   },
@@ -518,8 +518,6 @@ export default{
 
       this.$nextTick(function() {
         let make = self.form.vehicle_make;
-
-        console.log(make);
 
         self.form.vehicle_model = "";
 
@@ -546,7 +544,9 @@ export default{
         this.form.vehicle_model = this.form.vehicle_model_others;
       }
 
-      this.$store.commit("warranty/setProduct", this.form);
+      console.log(this.form);
+
+      this.$store.commit("warranty/setForm", this.form);
       this.$store.dispatch("warranty/saveWarranty");
     }
   }

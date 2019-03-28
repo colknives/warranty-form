@@ -81,8 +81,9 @@ export default {
             state.warranty.vehicle_registration = response.vehicle_registration;
             state.warranty.vehicle_make = response.vehicle_make;
             state.warranty.vehicle_model = response.vehicle_model;
-            state.warranty.serial_number = response.serial_number;
-            state.warranty.have_fabric = response.have_fabric;
+            state.warranty.serial_number = state.serial_email;
+            state.warranty.product_type = state.checkSerialType;
+            state.warranty.product_applied = response.product_applied;
         },
         setSerial(state, serial) {
             state.serial = serial;
@@ -132,24 +133,13 @@ export default {
             state.warranty.dealer_name = null;
             state.warranty.dealer_location = null;
             state.warranty.subscribe = null;
-            state.warranty.product_details = [
-                {
-                    product_type: '',
-                    serial_number: '',
-                    invoice_number: '',
-                    vehicle_registration: '',
-                    vehicle_make: '',
-                    vehicle_model: '',
-                    purchase_date: '',
-                    product_applied: [],
-                    proof_purchase: null,
-                    proof_purchase_type: null,
-                    proof_purchase_file: null,
-                    multiple: false,
-                    options: []
-                }
-            ];
-
+            state.warranty.product_type: '';
+            state.warranty.serial_number: '';
+            state.warranty.invoice_number: '';
+            state.warranty.vehicle_registration: '';
+            state.warranty.vehicle_make: '';
+            state.warranty.vehicle_model: '';
+            state.warranty.product_applied: '';
         }
     },
     actions: {
