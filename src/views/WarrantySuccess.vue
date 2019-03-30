@@ -11,7 +11,7 @@
     </div>
     <div class="warranty-success-description">
         <br />
-        <p>Once approved, we will send you a general warranty terms & conditions at <a href="#">{your-email-address}</a>.</p>
+        <p>Once approved, we will send you a general warranty terms & conditions at <a href="#">{{ email }}</a>.</p>
     </div>
     <div>
       <b-row>
@@ -42,11 +42,6 @@ export default{
     // }, 5000);
   },
   methods: {
-    registerProduct() {
-      this.$store.commit("warranty/enablePersonal");
-      this.$store.commit("warranty/clearForm");
-      this.$router.push('/');
-    },
     goShop() {
       window.location = 'http://tfrgoup.myshopify.com';
     }
@@ -59,7 +54,8 @@ export default{
           "notification",
           "warranty",
           "personal",
-          "product"
+          "product",
+          "email"
       ])
   }
 }

@@ -27,7 +27,7 @@
         </b-row>
         <b-row>
           <b-col sm="12" md="12">
-              <b-button type="button" variant="primary"><strong>GO TO SHOP</strong></b-button>
+              <b-button type="button" variant="primary" @click="goShop"><strong>GO TO SHOP</strong></b-button>
           </b-col>
         </b-row>
         <b-row>
@@ -57,6 +57,11 @@ export default{
           "checkSerialType",
           "checkData"
       ])
+  },
+  methods: {
+    goShop() {
+      window.location = 'http://tfrgoup.myshopify.com';
+    }
   }
 }
 </script>

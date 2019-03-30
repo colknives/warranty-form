@@ -24,6 +24,7 @@ export default {
         checkType: '',
         checkSerialType: '',
         checkData: [],
+        email: '',
         warranty: {
             firstname: null,
             lastname: null,
@@ -42,7 +43,7 @@ export default {
             vehicle_make: '',
             vehicle_model: '',
             serial_number: '',
-            have_fabric: null
+            product_applied: null
         }
     },
     mutations: {
@@ -84,6 +85,8 @@ export default {
             state.warranty.serial_number = state.serial_email;
             state.warranty.product_type = state.checkSerialType;
             state.warranty.product_applied = response.product_applied;
+
+            state.email = response.email;
         },
         setSerial(state, serial) {
             state.serial = serial;
@@ -133,13 +136,15 @@ export default {
             state.warranty.dealer_name = null;
             state.warranty.dealer_location = null;
             state.warranty.subscribe = null;
-            state.warranty.product_type: '';
-            state.warranty.serial_number: '';
-            state.warranty.invoice_number: '';
-            state.warranty.vehicle_registration: '';
-            state.warranty.vehicle_make: '';
-            state.warranty.vehicle_model: '';
-            state.warranty.product_applied: '';
+            state.warranty.product_type = '';
+            state.warranty.serial_number = '';
+            state.warranty.invoice_number = '';
+            state.warranty.vehicle_registration = '';
+            state.warranty.vehicle_make = '';
+            state.warranty.vehicle_model = '';
+            state.warranty.product_applied = '';
+
+            state.email = '';
         }
     },
     actions: {
