@@ -16,7 +16,7 @@
     <div>
       <b-row>
         <b-col sm="12" md="12">
-          <p><a href="#">Check another Serial Number</a></p>
+          <p><router-link to="/">Check another Serial Number</router-link></p>
         </b-col>
       </b-row>
     </div>

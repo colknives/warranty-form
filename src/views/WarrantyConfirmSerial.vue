@@ -19,7 +19,7 @@
                 <b-col>
                   <p>Your Warranty number {{ checkData[0].serial_number }} is already registered to <a href="#">{{ checkData[0].email }}</a>
                   <br />
-                  <small>Your Product is covered with a lifetime warranty. <a href="#">Check another Serial Number</a></small></p>
+                  <small>Your Product is covered with a lifetime warranty. <router-link to="/">Check another Serial Number</router-link></small></p>
                 </b-col>
               </b-row>
             </div>

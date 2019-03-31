@@ -19,15 +19,23 @@
                             type="text"
                             required
                             v-model="form.serial_email"
+                            :state="( ( $v.form.serial_email.$dirty && $v.form.serial_email.$invalid ) || ( invalidSerial ) )? false : null"
+                            @blur.native="$v.form.serial_email.$touch()"
                             aria-describedby="input1LiveFeedback"
                             placeholder="Enter a serial number or your email address">
               </b-form-input>
+              <b-form-invalid-feedback v-if="!$v.form.serial_email.required">
+                This field is required
+              </b-form-invalid-feedback>
+              <div class="invalid-serial-container" v-if="invalidSerial">
+                We're sorry, but the provided information isn't valid. Please check your information and try again
+              </div>
             </b-form-group>
           </b-col>
         </b-row>
         <b-row>
           <b-col sm="12" md="6">
-              <b-button type="button" variant="primary" @click="checkInfo"><strong>Continue</strong></b-button>
+              <b-button type="button" variant="primary" :disabled="$v.form.$invalid" @click="checkInfo"><strong>Continue</strong></b-button>
           </b-col>
         </b-row>
       </div>
@@ -40,6 +48,8 @@
 import { mapState } from "vuex";
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import { validationMixin } from "vuelidate";
+import { required, email, integer, maxLength, alphaNum } from 'vuelidate/lib/validators';
 
 export default{
   name: "WarrantyCheck",
@@ -59,8 +69,19 @@ export default{
           "hasErrors",
           "errors",
           "notification",
-          "warranty"
+          "warranty",
+          "invalidSerial"
       ])
+  },
+  mixins: [
+    validationMixin
+  ],
+  validations: {
+    form: {
+      serial_email: {
+        required
+      }
+    }
   },
   methods: {
     checkInfo: function (response) {

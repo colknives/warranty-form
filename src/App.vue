@@ -156,4 +156,11 @@ body {
 .font-icon .info{
   color: #4991e3;
 }
+
+.invalid-serial-container{
+  width: 100%;
+  margin-top: 0.25rem;
+  font-size: 80%;
+  color: #dc3545;
+}
 </style>

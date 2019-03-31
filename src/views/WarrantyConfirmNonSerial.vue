@@ -21,7 +21,7 @@
                   <br />
                   <small>If you think you have purchased our product, you can check it's serial number and apply for claim. Alternatively, please try calling our customer support centre to validate your purchase.</a>
                   <br />
-                  <a href="#">Check another Serial Number</a>
+                  <router-link to="/">Check another Serial Number</router-link>
                   </small></p>
                 </b-col>
               </b-row>

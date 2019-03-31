@@ -8,7 +8,7 @@
               <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
               <b-col>
                 <p><h5>{{ checkSerialType }} Product Validated.</h5>
-                <small>Your Warranty Number {{ serial_email }} is valid for a lifetime warranty. <a href="#">Check another Serial Number</a>
+                <small>Your Warranty Number {{ serial_email }} is valid for a lifetime warranty. <router-link to="/">Check another Serial Number</router-link>
                 </small></p>
               </b-col>
             </b-row>
@@ -301,7 +301,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="6" v-if="checkSerialType == 'Leather Guard' || checkSerialType == 'Soil Guard'">
+        <b-col md="6" v-if="checkSerialType == 'Leather Guard' || checkSerialType == 'Soil Guard' || checkSerialType == 'Premium Care Synthetic' || checkSerialType == 'Premium Care Leather' || checkSerialType == 'Premium Care Outdoor' || checkSerialType == 'Premium Care Fabric'">
           <b-form-group class="invoiceNumberGroup"
                         label="Invoice No.:"
                         label-for="invoiceNumber">
@@ -348,7 +348,7 @@
       </b-row>
       <b-row>
         <b-col md="4" sm="4" lg="4" class="padding-bot">
-          <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" @click="saveWarrantyRegistration"><strong>REGISTER PRODUCT</strong></b-button>
+          <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" :disabled="$v.form.$invalid" @click="saveWarrantyRegistration"><strong>REGISTER PRODUCT</strong></b-button>
         </b-col>
       </b-row>
     </b-form>
@@ -498,6 +498,15 @@ export default{
       this.form.product_applied = this.warranty.product_applied;
 
       this.$store.dispatch("warranty/getMake");
+
+      let type = 'Furniture';
+
+      if( this.checkSerialType == 'DURA SEAL Leather Protection' || this.checkSerialType == 'DURA SEAL Fabric Protection' || this.checkSerialType == 'DURA SEAL Paint Protection' ){
+        type = 'Vehicle';
+      }
+
+      this.$store.commit("warranty/setDealerType", type);
+      this.$store.dispatch("warranty/getDealer");
   },
   methods: {
     getResponse: function (response) {

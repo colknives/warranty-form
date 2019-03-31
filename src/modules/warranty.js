@@ -24,6 +24,7 @@ export default {
         checkType: '',
         checkSerialType: '',
         checkData: [],
+        invalidSerial : false,
         email: '',
         warranty: {
             firstname: null,
@@ -87,6 +88,9 @@ export default {
             state.warranty.product_applied = response.product_applied;
 
             state.email = response.email;
+        },
+        setInvalidSerial(state, invalid) {
+            state.invalidSerial = invalid;
         },
         setSerial(state, serial) {
             state.serial = serial;
@@ -283,8 +287,7 @@ export default {
 
                 commit("unloading");
                 commit("errors", errors);
-
-                notification.error(errors.errors.message);
+                commit("setInvalidSerial", true);
             }
 
         }
