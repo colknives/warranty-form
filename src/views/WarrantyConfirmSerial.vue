@@ -2,7 +2,7 @@
   <div id="warranty-success">
     <b-form>
       <div class="warranty-image-header">
-        <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
+        <router-link to="/"><img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></router-link>
       </div>
       <div class="warranty-success-header">
           <h3><strong>Check Your Service and Support Coverage</strong></h3>
@@ -15,7 +15,9 @@
           <b-col sm="12" md="12">
             <div class="warranty-notification">
               <b-row>
-                <b-col sm="1" md="1" class="font-icon"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+                <b-col sm="1" md="1" class="font-icon">
+                  <img src="/images/icon/green_checl.svg" />
+                </b-col>
                 <b-col>
                   <p>Your Warranty number {{ checkData[0].serial_number }} is already registered to <a href="#">{{ checkData[0].email }}</a>
                   <br />

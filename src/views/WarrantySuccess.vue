@@ -1,11 +1,13 @@
 <template>
   <div id="warranty-success">
     <div class="warranty-image-header">
-      <img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" />
+      <router-link to="/"><img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></router-link>
     </div>
     <div class="warranty-success-header">
       <b-row>
-        <b-col sm="1" md="1" class="font-icon"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+        <b-col sm="1" md="1" class="font-icon">
+          <img src="/images/icon/green_checl.svg" />
+        </b-col>
         <b-col sm="11" md="11"><h3><strong>Your Product has been registered!</strong></h3></b-col>
       </b-row>
     </div>

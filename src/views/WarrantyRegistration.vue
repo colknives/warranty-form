@@ -8,7 +8,7 @@
         <b-row>
           <b-col>
             <!--logo-->
-            <a href="http://tfgroup.co.nz"><img class="img-responsive" src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></a>
+            <router-link to="/"><img class="img-responsive" src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></router-link>
           </b-col>
         </b-row>
         <b-row>

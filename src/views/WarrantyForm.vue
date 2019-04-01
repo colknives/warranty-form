@@ -5,7 +5,9 @@
         <b-col md="12">
           <div class="warranty-notification">
             <b-row>
-              <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                <img src="/images/icon/green_checl.svg" />
+              </b-col>
               <b-col>
                 <p><h5>{{ checkSerialType }} Product Validated.</h5>
                 <small>Your Warranty Number {{ serial_email }} is valid for a lifetime warranty. <router-link to="/">Check another Serial Number</router-link>
@@ -15,7 +17,9 @@
           </div>
           <div class="warranty-notification">
             <b-row>
-              <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="info" icon="info-circle" /></b-col>
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                <img src="/images/icon/blue_checl.svg" />
+              </b-col>
               <b-col>
                 <p><h5>Warranty not yet Registered.</h5>
                 <small>Our records indicates that the serial number you have entered is not yet registered. In order to claim your lifetime warranty coverage, you need to register your warranty number.
@@ -23,9 +27,11 @@
               </b-col>
             </b-row>
           </div>
-          <div class="warranty-notification" v-if="checkSerialType == 'DURA SEAL Leather Protection'">
+          <div class="warranty-notification" v-if="checkSerialType == 'DURA SEAL Paint Protection' || checkSerialType == 'DURA SEAL Fabric Protection'">
             <b-row>
-              <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="info" icon="info-circle" /></b-col>
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                <img src="/images/icon/blue_checl.svg" />
+              </b-col>
               <b-col>
                 <p><h5>DURA-SEAL Leather Protection</h5>
                 <small>If you have purchased DURA SEAL Leather together with your DURA-SEAL product, you need to register it separately so you can claim it separately
@@ -347,6 +353,18 @@
         </b-col>
       </b-row>
       <b-row>
+        <b-col md="12" class="padding-bot">
+            <b-form-checkbox
+              class="confirmForm"
+              v-model="form.confirm_form"
+              :state="($v.form.confirm_form.$dirty && $v.form.confirm_form.$invalid)? false : null"
+              @blur.native="$v.form.confirm_form.$touch()"
+              value="1"
+              unchecked-value=""
+            >My information are correct based what is written above</b-form-checkbox>
+        </b-col>
+      </b-row>
+      <b-row>
         <b-col md="4" sm="4" lg="4" class="padding-bot">
           <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" :disabled="$v.form.$invalid" @click="saveWarrantyRegistration"><strong>REGISTER PRODUCT</strong></b-button>
         </b-col>
@@ -396,7 +414,8 @@ export default{
         multiple: false,
         options: [],
         dealer_name: '',
-        product_applied: 'No'
+        product_applied: 'No',
+        confirm_form: ''
       },
       countryOptions : [
         { value: 'New Zealand', text: 'New Zealand' }
@@ -457,6 +476,9 @@ export default{
       vehicle_model: {},
       product_applied: {},
       dealer_name: {
+        required
+      },
+      confirm_form: {
         required
       }
     }
@@ -552,8 +574,6 @@ export default{
       if( this.form.vehicle_model_others != null && this.form.vehicle_make_others != '' ){
         this.form.vehicle_model = this.form.vehicle_model_others;
       }
-
-      console.log(this.form);
 
       this.$store.commit("warranty/setForm", this.form);
       this.$store.dispatch("warranty/saveWarranty");

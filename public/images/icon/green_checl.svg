@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="40px" height="40px" viewBox="0 0 40 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>Green Checl</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Warranty-Checker" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="12-lg-status" sketch:type="MSArtboardGroup" transform="translate(-162.000000, -561.000000)">
+            <g id="Group-Copy" sketch:type="MSLayerGroup" transform="translate(161.000000, 561.000000)">
+                <g id="Green-Checl" transform="translate(0.875000, 0.000000)" sketch:type="MSShapeGroup">
+                    <path d="M20.0173134,0.088159204 C9.02646766,0.088159204 0.11641791,8.99741294 0.11641791,19.9888557 C0.11641791,30.9783085 9.02646766,39.8891542 20.0173134,39.8891542 C31.0073632,39.8891542 39.9174129,30.9783085 39.9174129,19.9888557 C39.9174129,8.99741294 31.0073632,0.088159204 20.0173134,0.088159204" id="Fill-6" fill="#4EAF46"></path>
+                    <path d="M17.6541294,27.0652736 L16.6541294,28.0654726 L10.8161194,22.2274627 L11.8161194,21.2272637 L17.6541294,27.0652736" id="Fill-7" fill="#FFFFFF"></path>
+                    <path d="M30.3554229,14.4226866 L16.7126368,28.0654726 L15.6606965,27.0133333 L29.3032836,13.3705473 L30.3554229,14.4226866" id="Fill-8" fill="#FFFFFF"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
