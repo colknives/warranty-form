@@ -13,58 +13,60 @@
       <div>
         <b-row>
           <b-col sm="12" md="12">
-
-            <!-- <template v-for="( checkInfo, key ) in checkData">
-              
-              <div class="warranty-notification" v-if="checkInfo['']">
-                <b-row>
-                  <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
-                  <b-col>
-                    <p><h5>Leather Guard Protection</h5>
-                    <small>Covered with Leather Guard lifetime warranty. Registered last {date e.g. 12 March 2018}.</small></p>
-                  </b-col>
-                </b-row>
-              </div>
-
-            </template> -->
-
-            <div class="warranty-notification">
-              <b-row>
-                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
-                <b-col>
-                  <p><h5>Dura-Seal Paint and Fabric Protection</h5>
-                  <small>Covered with Dura-Seal lifetime warranty. Registered last {date e.g. 12 March 2018}.</small></p>
-                </b-col>
-              </b-row>
-            </div>
-            <div class="warranty-notification">
-              <b-row>
-                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
-                <b-col>
-                  <p><h5>Dura-Seal Leather Protection</h5>
-                  <small>Covered with Dura-Seal lifetime warranty. Registered last {date e.g. 12 March 2018}.</small></p>
-                </b-col>
-              </b-row>
-            </div>
-            <div class="warranty-notification">
-              <b-row>
-                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="info" icon="info-circle" /></b-col>
-                <b-col>
-                  <p><h5>Dura-Seal Leather Protection Needs to top up twice a year</h5>
-                  <small>We will notify you via email when you might need to top up your leather protection.</small></p>
-                </b-col>
-              </b-row>
-            </div>
-            <div class="warranty-notification" v-if="checkInfo['']">
-              <b-row>
-                <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
-                <b-col>
-                  <p><h5>Leather Guard Protection</h5>
-                  <small>Covered with Leather Guard lifetime warranty. Registered last {date e.g. 12 March 2018}.</small></p>
-                </b-col>
-              </b-row>
-            </div>
-            
+            <template v-for="( checkInfo, key ) in checkData">
+              <template v-if="checkInfo['product_type'] == 'Leather Guard' || checkInfo['product_type'] == 'Soil Guard'">
+                <div class="warranty-notification">
+                  <b-row>
+                    <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+                    <b-col>
+                      <p><h5>{{ checkInfo['product_type'] }} Protection</h5>
+                      <small>Covered with Leather Guard lifetime warranty. Registered last {{ checkInfo['created_at'] }}.</small></p>
+                    </b-col>
+                  </b-row>
+                </div>
+              </template>
+              <template v-if="checkInfo['product_type'] == 'DURA SEAL Paint Protection' || checkInfo['product_type'] == 'DURA SEAL Leather Protection' || checkInfo['product_type'] == 'DURA SEAL Fabric Protection'">
+                <div class="warranty-notification">
+                  <b-row>
+                    <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="success" icon="check-circle" /></b-col>
+                    <b-col>
+                      <p>
+                      <template v-if="checkInfo['product_applied'] == 'Fabric Protection'">
+                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Paint Protection'">
+                          <h5>Dura-Seal Paint and Fabric Protection</h5>
+                        </template>
+                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Leather Protection'">
+                          <h5>Dura-Seal Leather and Fabric Protection</h5>
+                        </template>                        
+                      </template>
+                      <template v-if="checkInfo['product_applied'] == '' || checkInfo['product_applied'] == null">
+                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Paint Protection'">
+                          <h5>Dura-Seal Paint Protection</h5>
+                        </template>
+                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Leather Protection'">
+                          <h5>Dura-Seal Leather Protection</h5>
+                        </template>    
+                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Fabric Protection'">
+                          <h5>Dura-Seal Fabric Protection</h5>
+                        </template>                      
+                      </template>
+                      <small>Covered with Dura-Seal lifetime warranty. Registered last {{ checkInfo['created_at'] }}.</small></p>
+                    </b-col>
+                  </b-row>
+                </div>
+                <template v-if="checkInfo['product_type'] == 'DURA SEAL Leather Protection'">
+                  <div class="warranty-notification">
+                    <b-row>
+                      <b-col sm="1" md="1" class="font-icon font-icon-with-header"><font-awesome-icon class="info" icon="info-circle" /></b-col>
+                      <b-col>
+                        <p><h5>Dura-Seal Leather Protection Needs to top up twice a year</h5>
+                        <small>We will notify you via email when you might need to top up your leather protection.</small></p>
+                      </b-col>
+                    </b-row>
+                  </div>
+                </template>
+              </template>
+            </template>
           </b-col>
         </b-row>
         <b-row>
