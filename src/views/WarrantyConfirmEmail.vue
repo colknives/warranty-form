@@ -8,26 +8,26 @@
           <h3><strong>Check Your Service and Support Coverage</strong></h3>
         </div>
         <div class="warranty-success-description">
-          <p><a href="#">{{ checkData[0].email }}</a> product registrations</p><br />
+          <p><a href="#">{{ serial_email }}</a> product registrations</p><br />
       </div>
       <div>
         <b-row>
           <b-col sm="12" md="12">
             <template v-for="( checkInfo, key ) in checkData">
-              <template v-if="checkInfo['product_type'] == 'Leather Guard' || checkInfo['product_type'] == 'Soil Guard'">
+              <template v-if="checkInfo['Product Type'] == 'Leather Guard' || checkInfo['Product Type'] == 'Soil Guard'">
                 <div class="warranty-notification">
                   <b-row>
                     <b-col sm="1" md="1" class="font-icon font-icon-with-header">
                       <img src="/images/icon/green_checl.svg" />
                     </b-col>
                     <b-col>
-                      <p><h5>{{ checkInfo['product_type'] }} Protection</h5>
+                      <p><h5>{{ checkInfo['Product Type'] }} Protection</h5>
                       <small>Covered with Leather Guard lifetime warranty. Registered last {{ checkInfo['created_at'] }}.</small></p>
                     </b-col>
                   </b-row>
                 </div>
               </template>
-              <template v-if="checkInfo['product_type'] == 'DURA SEAL Paint Protection' || checkInfo['product_type'] == 'DURA SEAL Leather Protection' || checkInfo['product_type'] == 'DURA SEAL Fabric Protection'">
+              <template v-if="checkInfo['Product Type'] == 'DURA SEAL Paint Protection' || checkInfo['Product Type'] == 'DURA SEAL Leather Protection' || checkInfo['Product Type'] == 'DURA SEAL Fabric Protection'">
                 <div class="warranty-notification">
                   <b-row>
                     <b-col sm="1" md="1" class="font-icon font-icon-with-header">
@@ -36,21 +36,21 @@
                     <b-col>
                       <p>
                       <template v-if="checkInfo['product_applied'] == 'Fabric Protection'">
-                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Paint Protection'">
+                        <template v-if="checkInfo['Product Type'] == 'DURA SEAL Paint Protection'">
                           <h5>Dura-Seal Paint and Fabric Protection</h5>
                         </template>
-                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Leather Protection'">
+                        <template v-if="checkInfo['Product Type'] == 'DURA SEAL Leather Protection'">
                           <h5>Dura-Seal Leather and Fabric Protection</h5>
                         </template>                        
                       </template>
                       <template v-if="checkInfo['product_applied'] == '' || checkInfo['product_applied'] == null">
-                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Paint Protection'">
+                        <template v-if="checkInfo['Product Type'] == 'DURA SEAL Paint Protection'">
                           <h5>Dura-Seal Paint Protection</h5>
                         </template>
-                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Leather Protection'">
+                        <template v-if="checkInfo['Product Type'] == 'DURA SEAL Leather Protection'">
                           <h5>Dura-Seal Leather Protection</h5>
                         </template>    
-                        <template v-if="checkInfo['product_type'] == 'DURA SEAL Fabric Protection'">
+                        <template v-if="checkInfo['Product Type'] == 'DURA SEAL Fabric Protection'">
                           <h5>Dura-Seal Fabric Protection</h5>
                         </template>                      
                       </template>
@@ -58,7 +58,7 @@
                     </b-col>
                   </b-row>
                 </div>
-                <template v-if="checkInfo['product_type'] == 'DURA SEAL Leather Protection'">
+                <template v-if="checkInfo['Product Type'] == 'DURA SEAL Leather Protection'">
                   <div class="warranty-notification">
                     <b-row>
                       <b-col sm="1" md="1" class="font-icon font-icon-with-header">
@@ -111,7 +111,9 @@ export default{
           "notification",
           "checkType",
           "checkSerialType",
-          "checkData"
+          "checkSerialEmail",
+          "checkData",
+          "serial_email"
       ])
   },
   methods: {

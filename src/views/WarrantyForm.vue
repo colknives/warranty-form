@@ -326,7 +326,7 @@
         </b-col>
         <b-col md="4" v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection'">
           <b-form-group id="haveFabric"
-                        label="Do you bought it with fabric:"
+                        label="Have you bought it with Fabric Protection?:"
                         label-for="haveFabric">
             <b-form-select id="haveFabric"
                   v-model="form.product_applied"
@@ -339,7 +339,7 @@
         <b-col md="6">
           <b-form-group id="dealerGroup"
                         class="required"
-                        label="Where did you bought the product:"
+                        label="Where did you bought the product?:"
                         label-for="dealerName">
             <vue-bootstrap-typeahead v-model="form.dealer_name"
                                       :data="dealerNameOptions"
@@ -353,7 +353,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="12" class="padding-bot">
+        <b-col md="12" class="confirm-padding">
             <b-form-checkbox
               class="confirmForm"
               v-model="form.confirm_form"
@@ -361,7 +361,7 @@
               @blur.native="$v.form.confirm_form.$touch()"
               value="1"
               unchecked-value=""
-            >My information are correct based what is written above</b-form-checkbox>
+            >I confirm that the information given in this form is true, complete and accurate</b-form-checkbox>
         </b-col>
       </b-row>
       <b-row>

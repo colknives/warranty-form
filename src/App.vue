@@ -163,4 +163,8 @@ body {
   font-size: 80%;
   color: #dc3545;
 }
+
+.confirm-padding{
+  padding: 35px 0px 25px 0px;
+}
 </style>

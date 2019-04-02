@@ -19,7 +19,7 @@
                   <img src="/images/icon/green_checl.svg" />
                 </b-col>
                 <b-col>
-                  <p>Your Warranty number {{ checkData[0].serial_number }} is already registered to <a href="#">{{ checkData[0].email }}</a>
+                  <p>Your Warranty number {{ serial_email }} is already registered to <a href="#">{{ checkData[0].Email }}</a>
                   <br />
                   <small>Your Product is covered with a lifetime warranty. <router-link to="/">Check another Serial Number</router-link></small></p>
                 </b-col>
@@ -57,7 +57,8 @@ export default{
           "notification",
           "checkType",
           "checkSerialType",
-          "checkData"
+          "checkData",
+          "serial_email"
       ])
   },
   methods: {
