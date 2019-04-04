@@ -20,7 +20,7 @@
           <warranty-description></warranty-description>
         </b-row>
         <div class="warranty-footer">
-          <small>&copy; 2018 TFGROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
+          <small>&copy; 2018 TF GROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
         </div>
       </div>
     </b-col>

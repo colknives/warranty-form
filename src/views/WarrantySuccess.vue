@@ -5,16 +5,14 @@
     </div>
     <div class="warranty-success-header">
       <b-row>
-        <b-col sm="1" md="1" class="font-icon">
+        <b-col sm="1" md="1" class="font-icon col-2">
           <img src="/images/icon/green_checl.svg" />
         </b-col>
-        <b-col sm="11" md="11"><h3><strong>Your Warranty has been registered!</strong></h3></b-col>
+        <b-col sm="11" md="11"><h3><strong>CONGRATULATIONS!</strong></h3></b-col>
       </b-row>
     </div>
     <div class="warranty-success-description">
-        <br />
-        <p>Once approved, we will send you a general warranty terms & conditions at <a href="#">{{ email }}</a>.</p>
-    </div>
+      <br><p>Your warranty registration has been received. We will send an email to <a v-bind:href="'mailto:'+email"><strong>{{ email }}</strong></a> confirming the registration. You will also receive a confirmation letter once the registration is approved.</p></div>
     <div>
       <b-row>
         <b-col sm="12" md="12">
@@ -29,12 +27,19 @@
         </b-col>
       </b-row>
     </div>
+    <div id="warranty-description-container">
+        <warranty-description></warranty-description>
+    </div>
+    <div class="warranty-footer">
+      <small>&copy; 2018 TF GROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 
 import { mapState } from "vuex";
+import WarrantyDescription from "./WarrantyDescription";
 
 export default{
   name: "WarrantySuccess",
@@ -42,6 +47,9 @@ export default{
     // setTimeout(function(){ 
     //   window.location = 'http://tfrgoup.myshopify.com'; 
     // }, 5000);
+  },
+  components: {
+      "warranty-description": WarrantyDescription
   },
   methods: {
     goShop() {

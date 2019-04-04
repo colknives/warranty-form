@@ -6,50 +6,46 @@
           <template v-if="testAccount == 1">
             <div class="warranty-notification">
               <b-row>
-                <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                   <img src="/images/icon/yellow_checl.svg" />
                 </b-col>
                 <b-col>
                   <p><h5>Test account Detected.</h5>
-                  <small>You are using a test account. Details will still be save on our record.</small></p>
+                  <p>You are using a test account. Details will still be save on our record.</p></p>
                 </b-col>
               </b-row>
             </div>
           </template>
           <div class="warranty-notification">
             <b-row>
-              <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                 <img src="/images/icon/green_checl.svg" />
               </b-col>
               <b-col>
                 <p>
                   <template v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection' || checkSerialType == 'DURA SEAL Fabric Protection'">
-                    <h5>Valid DURA-SEAL Vehicle Protection Product.</h5>
-                    <small>Your Warranty Number {{ serial_email }} is covered with our lifetime warranty. <router-link to="/">Register another Warranty.</router-link>
-                    </small>
+                    <h5>Thank you for entering your DURA-SEAL warranty number.</h5>
+                    <p>Please complete the registration process by entering the requested details below.</p>
                   </template>
                   <template v-if="checkSerialType == 'Leather Guard'">
-                    <h5>Valid Leather Guard Product.</h5>
-                    <small>Your Warranty Number {{ serial_email }} is covered with our 5 year warranty. <router-link to="/">Register another Warranty.</router-link>
-                    </small>
+                    <h5>Thank you for entering your Leather Guard warranty number.</h5>
+                    <p>Please complete the registration process by entering the requested details below.</p>
                   </template>
                   <template v-if="checkSerialType == 'Soil Guard'">
-                    <h5>Valid Soil Guard Product.</h5>
-                    <small>Your Warranty Number {{ serial_email }} is covered with our 5 year warranty. <router-link to="/">Register another Warranty.</router-link>
-                    </small>
+                    <h5>Thank you for entering your Soil Guard warranty number.</h5>
+                    <p>Please complete the registration process by entering the requested details below.</p>
                   </template>
                   <template v-if="checkSerialType == 'Premium Care Synthetic Upholstery' || checkSerialType == 'Premium Care Leather' || checkSerialType == 'Premium Care Outdoor' || checkSerialType == 'Premium Care Fabric'">
-                    <h5>Valid Premium Care Product.</h5>
-                    <small>Your Warranty Number {{ serial_email }} is covered with our 5 years of warranty. <router-link to="/">Register another Warranty. <font-awesome-icon icon="coffee" /></router-link>
-                    </small>
+                    <h5>Thank you for entering your Premium Care warranty number.</h5>
+                    <p>Please complete the registration process by entering the requested details below.</p>
                   </template>
                 </p>
               </b-col>
             </b-row>
           </div>
-          <div class="warranty-notification">
+<!--           <div class="warranty-notification">
             <b-row>
-              <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                 <img src="/images/icon/blue_checl.svg" />
               </b-col>
               <b-col>
@@ -58,16 +54,14 @@
                 </small></p>
               </b-col>
             </b-row>
-          </div>
+          </div> -->
           <div class="warranty-notification" v-if="checkSerialType == 'DURA SEAL Paint Protection' || checkSerialType == 'DURA SEAL Fabric Protection'">
             <b-row>
-              <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+              <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                 <img src="/images/icon/blue_checl.svg" />
               </b-col>
-              <b-col>
-                <p><h5>DURA-SEAL Leather Protection</h5>
-                <small>If you have purchased DURA-SEAL Leather together with your DURA-SEAL product, you need to register it separately so you can claim it separately
-                </small></p>
+              <b-col class="padding-15">
+                <p>If you have purchased DURA-SEAL Leather Protection also, <router-link to="/">please register this separately</router-link>. You will find the DURA-SEAL Leather Protection Warranty document inside the DURA-SEAL Leather kit.</p>
               </b-col>
             </b-row>
           </div>
@@ -256,7 +250,12 @@
         </b-col>
       </b-row>
       <hr />
-      <b-row>
+      <b-row v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection' || checkSerialType == 'DURA SEAL Fabric Protection'">
+        <b-col md="12">
+          <h4><strong>Vehicle Details</strong></h4>
+        </b-col>
+      </b-row>
+      <b-row v-if="checkSerialType == 'Premium Care Synthetic Upholstery' || checkSerialType == 'Premium Care Leather' || checkSerialType == 'Premium Care Outdoor' || checkSerialType == 'Premium Care Fabric' || checkSerialType == 'Soil Guard' || checkSerialType == 'Leather Guard'">
         <b-col md="12">
           <h4><strong>Product Application Details</strong></h4>
         </b-col>
@@ -266,13 +265,13 @@
           <b-form-group class="vehicleRegistrationNumberGroup required"
                       label="Vehicle Registration No.:"
                       label-for="vehicleRegistrationNumber">
-          <b-form-input class="vehicleRegistrationNumber"
+          <b-form-input class="vehicleRegistrationNumber transform-upper"
                         v-model="form.vehicle_registration"
                         :state="($v.form.vehicle_registration.$dirty && $v.form.vehicle_registration.$invalid)? false : null"
                         @blur.native="$v.form.vehicle_registration.$touch()"
                         type="text"
                         required
-                        placeholder="Enter Vehicle Registration No.">
+                        placeholder="e.g. jgu100">
           </b-form-input>
           <b-form-invalid-feedback v-if="!form.vehicle_registration.required">
             Vehicle Registration Number is a required field
@@ -393,7 +392,7 @@
               @blur.native="$v.form.confirm_form.$touch()"
               value="1"
               unchecked-value=""
-            >I confirm that the information given in this form is true, complete and accurate</b-form-checkbox>
+            > I confirm that the above information is accurate.</b-form-checkbox>
         </b-col>
       </b-row>
       <b-row>

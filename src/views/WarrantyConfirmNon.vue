@@ -15,7 +15,7 @@
           <b-col sm="12" md="12">
             <div class="warranty-notification">
               <b-row>
-                <b-col sm="1" md="1" class="font-icon">
+                <b-col sm="1" md="1" class="font-icon col-2">
                   <img src="/images/icon/blue_checl.svg" />
                 </b-col>
                 <b-col>
@@ -41,6 +41,9 @@
             <p><a href="#">Where to find your Serial number</a></p>
           </b-col>
         </b-row>
+      </div>
+      <div class="warranty-footer">
+        <small>&copy; 2018 TF GROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
       </div>
     </b-form>
   </div>

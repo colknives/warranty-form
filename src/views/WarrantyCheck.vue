@@ -4,11 +4,8 @@
       <div class="warranty-image-header">
         <router-link to="/"><img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></router-link>
       </div>
-      <div class="warranty-success-header">
-          <h3><strong>Enter your Warranty Number</strong></h3>
-        </div>
         <div class="warranty-success-description">
-          <p>Review your warranty status and eligibility.</p><br />
+          <h5>To register please enter your Warranty Number in the box below.</h5>
       </div>
       <div>
         <b-row>
@@ -22,7 +19,8 @@
                             :state="( ( $v.form.serial_email.$dirty && $v.form.serial_email.$invalid ) || ( invalidSerial ) )? false : null"
                             @blur.native="$v.form.serial_email.$touch()"
                             aria-describedby="input1LiveFeedback"
-                            placeholder="Enter a serial number or your email address">
+                            placeholder="Enter a serial number or your email address"
+                            v-on:keyup.enter="checkInfo">
               </b-form-input>
               <b-form-invalid-feedback v-if="!$v.form.serial_email.required">
                 This field is required
@@ -39,14 +37,14 @@
           </b-col>
         </b-row>
       </div>
-      <div id="warranty-description-container">
-        <warranty-description></warranty-description>
-      </div>
       <div id="warranty-find-serial-container">
         <warranty-find-serial></warranty-find-serial>
       </div>
+      <div id="warranty-description-container">
+        <warranty-description></warranty-description>
+      </div>
       <div class="warranty-footer">
-        <small>&copy; 2018 TFGROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
+        <small>&copy; 2018 TF GROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
       </div>
     </b-form>
   </div>

@@ -11,7 +11,8 @@
 
 <style lang="scss">
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  font-family: Opens Sans, Helvetica, Arial, sans-serif;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -176,4 +177,16 @@ body {
   padding-top: 50px;
 }
 
+
+#warranty-find-serial{
+  padding-top: 50px;
+}
+
+.padding-15{
+  padding: 15px;
+}
+
+.transform-upper{
+  text-transform:uppercase;
+}
 </style>

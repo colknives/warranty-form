@@ -16,7 +16,7 @@
             <template v-if="testAccount == 1">
               <div class="warranty-notification">
                 <b-row>
-                  <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                  <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                     <img src="/images/icon/yellow_checl.svg" />
                   </b-col>
                   <b-col>
@@ -30,7 +30,7 @@
               <template v-if="checkInfo['Product Type'] == 'Leather Guard' || checkInfo['Product Type'] == 'Soil Guard'">
                 <div class="warranty-notification">
                   <b-row>
-                    <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                    <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                       <img src="/images/icon/green_checl.svg" />
                     </b-col>
                     <b-col>
@@ -43,7 +43,7 @@
               <template v-if="checkInfo['Product Type'] == 'DURA SEAL Paint Protection' || checkInfo['Product Type'] == 'DURA SEAL Leather Protection' || checkInfo['Product Type'] == 'DURA SEAL Fabric Protection'">
                 <div class="warranty-notification">
                   <b-row>
-                    <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                    <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                       <img src="/images/icon/green_checl.svg" />
                     </b-col>
                     <b-col>
@@ -74,7 +74,7 @@
                 <template v-if="checkInfo['Product Type'] == 'DURA SEAL Leather Protection'">
                   <div class="warranty-notification">
                     <b-row>
-                      <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                      <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                         <img src="/images/icon/blue_checl.svg" />
                       </b-col>
                       <b-col>
@@ -88,7 +88,7 @@
               <template v-if="checkInfo['Product Type'] == 'Premium Care Synthetic' || checkInfo['Product Type'] == 'Premium Care Leather' || checkInfo['Product Type'] == 'Premium Care Outdoor' || checkInfo['Product Type'] == 'Premium Care Fabric'">
                 <div class="warranty-notification">
                   <b-row>
-                    <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                    <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
                       <img src="/images/icon/green_checl.svg" />
                     </b-col>
                     <b-col>
@@ -115,6 +115,9 @@
       </div>
       <div id="warranty-description-container">
         <warranty-description></warranty-description>
+      </div>
+      <div class="warranty-footer">
+        <small>&copy; 2018 TF GROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
       </div>
     </b-form>
   </div>
