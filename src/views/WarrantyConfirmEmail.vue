@@ -4,16 +4,27 @@
       <div class="warranty-image-header">
         <router-link to="/"><img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></router-link>
       </div>
-      <div class="warranty-success-header">
+<!--       <div class="warranty-success-header">
           <h3><strong>Check Your Service and Support Coverage</strong></h3>
         </div>
         <div class="warranty-success-description">
           <p><a href="#">{{ serial_email }}</a> product registrations</p><br />
-      </div>
+      </div> -->
       <div>
         <b-row>
           <b-col sm="12" md="12">
-            <template v-if="testAccount == 1">
+            <div class="warranty-notification">
+              <b-row>
+                <b-col sm="1" md="1" class="font-icon col-2">
+                  <img src="/images/icon/blue_checl.svg" />
+                </b-col>
+                <b-col>
+                  <h5>The email you have entered has already registered a warranty number.</h5>
+                  <p><router-link to="/">Please click here to register another warranty number.</router-link></p>
+                </b-col>
+              </b-row>
+            </div>
+            <!-- <template v-if="testAccount == 1">
               <div class="warranty-notification">
                 <b-row>
                   <b-col sm="1" md="1" class="font-icon font-icon-with-header col-2">
@@ -98,15 +109,15 @@
                   </b-row>
                 </div>
               </template>
-            </template>
+            </template> -->
           </b-col>
         </b-row>
-        <b-row>
+<!--         <b-row>
           <b-col sm="12" md="12">
             <br />
             <p>Products are registered to the email above. <router-link to="/">Register another Warranty.</router-link></p>
           </b-col>
-        </b-row>
+        </b-row> -->
         <b-row>
           <b-col sm="12" md="12">
               <b-button type="button" variant="primary" @click="goShop"><strong>GO TO SHOP</strong></b-button>
