@@ -24,6 +24,7 @@ export default {
         checkType: '',
         checkSerialType: '',
         checkData: [],
+        testAccount: 0,
         invalidSerial : false,
         email: '',
         warranty: {
@@ -63,6 +64,7 @@ export default {
             state.checkType = response.type;
             state.checkData = response.data;
             state.checkSerialType = response.serial_type;
+            state.testAccount = response.test_account;
         },
         setSerialEmail(state, response){
             state.serial_email = response;

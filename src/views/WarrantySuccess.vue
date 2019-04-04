@@ -8,7 +8,7 @@
         <b-col sm="1" md="1" class="font-icon">
           <img src="/images/icon/green_checl.svg" />
         </b-col>
-        <b-col sm="11" md="11"><h3><strong>Your Product has been registered!</strong></h3></b-col>
+        <b-col sm="11" md="11"><h3><strong>Your Warranty has been registered!</strong></h3></b-col>
       </b-row>
     </div>
     <div class="warranty-success-description">
@@ -18,7 +18,7 @@
     <div>
       <b-row>
         <b-col sm="12" md="12">
-          <p><router-link to="/">Check another Serial Number</router-link></p>
+          <p><router-link to="/">Register another Warranty.</router-link></p>
         </b-col>
       </b-row>
     </div>

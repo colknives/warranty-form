@@ -13,6 +13,19 @@
       <div>
         <b-row>
           <b-col sm="12" md="12">
+            <template v-if="testAccount == 1">
+              <div class="warranty-notification">
+                <b-row>
+                  <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                    <img src="/images/icon/yellow_checl.svg" />
+                  </b-col>
+                  <b-col>
+                    <p><h5>Your email <a href="#">{{ serial_email }}</a> was used for test account.</h5>
+                    <small>It appears that you were part of our test respondents. You may ask the admin to delete your record if you wish to delete this notification from your address.</small></p>
+                  </b-col>
+                </b-row>
+              </div>
+            </template>
             <template v-for="( checkInfo, key ) in checkData">
               <template v-if="checkInfo['Product Type'] == 'Leather Guard' || checkInfo['Product Type'] == 'Soil Guard'">
                 <div class="warranty-notification">
@@ -22,7 +35,7 @@
                     </b-col>
                     <b-col>
                       <p><h5>{{ checkInfo['Product Type'] }} Protection</h5>
-                      <small>Covered with Leather Guard lifetime warranty. Registered last {{ checkInfo['created_at'] }}.</small></p>
+                      <small>Covered with {{ checkInfo['Product Type'] }} 5 year warranty. Registered last {{ checkInfo['created_at'] }}.</small></p>
                     </b-col>
                   </b-row>
                 </div>
@@ -72,13 +85,26 @@
                   </div>
                 </template>
               </template>
+              <template v-if="checkInfo['Product Type'] == 'Premium Care Synthetic' || checkInfo['Product Type'] == 'Premium Care Leather' || checkInfo['Product Type'] == 'Premium Care Outdoor' || checkInfo['Product Type'] == 'Premium Care Fabric'">
+                <div class="warranty-notification">
+                  <b-row>
+                    <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                      <img src="/images/icon/green_checl.svg" />
+                    </b-col>
+                    <b-col>
+                      <p><h5>{{ checkInfo['Product Type'] }} Protection</h5>
+                      <small>Covered with Premium Care 5 year warranty. Registered last {{ checkInfo['created_at'] }}.</small></p>
+                    </b-col>
+                  </b-row>
+                </div>
+              </template>
             </template>
           </b-col>
         </b-row>
         <b-row>
           <b-col sm="12" md="12">
             <br />
-            <p>Products are registered to the email above. <router-link to="/">Check another Serial Number</router-link></p>
+            <p>Products are registered to the email above. <router-link to="/">Register another Warranty.</router-link></p>
           </b-col>
         </b-row>
         <b-row>
@@ -86,12 +112,9 @@
               <b-button type="button" variant="primary" @click="goShop"><strong>GO TO SHOP</strong></b-button>
           </b-col>
         </b-row>
-        <b-row>
-          <b-col sm="12" md="12">
-            <br />
-            <p><a href="#">Where to find your Serial number</a></p>
-          </b-col>
-        </b-row>
+      </div>
+      <div id="warranty-description-container">
+        <warranty-description></warranty-description>
       </div>
     </b-form>
   </div>
@@ -100,9 +123,15 @@
 <script lang="ts">
 
 import { mapState } from "vuex";
+import WarrantyDescription from "./WarrantyDescription";
+import WarrantyFindSerial from "./WarrantyFindSerial";
 
 export default{
   name: "WarrantyConfirmEmail",
+  components: {
+      "warranty-description": WarrantyDescription,
+      "warranty-find-serial": WarrantyFindSerial
+  },
   computed: {
       ...mapState("warranty", [
           "loading",
@@ -113,7 +142,8 @@ export default{
           "checkSerialType",
           "checkSerialEmail",
           "checkData",
-          "serial_email"
+          "serial_email",
+          "testAccount"
       ])
   },
   methods: {

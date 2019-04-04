@@ -13,6 +13,7 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons'
 import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+// import { faChevronRight } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 
@@ -25,7 +26,7 @@ Vue.component('vue-bootstrap-typeahead', VueBootstrapTypeahead);
 library.add(faCoffee)
 library.add(faCheckCircle)
 library.add(faInfoCircle)
-
+// library.add(faChevronRight)
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 

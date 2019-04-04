@@ -167,4 +167,13 @@ body {
 .confirm-padding{
   padding: 35px 0px 25px 0px;
 }
+
+.serial-img{
+  width: 100%;
+}
+
+#warranty-description-container{
+  padding-top: 50px;
+}
+
 </style>

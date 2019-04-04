@@ -3,15 +3,47 @@
     <b-form>
       <b-row>
         <b-col md="12">
+          <template v-if="testAccount == 1">
+            <div class="warranty-notification">
+              <b-row>
+                <b-col sm="1" md="1" class="font-icon font-icon-with-header">
+                  <img src="/images/icon/yellow_checl.svg" />
+                </b-col>
+                <b-col>
+                  <p><h5>Test account Detected.</h5>
+                  <small>You are using a test account. Details will still be save on our record.</small></p>
+                </b-col>
+              </b-row>
+            </div>
+          </template>
           <div class="warranty-notification">
             <b-row>
               <b-col sm="1" md="1" class="font-icon font-icon-with-header">
                 <img src="/images/icon/green_checl.svg" />
               </b-col>
               <b-col>
-                <p><h5>{{ checkSerialType }} Product Validated.</h5>
-                <small>Your Warranty Number {{ serial_email }} is valid for a lifetime warranty. <router-link to="/">Check another Serial Number</router-link>
-                </small></p>
+                <p>
+                  <template v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection' || checkSerialType == 'DURA SEAL Fabric Protection'">
+                    <h5>Valid DURA-SEAL Vehicle Protection Product.</h5>
+                    <small>Your Warranty Number {{ serial_email }} is covered with our lifetime warranty. <router-link to="/">Register another Warranty.</router-link>
+                    </small>
+                  </template>
+                  <template v-if="checkSerialType == 'Leather Guard'">
+                    <h5>Valid Leather Guard Product.</h5>
+                    <small>Your Warranty Number {{ serial_email }} is covered with our 5 year warranty. <router-link to="/">Register another Warranty.</router-link>
+                    </small>
+                  </template>
+                  <template v-if="checkSerialType == 'Soil Guard'">
+                    <h5>Valid Soil Guard Product.</h5>
+                    <small>Your Warranty Number {{ serial_email }} is covered with our 5 year warranty. <router-link to="/">Register another Warranty.</router-link>
+                    </small>
+                  </template>
+                  <template v-if="checkSerialType == 'Premium Care Synthetic Upholstery' || checkSerialType == 'Premium Care Leather' || checkSerialType == 'Premium Care Outdoor' || checkSerialType == 'Premium Care Fabric'">
+                    <h5>Valid Premium Care Product.</h5>
+                    <small>Your Warranty Number {{ serial_email }} is covered with our 5 years of warranty. <router-link to="/">Register another Warranty. <font-awesome-icon icon="coffee" /></router-link>
+                    </small>
+                  </template>
+                </p>
               </b-col>
             </b-row>
           </div>
@@ -34,7 +66,7 @@
               </b-col>
               <b-col>
                 <p><h5>DURA-SEAL Leather Protection</h5>
-                <small>If you have purchased DURA SEAL Leather together with your DURA-SEAL product, you need to register it separately so you can claim it separately
+                <small>If you have purchased DURA-SEAL Leather together with your DURA-SEAL product, you need to register it separately so you can claim it separately
                 </small></p>
               </b-col>
             </b-row>
@@ -307,7 +339,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="6" v-if="checkSerialType == 'Leather Guard' || checkSerialType == 'Soil Guard' || checkSerialType == 'Premium Care Synthetic' || checkSerialType == 'Premium Care Leather' || checkSerialType == 'Premium Care Outdoor' || checkSerialType == 'Premium Care Fabric'">
+        <b-col md="6" v-if="checkSerialType == 'Leather Guard' || checkSerialType == 'Soil Guard' || checkSerialType == 'Premium Care Synthetic Upholstery' || checkSerialType == 'Premium Care Leather' || checkSerialType == 'Premium Care Outdoor' || checkSerialType == 'Premium Care Fabric'">
           <b-form-group class="invoiceNumberGroup"
                         label="Invoice No.:"
                         label-for="invoiceNumber">
@@ -324,9 +356,9 @@
             </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
-        <b-col md="4" v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection'">
+        <b-col md="6" v-if="checkSerialType == 'DURA SEAL Leather Protection' || checkSerialType == 'DURA SEAL Paint Protection'">
           <b-form-group id="haveFabric"
-                        label="Have you bought it with Fabric Protection?:"
+                        label="Have you bought it with Fabric Protection?"
                         label-for="haveFabric">
             <b-form-select id="haveFabric"
                   v-model="form.product_applied"
@@ -339,7 +371,7 @@
         <b-col md="6">
           <b-form-group id="dealerGroup"
                         class="required"
-                        label="Where did you bought the product?:"
+                        label="Where did you buy the product?"
                         label-for="dealerName">
             <vue-bootstrap-typeahead v-model="form.dealer_name"
                                       :data="dealerNameOptions"
@@ -496,7 +528,8 @@ export default{
           "checkType",
           "checkSerialType",
           "checkData",
-          "serial_email"
+          "serial_email",
+          "testAccount"
       ])
   },
   created: function() {
