@@ -21,6 +21,7 @@ export default {
         dealerNameOptions: [],
         dealerType: null,
         serial_email: '',
+        invalidRange: 0,
         checkType: '',
         checkSerialType: '',
         checkData: [],
@@ -90,6 +91,10 @@ export default {
             state.warranty.product_applied = response.product_applied;
 
             state.email = response.email;
+            state.invalidRange = 0;
+        },
+        setInvalidRange(state) {
+            state.invalidRange = 1;
         },
         setInvalidSerial(state, invalid) {
             state.invalidSerial = invalid;
@@ -265,23 +270,29 @@ export default {
 
                 if( response ){
 
-                    commit("setCheck", response);
-
-                    if( response.type == 'serial_number' ){
-
-                        if( response.count > 0 ){
-                            router.push('/warranty/confirm/serial');
-                        }
-                        else{
-                            router.push('/warranty/registration');
-                        }
+                    if( response.invalid_range && response.invalid_range > 0 ){
+                        commit("setInvalidRange");
                     }
                     else{
-                        if( response.count > 0 ){
-                            router.push('/warranty/confirm/email');
+
+                        commit("setCheck", response);
+
+                        if( response.type == 'serial_number' ){
+
+                            if( response.count > 0 ){
+                                router.push('/warranty/confirm/serial');
+                            }
+                            else{
+                                router.push('/warranty/registration');
+                            }
                         }
                         else{
-                            router.push('/warranty/confirm/email/not-found');
+                            if( response.count > 0 ){
+                                router.push('/warranty/confirm/email');
+                            }
+                            else{
+                                router.push('/warranty/confirm/email/not-found');
+                            }
                         }
                     }
                 }

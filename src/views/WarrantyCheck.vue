@@ -25,7 +25,7 @@
               <b-form-invalid-feedback v-if="!$v.form.serial_email.required">
                 This field is required
               </b-form-invalid-feedback>
-              <div class="invalid-serial-container" v-if="invalidSerial">
+              <div class="invalid-serial-container" v-if="invalidSerial || invalidRange">
                 We're sorry, but the provided information isn't valid. Please check your information and try again
               </div>
             </b-form-group>
@@ -81,7 +81,8 @@ export default{
           "errors",
           "notification",
           "warranty",
-          "invalidSerial"
+          "invalidSerial",
+          "invalidRange"
       ])
   },
   mixins: [
