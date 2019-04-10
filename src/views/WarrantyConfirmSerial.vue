@@ -62,20 +62,18 @@ export default{
       "warranty-description": WarrantyDescription,
       "warranty-find-serial": WarrantyFindSerial
   },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "checkType",
-          "checkSerialType",
-          "checkData",
-          "serial_email"
-      ])
-  },
+  computed: mapState("warranty", [
+      "loading",
+      "hasErrors",
+      "errors",
+      "notification",
+      "checkType",
+      "checkSerialType",
+      "checkData",
+      "serial_email"
+  ]),
   methods: {
-    goShop() {
+    goShop: function() {
       window.location = 'http://tfrgoup.myshopify.com';
     }
   }

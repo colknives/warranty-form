@@ -1,6 +1,6 @@
 <template>
   <div class="warranty-personal-form">
-    <b-form>
+        <b-form>
       <b-row>
         <b-col md="12">
           <template v-if="testAccount == 1">
@@ -412,16 +412,16 @@ import { validationMixin } from "vuelidate";
 import { required, email, integer, maxLength, alphaNum } from 'vuelidate/lib/validators';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
-import TypeAhead from "vue2-typeahead";
+// import TypeAhead from "vue2-typeahead";
 
 export default{
   name: "WarrantyForm",
   components: {
       Datepicker,
-      TypeAhead,
+      // TypeAhead,
       Loading
   },
-  data () {
+  data: function() {
     return {
       validated: true,
       haveFabricOptions: ['Yes', 'No'],
@@ -451,7 +451,7 @@ export default{
       countryOptions : [
         { value: 'New Zealand', text: 'New Zealand' }
       ]
-    }
+    };
   },
   mixins: [
     validationMixin
@@ -491,7 +491,7 @@ export default{
       },
       vehicle_registration: {
         alphaNum,
-        isNeeded(value, params) {
+        isNeeded: function(value, params) {
 
           if( this.checkSerialType == 'DURA SEAL Leather Protection' || this.checkSerialType == 'DURA SEAL Paint Protection' || this.checkSerialType == 'DURA SEAL Fabric Protection' ){
 
@@ -514,23 +514,21 @@ export default{
       }
     }
   },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "warranty",
-          "vehicleMakeOptions",
-          "vehicleModelOptions",
-          "dealerNameOptions",
-          "checkType",
-          "checkSerialType",
-          "checkData",
-          "serial_email",
-          "testAccount"
-      ])
-  },
+  computed: mapState("warranty", [
+      "loading",
+      "hasErrors",
+      "errors",
+      "notification",
+      "warranty",
+      "vehicleMakeOptions",
+      "vehicleModelOptions",
+      "dealerNameOptions",
+      "checkType",
+      "checkSerialType",
+      "checkData",
+      "serial_email",
+      "testAccount"
+  ]),
   created: function() {
       this.form.serial_number = this.serial_email;
       this.form.firstname = this.warranty.firstname;
@@ -597,7 +595,7 @@ export default{
       });
 
     },
-    saveWarrantyRegistration() {
+    saveWarrantyRegistration: function() {
 
       if( this.form.vehicle_make_others != null && this.form.vehicle_make_others != '' ){
         this.form.vehicle_make = this.form.vehicle_make_others;

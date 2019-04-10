@@ -189,4 +189,8 @@ body {
 .transform-upper{
   text-transform:uppercase;
 }
+
+.find-serial-img{
+  width: 125px;
+}
 </style>

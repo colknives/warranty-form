@@ -19,7 +19,7 @@
                             :state="( ( $v.form.serial_email.$dirty && $v.form.serial_email.$invalid ) || ( invalidSerial ) )? false : null"
                             @blur.native="$v.form.serial_email.$touch()"
                             aria-describedby="input1LiveFeedback"
-                            placeholder="Enter a serial number or your email address"
+                            placeholder="Enter a serial number"
                             v-on:keyup.enter="checkInfo">
               </b-form-input>
               <b-form-invalid-feedback v-if="!$v.form.serial_email.required">
@@ -67,24 +67,22 @@ export default{
       "warranty-description": WarrantyDescription,
       "warranty-find-serial": WarrantyFindSerial
   },
-  data () {
+  data: function() {
     return {
       form: {
         serial_email: ''
       }
-    }
+    };
   },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "warranty",
-          "invalidSerial",
-          "invalidRange"
-      ])
-  },
+  computed: mapState("warranty", [
+      "loading",
+      "hasErrors",
+      "errors",
+      "notification",
+      "warranty",
+      "invalidSerial",
+      "invalidRange"
+  ]),
   mixins: [
     validationMixin
   ],

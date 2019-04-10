@@ -2,7 +2,7 @@
   <div id="warranty-find-serial">
       <b-row>
         <b-col md="2" sm="2">
-          <img src="/images/icon/serial-img.png" class="serial-img" />
+          <img src="/images/icon/serial-img.png" class="serial-img find-serial-img" />
         </b-col>
         <b-col md="10" sm="10">
           <h5><strong>Where to find your Warranty Number</strong></h5>

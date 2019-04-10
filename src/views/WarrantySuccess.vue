@@ -52,21 +52,19 @@ export default{
       "warranty-description": WarrantyDescription
   },
   methods: {
-    goShop() {
+    goShop: function(){
       window.location = 'http://tfrgoup.myshopify.com';
     }
   },
-  computed: {
-      ...mapState("warranty", [
-          "loading",
-          "hasErrors",
-          "errors",
-          "notification",
-          "warranty",
-          "personal",
-          "product",
-          "email"
-      ])
-  }
+  computed: mapState("warranty", [
+      "loading",
+      "hasErrors",
+      "errors",
+      "notification",
+      "warranty",
+      "personal",
+      "product",
+      "email"
+  ])
 }
 </script>
