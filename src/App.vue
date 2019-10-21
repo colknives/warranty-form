@@ -25,7 +25,7 @@ body {
   margin: 20px 0px;
 }
 
-.warranty-main{
+.warranty-main, #warranty-success, #warranty-check{
   margin-left: 0px !important;
   margin-right: 0px !important;
 }
@@ -59,7 +59,7 @@ body {
   margin-bottom: 50px;
 }
 
-#warranty-success, #warranty-check, #warranty-confirm-non {
+#warranty-confirm-non {
   width: 900px;
   margin: 0px auto;
 }
@@ -101,10 +101,6 @@ body {
   margin-bottom: 7px;
   font-size: 14px;
   font-weight: bold;
-}
-
-.warranty-image-header{
-  padding-bottom: 30px;
 }
 
 .warranty-footer{
@@ -193,4 +189,18 @@ body {
 .find-serial-img{
   width: 125px;
 }
+
+.warranty-image-header{
+  padding-bottom: 30px;
+}
+
+
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .warranty-image-header a img{
+    width: 100%;
+  }
+}
+
 </style>

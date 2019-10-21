@@ -1,5 +1,7 @@
 <template>
-  <div id="warranty-success">
+  <b-row  id="warranty-success">
+    <b-col lg="2"></b-col>
+    <b-col lg="8" md="12" sm="12" xs="12">
     <div class="warranty-image-header">
       <router-link to="/"><img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></router-link>
     </div>
@@ -8,7 +10,7 @@
         <b-col sm="1" md="1" class="font-icon col-2">
           <img src="/images/icon/green_checl.svg" />
         </b-col>
-        <b-col sm="11" md="11"><h3><strong>CONGRATULATIONS!</strong></h3></b-col>
+        <b-col sm="11" md="11" class="col-10"><h3><strong>CONGRATULATIONS!</strong></h3></b-col>
       </b-row>
     </div>
     <div class="warranty-success-description">
@@ -33,7 +35,9 @@
     <div class="warranty-footer">
       <small>&copy; 2018 TF GROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
     </div>
-  </div>
+    </b-col>
+    <b-col lg="2"></b-col>
+  </b-row>
 </template>
 
 <script lang="ts">
@@ -53,7 +57,7 @@ export default{
   },
   methods: {
     goShop: function(){
-      window.location = 'http://tfrgoup.myshopify.com';
+      window.location = 'http://tfgroup.co.nz';
     }
   },
   computed: mapState("warranty", [

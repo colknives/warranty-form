@@ -1,5 +1,7 @@
 <template>
-  <div id="warranty-check">
+  <b-row id="warranty-check">
+    <b-col lg="2"></b-col>
+    <b-col lg="8" md="12" sm="12" xs="12">
     <b-form>
       <div class="warranty-image-header">
         <router-link to="/"><img src="https://cdn.shopify.com/s/files/1/2711/9576/files/TF-Group-Logo-500-08082018_1728x.png" /></router-link>
@@ -47,7 +49,9 @@
         <small>&copy; 2018 TF GROUP Limited Warranty Registration application. Designed and maintained by <a href="http://www.weroar.co.nz/" target="_blank">Weroar NZ</a>.</small>
       </div>
     </b-form>
-  </div>
+    </b-col>
+    <b-col lg="2"></b-col>
+  </b-row>
 </template>
 
 <script lang="ts">

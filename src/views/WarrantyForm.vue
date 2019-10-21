@@ -128,6 +128,9 @@
             <b-form-invalid-feedback v-if="!$v.form.contact_number.required">
               Contact Number is a required field
             </b-form-invalid-feedback>
+            <b-form-invalid-feedback v-if="!$v.form.contact_number.maxLength">
+              Contact Number can only have a maximum of 12 digits
+            </b-form-invalid-feedback>
           </b-form-group>
         </b-col>
         <b-col md="6">
@@ -396,7 +399,7 @@
         </b-col>
       </b-row>
       <b-row>
-        <b-col md="4" sm="4" lg="4" class="padding-bot">
+        <b-col md="6" sm="5" lg="5" class="padding-bot">
           <b-button class="col-sm-12 col-md-12 col-lg-12" type="button" variant="primary" :disabled="$v.form.$invalid" @click="saveWarrantyRegistration"><strong>REGISTER PRODUCT</strong></b-button>
         </b-col>
       </b-row>
@@ -465,7 +468,8 @@ export default{
         required
       },
       contact_number: {
-        required
+        required,
+        maxLength: maxLength(12)
       },
       email: {
         required,
